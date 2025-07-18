@@ -26,6 +26,7 @@
       <Filter>No Category</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Config.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -38,5 +39,6 @@
       <Filter>No Category</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Config.h" />
   </ItemGroup>
 </Project>
