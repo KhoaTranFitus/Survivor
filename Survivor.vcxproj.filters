@@ -103,6 +103,11 @@
     </ClCompile>
     <ClCompile Include="Shoot.cpp" />
     <ClCompile Include="MoveForward.cpp" />
+    <ClCompile Include="ItemEffect.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="DamageOnContact.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -177,6 +182,11 @@
     </ClInclude>
     <ClInclude Include="Shoot.h" />
     <ClInclude Include="MoveForward.h" />
+    <ClInclude Include="ItemEffect.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="DamageOnContact.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Game1.jpg">

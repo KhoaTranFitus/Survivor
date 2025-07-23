@@ -6,4 +6,6 @@ private:
 public:
 	Enemies();
 	~Enemies();
+
+	void onDestroy() override;
 };

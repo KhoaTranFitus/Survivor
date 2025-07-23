@@ -12,8 +12,8 @@ class Button;
 class Scene
 {
 protected:
-	std::vector<std::shared_ptr<Button>> buttons;
-	std::vector<std::shared_ptr<GameObject>> gameObjects;
+	std::vector<std::shared_ptr<Button>> buttons; // các nút bấm trong scene, dùng để quản lý các nút bấm
+	std::vector<std::shared_ptr<GameObject>> gameObjects; // các object trong scene, dùng để quản lý các object đã được tạo ra
 	std::vector<std::shared_ptr<GameObject>> gameObjectQueue; // thêm object trong khi "update" thì dùng hàm addGameObject()
 	Camera camera;
 public: 

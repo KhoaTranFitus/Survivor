@@ -144,6 +144,7 @@
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="DamageOnContact.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="FollowTarget.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -152,12 +153,14 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GamePlayScene.cpp" />
     <ClCompile Include="ICommand.cpp" />
+    <ClCompile Include="ItemEffect.cpp" />
     <ClCompile Include="KeyboardMove.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="MoveForward.cpp" />
     <ClCompile Include="PauseScene.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SelectLevelScene.cpp" />
     <ClCompile Include="SettingScene.cpp" />
@@ -173,6 +176,7 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="DamageOnContact.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="FollowTarget.h" />
     <ClInclude Include="Game.h" />
@@ -181,11 +185,13 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GamePlayScene.h" />
     <ClInclude Include="ICommand.h" />
+    <ClInclude Include="ItemEffect.h" />
     <ClInclude Include="KeyboardMove.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="MoveForward.h" />
     <ClInclude Include="PauseScene.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SelectLevelScene.h" />
     <ClInclude Include="SettingScene.h" />

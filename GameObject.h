@@ -15,8 +15,8 @@ protected:
     //std::vector<std::shared_ptr<Animation>> animations;
     std::string tag;
 
+
     int currentState = 0;
-    bool destroyed = false;
 
 public:
     GameObject();
@@ -26,6 +26,7 @@ public:
     void updateComponents(float deltaTime);
 
     bool needDeleted = false;
+	virtual void onDestroy();
 
     sf::Vector2f getOrigin() const;
     virtual void onCollisionEnter(std::shared_ptr<GameObject> other);
@@ -41,10 +42,6 @@ public:
 
     void setTag(const std::string n_tag);
     std::string getTag();
-
-    void markForDestroy();
-    void revive();
-    bool isDestroyed();
 
     virtual void update(float deltaTime);
     virtual void render(sf::RenderWindow& window);

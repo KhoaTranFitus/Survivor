@@ -8,39 +8,53 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 // Scene.cpp
 void Scene::update(float deltaTime)
 {
-	for (auto& obj : this->gameObjectQueue)
-	{
-		this->gameObjects.push_back(obj);
-	}
-	while (!this->gameObjectQueue.empty()) this->gameObjectQueue.pop_back();
+    // 1. Thêm gameObject mới từ queue vào danh sách chính
+    for (auto& obj : this->gameObjectQueue)
+    {
+        this->gameObjects.push_back(obj);
+    }
+    this->gameObjectQueue.clear();
 
-	// 1. Xoá thật sự các object cần xoá
-	gameObjects.erase(std::remove_if(gameObjects.begin(), gameObjects.end(),
-		[](std::shared_ptr<GameObject>& obj) {
-			return obj->needDeleted;
-		}), gameObjects.end());
+    // 2. Xoá thật sự các object cần xoá: reset + erase
+    for (auto it = gameObjects.begin(); it != gameObjects.end(); )
+    {
+        if ((*it)->needDeleted)
+        {
+            (*it)->onDestroy();
+            it = gameObjects.erase(it); // Xoá khỏi vector
+        }
+        else
+        {
+            ++it;
+        }
+    }
 
-	// 2. Cập nhật còn lại
-	for (auto& obj : gameObjects)
-		obj->update(deltaTime);
-	
-	if (gameObjects.size() >= 2)
-	{
-		for (int i = 0; i < gameObjects.size() - 1; i++)
-		{
-			for (int j = i + 1; j < gameObjects.size(); j++)
-			{
-				if (gameObjects[i]->getHitbox().getGlobalBounds().intersects(gameObjects[j]->getHitbox().getGlobalBounds()))
-				{
-					gameObjects[i]->onCollisionEnter(gameObjects[j]);
-					gameObjects[j]->onCollisionEnter(gameObjects[i]);
-				}
-			}
-		}
-	}
+    // 3. Cập nhật tất cả object còn lại
+    for (auto& obj : gameObjects)
+    {
+        obj->update(deltaTime);
+    }
 
-	for (auto& button : buttons)
-		button->update(deltaTime);
+    // 4. Va chạm
+    const size_t size = gameObjects.size();
+    for (size_t i = 0; i < size; ++i)
+    {
+        for (size_t j = i + 1; j < size; ++j)
+        {
+            if (gameObjects[i]->getHitbox().getGlobalBounds().intersects(
+                gameObjects[j]->getHitbox().getGlobalBounds()))
+            {
+                gameObjects[i]->onCollisionEnter(gameObjects[j]);
+                gameObjects[j]->onCollisionEnter(gameObjects[i]);
+            }
+        }
+    }
+
+    // 5. Cập nhật nút
+    for (auto& button : buttons)
+    {
+        button->update(deltaTime);
+    }
 }
 
 void Scene::render(sf::RenderWindow& window)

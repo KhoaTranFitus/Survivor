@@ -1,8 +1,8 @@
-#include "Stat.h"
+﻿#include "Stat.h"
 #include "GameObject.h"
 
 Stat::Stat(std::shared_ptr<GameObject> owner, float health, float damage) :
-	Component(owner), health(health), maxHealth(health), damage(damage) // G�n maxHealth = health ban ??u
+	Component(owner), health(health), maxHealth(health), damage(damage) // Gán maxHealth = health ban ??u
 {
 	this->healthBar.setSize(sf::Vector2f(50.f, 12.f));
 	this->healthBar.setFillColor(sf::Color::Green);
@@ -39,13 +39,16 @@ void Stat::render(sf::RenderWindow& window)
 void Stat::takeDamage(float amount)
 {
 	health -= amount;
-	if (health > maxHealth) health = maxHealth; // Kh�ng v??t qu� max  
+	if (health > maxHealth) health = maxHealth; // Không v??t quá max  
 	if (health < 0) health = 0;
 
 	float percent = health / maxHealth;
 	if (percent < 0) percent = 0;
 	healthBar.setSize(sf::Vector2f(50 * percent, 10));
-	std::cout << "Health remain: " << health << std::endl;
+	
+	if (health == 0) {
+		owner->needDeleted = true; // Đánh d??i th??ng báo cho GameObject bi?t r?ng n??n xóa nó đi
+	} 
 
 }
 

@@ -36,6 +36,10 @@ void GameObject::updateComponents(float deltaTime)
 	}
 }
 
+void GameObject::onDestroy()
+{
+}
+
 sf::Vector2f GameObject::getOrigin() const
 {
 	return this->hitbox.getPosition() + this->hitbox.getSize() / 2.f;
@@ -60,21 +64,6 @@ void GameObject::move(sf::Vector2f offset)
 sf::RectangleShape& GameObject::getHitbox()
 {
 	return this->hitbox;
-}
-
-void GameObject::markForDestroy()
-{
-	destroyed = true;
-}
-
-void GameObject::revive()
-{
-	destroyed = false;
-}
-
-bool GameObject::isDestroyed()
-{
-	return destroyed;
 }
 
 void GameObject::update(float deltaTime)

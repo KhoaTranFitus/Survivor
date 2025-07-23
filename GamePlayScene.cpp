@@ -9,14 +9,18 @@
 	bool GamePlayScene::fontLoaded = false;
 	GamePlayScene::GamePlayScene()
 	{
+		//thêm background
 		if (!fontLoaded) {
 			fontLoaded = font.loadFromFile("arial.ttf");
 			clockInGame = std::make_shared<Clock>();
 			gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/Game1.jpg"));
 		}
+		//player
 		auto player = GameObjectFactory::createPlayer();
 		gameObjects.push_back(player);
+		gameObjects.push_back(GameObjectFactory::createPowerUp("shoot", 400, 400));
 
+		// buttons
 		auto playBack = std::make_shared<Button>(
 			"Back", 100, 600, sf::Vector2f(50, 50),
 			std::make_shared<SwitchSceneCommand>([]() {
@@ -32,32 +36,12 @@
 				})
 		);
 		buttons.push_back(playPause);
-
-		// add player
-		//add clock run in game play scene
-		//GameManager::getInstance().setCamera(std::make_shared<Camera>());
 	}
 
 	GamePlayScene::~GamePlayScene()
 	{
 	}
 
-
-	float GamePlayScene::getElapsedTime() const {
-		if (clockInGame)
-		{
-			return clockInGame->getElapsedSeconds();
-		}
-		return 0.f;
-	}
-
-	void GamePlayScene::pauseClock() {
-		if (clockInGame) clockInGame->pause();
-	}
-
-	void GamePlayScene::resumeClock() {
-		if (clockInGame) clockInGame->resume();
-	}
 
 
 	void GamePlayScene::update(float deltaTime)
@@ -109,9 +93,6 @@
 				gameObjects.push_back(enemy);
 			}
 		}
-
-		 //--- Tự động bắn đạn ---
-		
 	}
 
 	void GamePlayScene::render(sf::RenderWindow& window)
@@ -126,9 +107,7 @@
 			button->render(window);
 		}
 
-
-	 
-		// Render the clock in game play scene
+		// Render the clock in game play scene with form "Time: mm:ss"
 		if (fontLoaded) {
 			int elapsed = static_cast<int>(getElapsedTime());
 			int minutes = elapsed / 60;
@@ -144,4 +123,20 @@
 			text.setPosition(10, 10); // Góc trên bên trái
 			window.draw(text);
 		}
+	}
+
+	float GamePlayScene::getElapsedTime() const {
+		if (clockInGame)
+		{
+			return clockInGame->getElapsedSeconds();
+		}
+		return 0.f;
+	}
+
+	void GamePlayScene::pauseClock() {
+		if (clockInGame) clockInGame->pause();
+	}
+
+	void GamePlayScene::resumeClock() {
+		if (clockInGame) clockInGame->resume();
 	}
