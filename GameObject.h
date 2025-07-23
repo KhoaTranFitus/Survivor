@@ -1,0 +1,83 @@
+﻿// GameObject.h
+#pragma once
+
+#include <SFML/Graphics.hpp>
+#include <vector>
+#include "Component.h"
+//#include "Animation.h"
+
+class GameObject : public std::enable_shared_from_this<GameObject>
+{
+protected:
+    sf::RectangleShape hitbox;
+    sf::Sprite sprite;
+    std::vector<std::shared_ptr<Component>> components;
+    //std::vector<std::shared_ptr<Animation>> animations;
+    std::string tag;
+
+    int currentState = 0;
+    bool destroyed = false;
+
+public:
+    GameObject();
+    virtual ~GameObject();
+
+    void addComponent(std::shared_ptr<Component> component);
+    void updateComponents(float deltaTime);
+
+    bool needDeleted = false;
+
+    sf::Vector2f getOrigin() const;
+    virtual void onCollisionEnter(std::shared_ptr<GameObject> other);
+
+    template<class T>
+    std::shared_ptr<T> getComponent();
+
+    template<class T>
+    std::shared_ptr<T> removeComponent();
+
+    void move(sf::Vector2f offset);
+    sf::RectangleShape& getHitbox();
+
+    void setTag(const std::string n_tag);
+    std::string getTag();
+
+    void markForDestroy();
+    void revive();
+    bool isDestroyed();
+
+    virtual void update(float deltaTime);
+    virtual void render(sf::RenderWindow& window);
+};
+
+template<class T>
+inline std::shared_ptr<T> GameObject::getComponent()
+{
+    for (const auto& component : components)
+    {
+        if (isType<T>(component))
+        {
+            return std::dynamic_pointer_cast<T>(component);
+        }
+    }
+    return nullptr;
+}
+
+
+// xóa component
+// ví dụ: người chơi nhặt được khiên trong hiệu lực 5s, ban đầu sẽ thêm component Shield vào người chơi
+// nhưng sau 5s thì sẽ xóa component Shield ra khỏi người chơi -> người chơi mất khiên
+template<class T>
+inline std::shared_ptr<T> GameObject::removeComponent()
+{
+    for (auto it = components.begin(); it != components.end(); ++it)
+    {
+        if (isType<T>(*it))
+        {
+            std::shared_ptr<T> removedComponent = std::dynamic_pointer_cast<T>(*it);
+            components.erase(it);
+            return removedComponent;
+        }
+    }
+    return nullptr;
+}

@@ -11,6 +11,21 @@
     <Filter Include="No Category">
       <UniqueIdentifier>{bf335b5c-ae6d-40ca-9063-1e22a51c19b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Command">
+      <UniqueIdentifier>{6d018f90-2ecd-47de-b5ee-b5681173bc7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{6d31467c-8e97-4d9f-b3c1-d3b37b783ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{ecf329ee-34ca-448d-8f98-7d3b927ceb8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{2fc0df95-cbae-4268-8ec5-5ffeaac27c0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\backGround">
+      <UniqueIdentifier>{deec9b32-150a-4eda-abfb-5e49bed2a8f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -25,8 +40,69 @@
     <ClCompile Include="main.cpp">
       <Filter>No Category</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Config.cpp">
+      <Filter>No Category</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectLevelScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePlayScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ICommand.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchSceneCommand.cpp">
+      <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardMove.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>No Category</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="Clock.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>No Category</Filter>
+    </ClCompile>
+    <ClCompile Include="Stat.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemies.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>No Category</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowTarget.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Shoot.cpp" />
+    <ClCompile Include="MoveForward.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -38,7 +114,73 @@
     <ClInclude Include="Game.h">
       <Filter>No Category</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="Config.h" />
+    <ClInclude Include="Config.h">
+      <Filter>No Category</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectLevelScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlayScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchSceneCommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardMove.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>No Category</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectFactory.h" />
+    <ClInclude Include="Clock.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>No Category</Filter>
+    </ClInclude>
+    <ClInclude Include="Stat.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>No Category</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowTarget.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Shoot.h" />
+    <ClInclude Include="MoveForward.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Game1.jpg">
+      <Filter>Assets\backGround</Filter>
+    </Image>
   </ItemGroup>
 </Project>
