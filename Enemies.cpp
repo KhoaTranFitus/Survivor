@@ -1,4 +1,4 @@
-#include "Enemies.h"
+﻿#include "Enemies.h"
 #include "GameManager.h"
 #include "GameObjectFactory.h"
 
@@ -16,4 +16,8 @@ Enemies::~Enemies()
 void Enemies::onDestroy()
 {
 	GameManager::getInstance().getCurrentScene()->addGameObject(GameObjectFactory::createPowerUp("shoot", this->getOrigin().x, this->getOrigin().y));
+	// Thêm gem khi enemy chết
+	GameManager::getInstance().getCurrentScene()->addGameObject(
+		GameObjectFactory::createGem(this->getOrigin().x, this->getOrigin().y)
+	);
 }

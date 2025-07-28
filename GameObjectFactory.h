@@ -21,6 +21,7 @@ public:
 	static std::shared_ptr<Enemies> createShooterEnemy();
 	static std::shared_ptr<Enemies> createBoss();
 	static std::shared_ptr<PowerUp> createPowerUp(std::string name, float x, float y);
+	static std::shared_ptr<GameObject> createGem(float x, float y);
 };
 
 // cái này là Factory Pattern ?? t?o ra các ??i t??ng GameObject
