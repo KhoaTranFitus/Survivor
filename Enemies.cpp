@@ -15,7 +15,7 @@ Enemies::~Enemies()
 
 void Enemies::onDestroy()
 {
-	GameManager::getInstance().getCurrentScene()->addGameObject(GameObjectFactory::createPowerUp("shoot", this->getOrigin().x, this->getOrigin().y));
+	//GameManager::getInstance().getCurrentScene()->addGameObject(GameObjectFactory::createPowerUp("shoot", this->getOrigin().x, this->getOrigin().y));
 	// Thêm gem khi enemy chết
 	GameManager::getInstance().getCurrentScene()->addGameObject(
 		GameObjectFactory::createGem(this->getOrigin().x, this->getOrigin().y)
@@ -24,8 +24,5 @@ void Enemies::onDestroy()
 	// ví dụ về tạo một cái powerup khi enemy bi tiêu diệt
 
 	//thì cái này là nó sẽ tạo ra 1 cái cục có thể cung cấp khả năng bắn cho đối tượng nhặt đc nó
-	GameManager::getInstance().getCurrentScene()->addGameObject(GameObjectFactory::createPowerUp("shoot",
-		this->getOrigin().x, this->getOrigin().y));
-
 	//mình có thể đánh dấu xóa nó rồi cho gem vô đây cũng oke nè
 }

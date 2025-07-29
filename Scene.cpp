@@ -28,9 +28,7 @@ void Scene::update(float deltaTime)
             ++it;
         }
     }
-    // Remove null pointers from the gameObjects vector
-    gameObjects.erase(std::remove(gameObjects.begin(), gameObjects.end(), nullptr), gameObjects.end());
-    // 3. Cập nhật tất cả object còn lại
+  
     for (auto& obj : gameObjects)
     {
         obj->update(deltaTime);

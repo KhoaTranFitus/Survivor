@@ -6,39 +6,8 @@
 #include "PauseScene.h"
 #include "PlayerStat.h"
 #include "NoOverlapComponent.h"
-
-	sf::Font GamePlayScene::font;
-	bool GamePlayScene::fontLoaded = false;
-	GamePlayScene::GamePlayScene()
-	{
-		//thêm background
-		if (!fontLoaded) {
-			fontLoaded = font.loadFromFile("arial.ttf");
-			clockInGame = std::make_shared<Clock>();
-			gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/Game1.jpg"));
-		}
-		//player
-		auto player = GameObjectFactory::createPlayer();
-		gameObjects.push_back(player);
-		gameObjects.push_back(GameObjectFactory::createPowerUp("shoot", 400, 400));
-
-		// buttons
-		auto playBack = std::make_shared<Button>(
-			"Back", 100, 600, sf::Vector2f(50, 50),
-			std::make_shared<SwitchSceneCommand>([]() {
-				return std::make_shared<SelectLevelScene>();
-				})
-		);
-		buttons.push_back(playBack);
-
-		auto playPause = std::make_shared<Button>(
-			"Pause", 100, 100, sf::Vector2f(50, 50),
-			std::make_shared<SwitchSceneCommand>([this]() {
-				return std::make_shared<PauseScene>(shared_from_this());
-				})
-		);
-		buttons.push_back(playPause);
 #include "LoseScene.h"
+
 sf::Font GamePlayScene::font;
 bool GamePlayScene::fontLoaded = false;
 GamePlayScene::GamePlayScene()
@@ -56,7 +25,7 @@ GamePlayScene::GamePlayScene()
 	//add item in game play scene
 	//gameObjects.push_back(GameObjectFactory::createPowerUp("shoot", 400, 400));
 	//gameObjects.push_back(GameObjectFactory::createPowerUp("move", 600, 400));
-	gameObjects.push_back(GameObjectFactory::createPowerUp("heal", 100,100));
+	gameObjects.push_back(GameObjectFactory::createPowerUp("heal", 100, 100));
 
 
 	// buttons
@@ -95,7 +64,6 @@ bool GamePlayScene::alivePlayer()
 	return false;
 }
 
-
 void GamePlayScene::update(float deltaTime)
 {
 	Scene::update(deltaTime);
@@ -109,56 +77,6 @@ void GamePlayScene::update(float deltaTime)
 	enemySpawnElapsed += deltaTime;
 	if (GameManager::getInstance().isKeyPressed(sf::Keyboard::Enter))
 		//if (enemySpawnElapsed >= enemySpawnCooldown)
-		{
-			enemySpawnElapsed = 0.0f;
-			//check player is exist
-			sf::FloatRect viewRect = camera.getViewRect();
-			float spawnX = 0.f;
-			float spawnY = 0.f;
-			// Chọn 1 trong 4 phía: 0 = trái, 1 = phải, 2 = trên, 3 = dưới
-			int side = rand() % 4;
-			float margin = 100.f; // spawn cách rìa camera khoảng 100 px
-
-			switch (side)
-			{
-			case 0: // trái
-				spawnX = viewRect.left - margin;
-				spawnY = viewRect.top + rand() /  viewRect.height;
-				break;
-			case 1: // phải
-				spawnX = viewRect.left + viewRect.width + margin;
-				spawnY = viewRect.top + rand() /  viewRect.height;
-				break;
-			case 2: // trên
-				spawnX = viewRect.left + rand() /  viewRect.width;
-				spawnY = viewRect.top - margin;
-				break;
-			case 3: // dưới
-				spawnX = viewRect.left + rand() /  viewRect.width;
-				spawnY = viewRect.top + viewRect.height + margin;
-				break;
-			}
-			auto enemy = GameObjectFactory::createEnemy();
-			if (enemy)
-			{
-				enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, &gameObjects));
-				enemy->getHitbox().setPosition(sf::Vector2f(spawnX, spawnY));
-				gameObjects.push_back(enemy);
-			}
-		}
-	}
-
-	void GamePlayScene::render(sf::RenderWindow& window)
-	{
-		window.setView(camera.getView(window.getSize())); // Cập nhật camera theo vị trí của người chơi
-		for (auto& gameObject : gameObjects) {
-			gameObject->render(window);
-		}
-		window.setView(window.getDefaultView()); // Đặt lại view về mặc định để vẽ UI
-
-		// Render buttons
-		for (const auto& button : buttons) {
-			button->render(window);
 	{
 		enemySpawnElapsed = 0.0f;
 		//check player is exist
@@ -191,86 +109,13 @@ void GamePlayScene::update(float deltaTime)
 		auto enemy = GameObjectFactory::createEnemy();
 		if (enemy)
 		{
+			enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, &gameObjects));
 			enemy->getHitbox().setPosition(sf::Vector2f(spawnX, spawnY));
 			gameObjects.push_back(enemy);
 		}
-
-		// === VẼ THANH EXP TO VÀ LEVEL ===
-		auto player = GameManager::getInstance().currentPlayer;
-		if (fontLoaded && player) {
-			auto playerStat = player->getComponent<PlayerStat>();
-			if (playerStat) {
-				// Kích thước và vị trí thanh exp
-				float barWidth = 400.f;
-				float barHeight = 22.f;
-				float windowWidth = window.getSize().x;
-				float barX = (windowWidth - barWidth) / 2.f;
-				float barY = 16.f;
-
-				// Level box
-				float levelBoxWidth = 60.f;
-				float levelBoxHeight = barHeight + 8.f;
-				float levelBoxX = barX - levelBoxWidth - 10.f;
-				float levelBoxY = barY - 4.f;
-
-				// Vẽ khung level
-				sf::RectangleShape levelBox(sf::Vector2f(levelBoxWidth, levelBoxHeight));
-				levelBox.setFillColor(sf::Color(40, 40, 40));
-				levelBox.setOutlineColor(sf::Color::White);
-				levelBox.setOutlineThickness(2.f);
-				levelBox.setPosition(levelBoxX, levelBoxY);
-				window.draw(levelBox);
-
-				// Vẽ số level
-				std::ostringstream oss;
-				oss << "Lv " << playerStat->getLevel();
-				sf::Text levelText(oss.str(), font, 22);
-				levelText.setFillColor(sf::Color::White);
-				// Căn giữa trong khung
-				sf::FloatRect textRect = levelText.getLocalBounds();
-				levelText.setPosition(
-					levelBoxX + (levelBoxWidth - textRect.width) / 2.f,
-					levelBoxY + (levelBoxHeight - textRect.height) / 2.f - 4.f
-				);
-				window.draw(levelText);
-
-				// Hiển thị thanh exp
-				int exp = playerStat->getExp();
-				int expToNext = playerStat->getExpToNextLevel();
-				float percent = static_cast<float>(exp) / expToNext;
-
-				// Khung nền exp
-				sf::RectangleShape expBarBg(sf::Vector2f(barWidth, barHeight));
-				expBarBg.setFillColor(sf::Color(50, 50, 50));
-				expBarBg.setPosition(barX, barY);
-
-				// Thanh exp
-				sf::RectangleShape expBar(sf::Vector2f(barWidth * percent, barHeight));
-				expBar.setFillColor(sf::Color(255, 165, 0)); // Màu cam
-				expBar.setPosition(barX, barY);
-
-				window.draw(expBarBg);
-				window.draw(expBar);
-
-				// Text exp
-				std::ostringstream expText;
-				expText << static_cast<int>(exp) << " / " << static_cast<int>(expToNext);
-				sf::Text expValue(expText.str(), font, 16);
-				expValue.setFillColor(sf::Color::White);
-				sf::FloatRect expRect = expValue.getLocalBounds();
-				expValue.setPosition(
-					barX + (barWidth - expRect.width) / 2.f,
-					barY + (barHeight - expRect.height) / 2.f - 2.f
-				);
-				window.draw(expValue);
-			}
-		}
-	}
-	if (!alivePlayer()) {
-		GameManager::getInstance().setScene(std::make_shared<LoseScene>(shared_from_this()));
-		return;
 	}
 }
+
 
 void GamePlayScene::render(sf::RenderWindow& window)
 {

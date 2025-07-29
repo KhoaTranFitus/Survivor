@@ -19,3 +19,13 @@ Bullet::Bullet(sf::Vector2f position):
 Bullet::~Bullet()
 {
 }
+
+void Bullet::update(float deltaTime)
+{
+	GameObject::update(deltaTime);
+	this->lifeTime += deltaTime;
+	if (lifeTime > 3.f)
+	{
+		needDeleted = true;
+	}
+}

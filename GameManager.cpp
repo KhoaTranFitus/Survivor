@@ -2,8 +2,6 @@
 #include "GameManager.h"
 
 
-GameManager::~GameManager() {}
-
 GameManager& GameManager::getInstance() {
     static GameManager instance;
     return instance;
