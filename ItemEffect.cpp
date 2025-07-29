@@ -9,13 +9,14 @@ void ItemEffect::update(float deltaTime) {
 }
 
 void ItemEffect::onCollisionEnter(std::shared_ptr<GameObject> other) {
+	if (other->getTag() == "enemies" || other->getTag() == "player") {
 	// cho bat ke mọi đối tượng đều nhặt được kể cả enenmy
 	if ( other->getTag() == "player") {
 		auto component = componentCreator(other);
 		if (component) {
 			component->setOwner(other);
 			other->addComponent(component);
-			owner->needDeleted = true; // Destroy the item after applying the effect
 		}
+		owner->needDeleted = true; // Luôn xóa item/gem sau khi nhặt
 	}
 }

@@ -38,6 +38,7 @@ void Shoot::update(float deltaTime)
 			if (closestEnemy)
 			{
 				auto bullet = GameObjectFactory::createBullet(owner->getOrigin());
+				bullet->getHitbox().setFillColor(sf::Color::Green);
 				bullet->addComponent(std::make_shared<MoveForward>(bullet, closestEnemy->getOrigin(), 700.f)); // Thêm speed
 				bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), closestEnemy->getTag())); // Thêm damage
 				GameManager::getInstance().getCurrentScene()->addGameObject(bullet);
@@ -51,6 +52,7 @@ void Shoot::update(float deltaTime)
 		{
 			elapsed = 0.f;
 			auto bullet = GameObjectFactory::createBullet(owner->getOrigin());
+			bullet->getHitbox().setFillColor(sf::Color::Red);
 			bullet->addComponent(std::make_shared<MoveForward>(bullet, GameManager::getInstance().currentPlayer->getOrigin(), 300.f)); // Thêm speed
 			bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player")); // Thêm damage
 			GameManager::getInstance().getCurrentScene()->addGameObject(bullet);

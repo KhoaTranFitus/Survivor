@@ -4,6 +4,8 @@
 #include "Camera.h"
 #include "Shoot.h"
 #include "ItemEffect.h"
+#include "Gem.h"
+#include "PlayerStat.h"
 //#include "Heal.h"
 //#include "Assets.h"
 
@@ -11,9 +13,12 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
     auto player = std::make_shared<Player>();
 
-    // bật tắt tùy ý các hành vi (component)
+    // Thêm các component cho player
     player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
     player->addComponent(std::make_shared<Stat>(player, 100, 20));
+    player->addComponent(std::make_shared<PlayerStat>(player));
+
+    //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
     player->addComponent(std::make_shared<Shoot>(player, 0.75f));
 
     GameManager::getInstance().currentPlayer = player;
@@ -88,4 +93,21 @@ std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, floa
         ));
     }
     return powerUp;
+}
+
+std::shared_ptr<GameObject> GameObjectFactory::createGem(float x, float y)
+{
+    auto gem = std::make_shared<Gem>(sf::Vector2f(x, y));
+    gem->setTag("gem"); // Đảm bảo tag được set
+    gem->addComponent(std::make_shared<ItemEffect>(
+        gem,
+        [](std::shared_ptr<GameObject> target) {
+            auto playerStat = target->getComponent<PlayerStat>();
+            if (playerStat) {
+                playerStat->addExp(20);
+            }
+            return nullptr;
+        }
+    ));
+    return gem;
 }
