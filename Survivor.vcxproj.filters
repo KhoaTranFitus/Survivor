@@ -26,6 +26,9 @@
     <Filter Include="Assets\backGround">
       <UniqueIdentifier>{deec9b32-150a-4eda-abfb-5e49bed2a8f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\player">
+      <UniqueIdentifier>{88e13dbd-8ee7-48aa-9ced-b34f4933b2d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -101,13 +104,30 @@
     <ClCompile Include="FollowTarget.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="Shoot.cpp" />
-    <ClCompile Include="MoveForward.cpp" />
     <ClCompile Include="ItemEffect.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="PowerUp.cpp" />
-    <ClCompile Include="DamageOnContact.cpp" />
+    <ClCompile Include="DamageOnContact.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveForward.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Shoot.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="LoseScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets.cpp">
+      <Filter>No Category</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>No Category</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -180,17 +200,40 @@
     <ClInclude Include="FollowTarget.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Shoot.h" />
-    <ClInclude Include="MoveForward.h" />
     <ClInclude Include="ItemEffect.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="PowerUp.h" />
-    <ClInclude Include="DamageOnContact.h" />
+    <ClInclude Include="DamageOnContact.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveForward.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Shoot.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="LoseScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets.h">
+      <Filter>No Category</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>No Category</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Game1.jpg">
       <Filter>Assets\backGround</Filter>
+    </Image>
+    <Image Include="C:\Users\ADMIN\Downloads\player_IDLE.png">
+      <Filter>Assets\player</Filter>
+    </Image>
+    <Image Include="player_RUN.png">
+      <Filter>Assets\player</Filter>
     </Image>
   </ItemGroup>
 </Project>

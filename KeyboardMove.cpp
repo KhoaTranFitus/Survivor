@@ -15,6 +15,7 @@ KeyboardMove::KeyboardMove(std::shared_ptr<GameObject> owner, float speed, std::
         left = sf::Keyboard::Left;
         right = sf::Keyboard::Right;
     }
+
     else
     {
         // Mặc định là WASD nếu mode không hợp lệ
@@ -23,6 +24,22 @@ KeyboardMove::KeyboardMove(std::shared_ptr<GameObject> owner, float speed, std::
         left = sf::Keyboard::A;
         right = sf::Keyboard::D;
     }
+}
+
+sf::Vector2f KeyboardMove::getDirection() const
+{
+    sf::Vector2f direction(0.f, 0.f);
+
+    if (sf::Keyboard::isKeyPressed(this->up))
+        direction.y -= 1.f;
+    if (sf::Keyboard::isKeyPressed(this->down))
+        direction.y += 1.f;
+    if (sf::Keyboard::isKeyPressed(this->left))
+        direction.x -= 1.f;
+    if (sf::Keyboard::isKeyPressed(this->right))
+        direction.x += 1.f;
+
+    return direction;
 }
 
 void KeyboardMove::update(float deltaTime)

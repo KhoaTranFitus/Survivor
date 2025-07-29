@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "GameManager.h"
+#include "Animation.h"
 Camera::Camera()
 {
     this->position = sf::Vector2f(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);

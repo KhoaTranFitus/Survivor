@@ -49,7 +49,6 @@ void Stat::takeDamage(float amount)
 	if (health == 0) {
 		owner->needDeleted = true; // Đánh d??i th??ng báo cho GameObject bi?t r?ng n??n xóa nó đi
 	} 
-
 }
 
 float Stat::getHealth()

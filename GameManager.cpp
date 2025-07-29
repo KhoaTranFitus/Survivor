@@ -1,10 +1,7 @@
 ﻿// GameManager.cpp
 #include "GameManager.h"
 
-GameManager::GameManager() 
-{
-	// Initialize the window with a default size and title
-}
+
 GameManager::~GameManager() {}
 
 GameManager& GameManager::getInstance() {
@@ -125,4 +122,5 @@ std::shared_ptr<Camera> GameManager::getCamera() const {
 sf::FloatRect GameManager::getCameraViewRect() const {
     if (camera)
         return camera->getViewRect();
+    return sf::FloatRect();
 } 

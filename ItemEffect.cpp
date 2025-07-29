@@ -10,7 +10,7 @@ void ItemEffect::update(float deltaTime) {
 
 void ItemEffect::onCollisionEnter(std::shared_ptr<GameObject> other) {
 	// cho bat ke mọi đối tượng đều nhặt được kể cả enenmy
-	if (other->getTag() == "enemies" || other->getTag() == "player") {
+	if ( other->getTag() == "player") {
 		auto component = componentCreator(other);
 		if (component) {
 			component->setOwner(other);

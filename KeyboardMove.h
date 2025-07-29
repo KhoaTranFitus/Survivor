@@ -15,6 +15,9 @@ private:
 	sf::Keyboard::Key right;
 public:
 	KeyboardMove(std::shared_ptr<GameObject> owner, float speed, std::string mode = "wasd");
+
+	sf::Vector2f getDirection() const;
+
 	void update(float deltaTime) override;
 };
 
