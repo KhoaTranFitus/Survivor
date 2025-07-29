@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "Component.h"
-//#include "Animation.h"
+#include "Animation.h"
 
 class GameObject : public std::enable_shared_from_this<GameObject>
 {
@@ -12,8 +12,11 @@ protected:
     sf::RectangleShape hitbox;
     sf::Sprite sprite;
     std::vector<std::shared_ptr<Component>> components;
-    //std::vector<std::shared_ptr<Animation>> animations;
+    std::vector<std::shared_ptr<Animation>> animations;
     std::string tag;
+
+    bool flipped = false  ;              // true = sang trái
+    sf::Vector2f lastDirection = { 0.f,0.f }; // để biết đang đi hướng nào
 
 
     int currentState = 0;

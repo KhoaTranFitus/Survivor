@@ -1,5 +1,5 @@
-#include "GameObject.h"
-
+﻿#include "GameObject.h"
+#include "KeyboardMove.h"
 GameObject::GameObject()
 {
 }
@@ -70,27 +70,52 @@ void GameObject::update(float deltaTime)
 {
 	this->updateComponents(deltaTime);
 
-	//if (1)
-	//{
-	//	currentState = INT(PLAYER_STATE::WALKING);
-	//}
+	auto move = getComponent<KeyboardMove>();
+		// So sánh hướng mới với hướng cũ (theo trục x)
+	if (move)
+	{
+		sf::Vector2f currentDirection = move->getDirection();
 
-	//if (!this->animations.empty())
-	//{
-	//	for (auto& a : animations)
-	//	{
-	//		a->update(deltaTime, false);
-	//		a->setPosition(this->hitbox.getPosition());
-	//	}
-	//}
+		// Xác định trạng thái dựa trên hướng di chuyển
+		if (currentDirection.x != 0.f || currentDirection.y != 0.f) {
+			currentState = 1; // Đang chạy
+		}
+		else {
+			currentState = 0; // Đứng yên
+		}
+
+		// So sánh hướng mới với hướng cũ (theo trục x)
+		if (currentDirection.x != 0 || lastDirection.x != 0)
+		{
+			if (lastDirection.x <= 0)
+			{
+				flipped = true;
+			}
+			else if (lastDirection.x > 0)
+			{
+				flipped = false;
+			}
+		}
+
+		// Cập nhật hướng cũ
+		lastDirection = currentDirection;
+	}
+	if (!this->animations.empty())
+	{
+		for (auto& a : animations)
+		{
+			a->update(deltaTime, flipped);
+			a->setPosition(this->hitbox.getPosition());
+		}
+	}
 }
 
 void GameObject::render(sf::RenderWindow& window)
 {
-	/*if (!animations.empty()) {
+	if (!animations.empty()) {
 		animations[currentState]->render(window);
-	}*/
-	window.draw(this->hitbox);
+	}
+	else window.draw(this->hitbox);
 
 	for (const auto& component : this->components)
 	{

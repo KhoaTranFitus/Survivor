@@ -26,7 +26,7 @@ private:
 
 
 public:
-    GameManager();
+    GameManager() {};
     ~GameManager();
     static GameManager& getInstance();
     std::shared_ptr<Player> currentPlayer = nullptr;

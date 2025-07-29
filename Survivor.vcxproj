@@ -137,6 +137,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Assets.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -156,6 +158,7 @@
     <ClCompile Include="ICommand.cpp" />
     <ClCompile Include="ItemEffect.cpp" />
     <ClCompile Include="KeyboardMove.cpp" />
+    <ClCompile Include="LoseScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="MoveForward.cpp" />
@@ -172,6 +175,8 @@
     <ClCompile Include="SwitchSceneCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Assets.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
@@ -191,6 +196,7 @@
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="ItemEffect.h" />
     <ClInclude Include="KeyboardMove.h" />
+    <ClInclude Include="LoseScene.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="MoveForward.h" />
     <ClInclude Include="NoOverlapComponent.h" />
@@ -206,6 +212,7 @@
     <ClInclude Include="SwitchSceneCommand.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="C:\Users\ADMIN\Downloads\player_IDLE.png" />
     <Image Include="Game1.jpg">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -214,6 +221,7 @@
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
+    <Image Include="player_RUN.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

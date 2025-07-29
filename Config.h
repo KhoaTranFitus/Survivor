@@ -3,12 +3,15 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#define INT(enumValue) static_cast<int>(enumValue)
+
 template <typename T, typename U>
 bool isType(const std::shared_ptr<U>& ptr)
 {
     if (!ptr) return false;
     return typeid(*ptr) == typeid(T);
 }
+
 template <typename T, typename U>
 bool isDerivedFrom(const std::shared_ptr<U>& ptr)
 {
@@ -24,3 +27,8 @@ const float PLAYER_SPEED = 400.f;
 const float BULLET_VELOCITY = 800.f;
 
 const float ENEMY_SPEED = 200.f;
+
+enum class PLAYER_STATE {
+    IDLE = 0,
+    RUN = 1,
+};

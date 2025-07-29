@@ -6,6 +6,7 @@
 #include "ItemEffect.h"
 #include "Gem.h"
 #include "PlayerStat.h"
+//#include "Heal.h"
 //#include "Assets.h"
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
@@ -18,6 +19,7 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
     player->addComponent(std::make_shared<PlayerStat>(player));
 
     //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
+    player->addComponent(std::make_shared<Shoot>(player, 0.75f));
 
     GameManager::getInstance().currentPlayer = player;
     return player;
@@ -40,6 +42,7 @@ std::shared_ptr<Enemies> GameObjectFactory::createEnemy()
 
 	enemies->addComponent(std::make_shared<FollowTarget>(enemies, GameManager::getInstance().currentPlayer, 100.f));
     enemies->addComponent(std::make_shared<Stat>(enemies, 100, 20));
+    enemies->addComponent(std::make_shared<Shoot>(enemies, 1.f));
 
     return enemies;
 }
@@ -75,21 +78,20 @@ std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, floa
         powerUp->addComponent(std::make_shared<ItemEffect>(
             powerUp,
             [](std::shared_ptr<GameObject> target) {
-                return std::make_shared<Shoot>(target, 0.5f);
+                return std::make_shared<Shoot>(target, 1.f);
             }
         ));
     }
-  //  else if (name == "move")
-  //  {
-		//powerUp->getHitbox().setFillColor(sf::Color::Green);
-  //      powerUp->addComponent(std::make_shared<ItemEffect>(
-  //          powerUp,
-  //          [](std::shared_ptr<GameObject> target) {
-  //              return std::make_shared<KeyboardMove>(target, 400.f, "arrows");
-  //          }
-  //      ));
-  //  }
-
+    else if (name == "move")
+    {
+		powerUp->getHitbox().setFillColor(sf::Color::Green);
+        powerUp->addComponent(std::make_shared<ItemEffect>(
+            powerUp,
+            [](std::shared_ptr<GameObject> target) {
+                return std::make_shared<KeyboardMove>(target, 400.f, "arrows");
+            }
+        ));
+    }
     return powerUp;
 }
 
