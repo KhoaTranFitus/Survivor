@@ -1,14 +1,17 @@
 ﻿#include "SettingScene.h"
 #include <algorithm>  // để dùng std::clamp
 #include "Config.h"
+#include "SwitchSceneCommand.h"
+#include "MenuScene.h"
+#include "MusicManager.h"
 
 SettingScene::SettingScene() : Scene()
 {
 	//this->name = "SettingScene";
-
+	gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/selectLevel.png"));
 	// Thanh bar
 	volumeBar.setSize(sf::Vector2f(300.f, 10.f));
-	volumeBar.setPosition(300.f, 300.f);
+	volumeBar.setPosition(490.f, 300.f);
 	volumeBar.setFillColor(sf::Color::Black);
 
 	// Nút tròn
@@ -16,6 +19,14 @@ SettingScene::SettingScene() : Scene()
 	volumeDot.setFillColor(sf::Color::Red);
 	volumeDot.setOrigin(10.f, 10.f); // Đặt tâm
 	volumeDot.setPosition(volumeBar.getPosition().x + volumeBar.getSize().x * (volume / 100.f), volumeBar.getPosition().y + 5.f);
+
+	auto backButton = std::make_shared<Button>(
+		"Back", "type2", 70, 650, sf::Vector2f(145, 50),
+		std::make_shared<SwitchSceneCommand>([]() {
+			return std::make_shared<MenuScene>();
+			})
+	);
+	buttons.push_back(backButton);
 }
 
 
@@ -44,8 +55,8 @@ void SettingScene::update(float deltaTime)
 			float percent = (newX - volumeBar.getPosition().x) / volumeBar.getSize().x;
 			volume = percent * 100.f;
 
-			// Gọi điều chỉnh âm lượng ở đây nếu bạn dùng sf::Music hoặc Sound
-			// sound.setVolume(volume);
+			 // Điều chỉnh âm lượng nhạc nền
+			MusicManager::getInstance().setVolume(volume);
 		}
 	}
 	else

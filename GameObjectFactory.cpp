@@ -51,6 +51,7 @@ std::shared_ptr<GameObject> GameObjectFactory::createBackground(const std::strin
 //    return enemies;
 //}
 
+
 std::shared_ptr<Enemies> GameObjectFactory::createDefaultEnemy()
 {
     auto enemy = std::make_shared<DefaultEnemy>();
@@ -75,9 +76,9 @@ std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
 
 
 //tạo ra bullet
-std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position)
+std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position,sf:: Vector2f size)
 {
-	auto bullet = std::make_shared<Bullet>(position);
+	auto bullet = std::make_shared<Bullet>(position,size);
     bullet->setTag("bullet");
 
 	return bullet;

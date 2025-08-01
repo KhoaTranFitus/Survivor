@@ -3,12 +3,19 @@
 #include "GameObjectFactory.h"
 #include "SwitchSceneCommand.h"
 #include "VictoryScene.h"
+#include "Assets.h"
+#include "Animation.h"
 
 Enemies::Enemies()
 {
-	hitbox.setSize(sf::Vector2f(50.f, 50.f));
+	hitbox.setSize(sf::Vector2f(28.f, 30.f));
 	hitbox.setFillColor(sf::Color::Red);
 	hitbox.setPosition(600.f, 600.f);
+	this->setTag("Enemies");
+
+	// Add run animation
+	animations.push_back(std::make_shared<Animation>(Assets::ENEMY_RUN, 4, 0.15f,sf::Vector2i(14, 15)));
+	animations[INT(ENEMY_STATE::RUN)]->setScale(sf::Vector2f(2, 2));
 }
 
 Enemies::~Enemies()

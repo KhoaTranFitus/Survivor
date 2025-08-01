@@ -2,7 +2,7 @@
 
 
 sf::Font Button::font;
-Button::Button(const std::string& n_text, float x, float y, sf::Vector2f size, std::shared_ptr<ICommand> command)
+Button::Button(const std::string& n_text, std::string tag, float x, float y, sf::Vector2f size, std::shared_ptr<ICommand> command)
 {
     //text at button
     static bool fontLoaded = false;
@@ -12,20 +12,39 @@ Button::Button(const std::string& n_text, float x, float y, sf::Vector2f size, s
         }
         fontLoaded = true;
     }
+	this->tag = tag;
+    if (tag == "type1")
+    {
+    if (!textureNormal.loadFromFile("./Assets/button/button.png"))
+        std::cerr << "Error loading normal button texture\n";
+    if (!textureHover.loadFromFile("./Assets/button/button_hover.png"))
+        std::cerr << "Error loading hover button texture\n";
+    }
+    else if (tag == "type2")
+    {
+        if (!textureNormal.loadFromFile("./Assets/button/button2.png"))
+            std::cerr << "Error loading normal button texture\n";
+        if (!textureHover.loadFromFile("./Assets/button/button2_hover.png"))
+            std::cerr << "Error loading hover button texture\n";
+    }
+
+
+    sprite.setTexture(textureNormal);
+    sprite.setPosition(x - 20.f, y);
+
     text.setFont(font);
     text.setString(n_text);
     text.setCharacterSize(30);
     text.setFillColor(sf::Color::Red);
     // can giua nut
     sf::FloatRect textRect = text.getLocalBounds();
-    text.setOrigin(textRect.left + textRect.width / 2.0f,
-        textRect.top + textRect.height / 2.0f);
-    text.setPosition(x + size.x / 2.0f, y + size.y / 2.0f);
+    text.setOrigin(textRect.left + textRect.width / 2.f,
+        textRect.top + textRect.height / 2.f);
+    text.setPosition(x + size.x / 2.f, y + size.y / 2.f);
+
+
     hitbox.setSize(size);
     hitbox.setPosition(x, y);
-    hitbox.setFillColor(sf::Color::Blue);
-    hitbox.setOutlineThickness(2.f);
-    hitbox.setOutlineColor(sf::Color::Black);
 	this->command = command;
 }
 
@@ -41,7 +60,9 @@ void Button::update(float deltaTime)
 
     if (hitbox.getGlobalBounds().contains(posF)) {
         if (!isHovered) {
-            hitbox.setFillColor(sf::Color::Green);
+            //hitbox.setFillColor(sf::Color::Green);
+			sprite.setTexture(textureHover,true);
+            sprite.setPosition(hitbox.getPosition().x - 20.f, hitbox.getPosition().y);
             isHovered = true;
         }
         if (mouseNowDown && !wasMouseDown) {
@@ -51,7 +72,10 @@ void Button::update(float deltaTime)
     }
     else {
         if (isHovered) {
-            hitbox.setFillColor(sf::Color::Blue);
+            //hitbox.setFillColor(sf::Color::Blue);
+			sprite.setTexture(textureNormal,true);
+            sprite.setPosition(hitbox.getPosition().x - 20.f, hitbox.getPosition().y);
+
             isHovered = false;
         }
     }
@@ -60,6 +84,7 @@ void Button::update(float deltaTime)
 
 void Button::render(sf::RenderWindow& window)
 {
-    window.draw(hitbox);
+	window.draw(sprite);
+    //window.draw(hitbox);
     window.draw(text);
 }

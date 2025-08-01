@@ -6,7 +6,8 @@
 class MenuScene: public Scene
 {
 private:
-
+	static sf::Font font;
+	static bool fontLoaded;
 public:
 	MenuScene();
 	~MenuScene();

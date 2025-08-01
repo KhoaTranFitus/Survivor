@@ -46,8 +46,11 @@ public:
     void setTag(const std::string n_tag);
     std::string getTag();
 
+	void setFlipped(bool flipped); 
+
     virtual void update(float deltaTime);
     virtual void render(sf::RenderWindow& window);
+
 };
 
 template<class T>

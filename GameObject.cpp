@@ -24,6 +24,11 @@ std::string GameObject::getTag()
 	return this->tag;
 }
 
+void GameObject::setFlipped(bool flipped)
+{
+	this->flipped = flipped;
+}
+
 
 void GameObject::updateComponents(float deltaTime)
 {
@@ -71,39 +76,36 @@ void GameObject::update(float deltaTime)
 	this->updateComponents(deltaTime);
 
 	auto move = getComponent<KeyboardMove>();
-		// So sánh hướng mới với hướng cũ (theo trục x)
-	if (move)
-	{
+
+	if (move) {
 		sf::Vector2f currentDirection = move->getDirection();
 
-		// Xác định trạng thái dựa trên hướng di chuyển
+		// Determine state based on movement direction
 		if (currentDirection.x != 0.f || currentDirection.y != 0.f) {
-			currentState = 1; // Đang chạy
+			currentState = 1; // Running
 		}
 		else {
-			currentState = 0; // Đứng yên
+			currentState = 0; // Idle
 		}
-
-		// So sánh hướng mới với hướng cũ (theo trục x)
-		if (currentDirection.x != 0 || lastDirection.x != 0)
-		{
-			if (lastDirection.x <= 0)
-			{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			currentState = 2; // Update state to 2 when Enter key is pressed
+		}
+		// Compare new direction with the previous direction (on the x-axis)
+		if (currentDirection.x != 0 || lastDirection.x != 0) {
+			if (lastDirection.x <= 0) {
 				flipped = true;
 			}
-			else if (lastDirection.x > 0)
-			{
+			else if (lastDirection.x > 0) {
 				flipped = false;
 			}
 		}
 
-		// Cập nhật hướng cũ
+		// Update the previous direction
 		lastDirection = currentDirection;
 	}
-	if (!this->animations.empty())
-	{
-		for (auto& a : animations)
-		{
+
+	if (!this->animations.empty()) {
+		for (auto& a : animations) {
 			a->update(deltaTime, flipped);
 			a->setPosition(this->hitbox.getPosition());
 		}
@@ -115,6 +117,7 @@ void GameObject::render(sf::RenderWindow& window)
 	if (!animations.empty()) {
 		animations[currentState]->render(window);
 	}
+
 	else window.draw(this->hitbox);
 
 	for (const auto& component : this->components)

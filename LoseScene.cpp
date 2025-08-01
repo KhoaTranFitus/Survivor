@@ -22,15 +22,15 @@ LoseScene::LoseScene(std::shared_ptr<GamePlayScene> gamePlayScene) :
 	oss << seconds;
 	timeString = oss.str();
 
-	auto retryButton = std::make_shared<Button>("Retry",540,300,
-		sf::Vector2f(200, 60), std::make_shared<SwitchSceneCommand>([]()
+	auto retryButton = std::make_shared<Button>("Retry","type1",535,300,
+		sf::Vector2f(210, 50), std::make_shared<SwitchSceneCommand>([]()
 			{
 				return std::make_shared<GamePlayScene>();
 			}));
 	buttons.push_back(retryButton);
 
-	auto menuButton = std::make_shared<Button>("Menu", 540, 400,
-		sf::Vector2f(200, 60), std::make_shared<SwitchSceneCommand>([]()
+	auto menuButton = std::make_shared<Button>("Menu", "type1", 535, 400,
+		sf::Vector2f(210, 50), std::make_shared<SwitchSceneCommand>([]()
 			{
 				return std::make_shared<MenuScene>();
 			}));
