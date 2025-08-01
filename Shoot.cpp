@@ -12,6 +12,7 @@ Shoot::Shoot(std::shared_ptr<GameObject> owner, float cooldown) :
 
 void Shoot::update(float deltaTime)
 {
+
 	if (owner->getTag() == "player")
 	{
 		if (GameManager::getInstance().isKeyPressed(sf::Keyboard::Space))
@@ -22,7 +23,7 @@ void Shoot::update(float deltaTime)
 
 			for (auto& obj : gameObjects)
 			{
-				if (obj->getTag() == "enemies")
+				if (obj->getTag() == "enemies" || obj->getTag() == "boss")
 				{
 					float dx = owner->getHitbox().getPosition().x - obj->getHitbox().getPosition().x;
 					float dy = owner->getHitbox().getPosition().y - obj->getHitbox().getPosition().y;
@@ -40,22 +41,50 @@ void Shoot::update(float deltaTime)
 				auto bullet = GameObjectFactory::createBullet(owner->getOrigin());
 				bullet->getHitbox().setFillColor(sf::Color::Green);
 				bullet->addComponent(std::make_shared<MoveForward>(bullet, closestEnemy->getOrigin(), 700.f)); // Thêm speed
-				bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), closestEnemy->getTag())); // Thêm damage
+				bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "enemies")); // Thêm damage
+				bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "boss")); // Thêm damage
 				GameManager::getInstance().getCurrentScene()->addGameObject(bullet);
 			}
 		}
 	}
-	else if (owner->getTag() == "enemies")
+	else if (owner->getTag() == "enemies" || owner->getTag() == "boss")
 	{
 		elapsed += deltaTime;
 		if (elapsed >= cooldown)
 		{
 			elapsed = 0.f;
-			auto bullet = GameObjectFactory::createBullet(owner->getOrigin());
-			bullet->getHitbox().setFillColor(sf::Color::Red);
-			bullet->addComponent(std::make_shared<MoveForward>(bullet, GameManager::getInstance().currentPlayer->getOrigin(), 300.f)); // Thêm speed
-			bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player")); // Thêm damage
-			GameManager::getInstance().getCurrentScene()->addGameObject(bullet);
+
+			sf::Vector2f origin = owner->getOrigin();
+			sf::Vector2f target = GameManager::getInstance().currentPlayer->getOrigin();
+
+			if (owner->getTag() == "boss")
+			{
+				// Bắn 3 tia: thẳng, lệch trái, lệch phải
+				float angleToPlayer = std::atan2(target.y - origin.y, target.x - origin.x);
+				float spread = 20.0f * 3.14159265f / 180.0f; // 20 độ sang radian
+
+				for (int i = -1; i <= 1; ++i)
+				{
+					float angle = angleToPlayer + i * spread;
+					sf::Vector2f dir(std::cos(angle), std::sin(angle));
+					sf::Vector2f bulletTarget = origin + dir * 100.f;
+
+					auto bullet = GameObjectFactory::createBullet(origin);
+					bullet->getHitbox().setFillColor(sf::Color::Yellow);
+					bullet->getHitbox().setSize(sf::Vector2f(32, 32)); // Đạn to hơn
+					bullet->addComponent(std::make_shared<MoveForward>(bullet, bulletTarget, 350.f));
+					bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player"));
+					GameManager::getInstance().getCurrentScene()->addGameObject(bullet);
+				}
+			}
+			else // enemy thường
+			{
+				auto bullet = GameObjectFactory::createBullet(origin);
+				bullet->getHitbox().setFillColor(sf::Color::Red);
+				bullet->addComponent(std::make_shared<MoveForward>(bullet, target, 300.f));
+				bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player"));
+				GameManager::getInstance().getCurrentScene()->addGameObject(bullet);
+			}
 		}
 	}
 }

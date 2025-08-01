@@ -1,6 +1,8 @@
 ﻿#include "Enemies.h"
 #include "GameManager.h"
 #include "GameObjectFactory.h"
+#include "SwitchSceneCommand.h"
+#include "VictoryScene.h"
 
 Enemies::Enemies()
 {
@@ -20,6 +22,15 @@ void Enemies::onDestroy()
 	GameManager::getInstance().getCurrentScene()->addGameObject(
 		GameObjectFactory::createGem(this->getOrigin().x, this->getOrigin().y)
 	);
+
+	// Nếu là boss thì chuyển sang VictoryScene
+	if (this->getTag() == "boss")
+	{
+		auto switchCommand = std::make_shared<SwitchSceneCommand>([]() {
+			return std::make_shared<VictoryScene>();
+			});
+		switchCommand->execute(); // Execute the command to switch scenes
+	}
 
 	// ví dụ về tạo một cái powerup khi enemy bi tiêu diệt
 

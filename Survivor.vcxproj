@@ -140,6 +140,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -173,11 +174,13 @@
     <ClCompile Include="Shoot.cpp" />
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="SwitchSceneCommand.cpp" />
+    <ClCompile Include="VictoryScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Assets.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
@@ -185,6 +188,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="DamageOnContact.h" />
+    <ClInclude Include="DefaultEnemy.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="FollowTarget.h" />
     <ClInclude Include="Game.h" />
@@ -208,8 +212,10 @@
     <ClInclude Include="SelectLevelScene.h" />
     <ClInclude Include="SettingScene.h" />
     <ClInclude Include="Shoot.h" />
+    <ClInclude Include="ShooterEnemy.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="SwitchSceneCommand.h" />
+    <ClInclude Include="VictoryScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="C:\Users\ADMIN\Downloads\player_IDLE.png" />

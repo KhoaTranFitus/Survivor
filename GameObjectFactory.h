@@ -15,7 +15,7 @@ public:
 	static std::shared_ptr<Player> createPlayer();
 
 	static std::shared_ptr<GameObject> createBackground(const std::string& path);
-	static std::shared_ptr<Enemies> createEnemy();
+	static std::shared_ptr<Enemies> createDefaultEnemy();
 	static std::shared_ptr<Bullet> createBullet(sf::Vector2f position);
 
 	static std::shared_ptr<Enemies> createShooterEnemy();
