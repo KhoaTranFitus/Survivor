@@ -108,6 +108,14 @@
     </ClCompile>
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="DamageOnContact.cpp" />
+    <ClCompile Include="Heal.cpp" />
+    <ClCompile Include="Shield.cpp" />
+    <ClCompile Include="Speed.cpp" />
+    <ClCompile Include="PlayerDamageUpgrade.cpp" />
+    <ClCompile Include="PlayerHealthUpgrade.cpp" />
+    <ClCompile Include="PlayerReloadUpgrade.cpp" />
+    <ClCompile Include="PlayerSpeedUpgrade.cpp" />
+    <ClCompile Include="LevelUpScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -187,6 +195,14 @@
     </ClInclude>
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="DamageOnContact.h" />
+    <ClInclude Include="Heal.h" />
+    <ClInclude Include="Shield.h" />
+    <ClInclude Include="Speed.h" />
+    <ClInclude Include="PlayerDamageUpgrade.h" />
+    <ClInclude Include="PlayerHealthUpgrade.h" />
+    <ClInclude Include="PlayerReloadUpgrade.h" />
+    <ClInclude Include="PlayerSpeedUpgrade.h" />
+    <ClInclude Include="LevelUpScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Game1.jpg">

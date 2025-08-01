@@ -32,15 +32,19 @@ void KeyboardMove::update(float deltaTime)
     // Truy cập và di chuyển hitbox của GameObject
     sf::Vector2f movement(0.f, 0.f);
 
-    if (sf::Keyboard::isKeyPressed(this->up))
-        movement.y -= this->speed * deltaTime;
-    if (sf::Keyboard::isKeyPressed(this->down))
-        movement.y += this->speed * deltaTime;
-    if (sf::Keyboard::isKeyPressed(this->left))
-        movement.x -= this->speed * deltaTime;
-    if (sf::Keyboard::isKeyPressed(this->right))
-        movement.x += this->speed * deltaTime;
+    auto stat = owner->getComponent<Stat>();
+    float moveSpeed = stat ? stat->getSpeed() : speed;
 
+    if (sf::Keyboard::isKeyPressed(this->up))
+        movement.y -= moveSpeed * deltaTime;
+    if (sf::Keyboard::isKeyPressed(this->down))
+        movement.y += moveSpeed * deltaTime;
+    if (sf::Keyboard::isKeyPressed(this->left))
+        movement.x -= moveSpeed * deltaTime;
+    if (sf::Keyboard::isKeyPressed(this->right))
+        movement.x += moveSpeed * deltaTime;
+
+    
     this->owner->move(movement);
 }
 

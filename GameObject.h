@@ -52,9 +52,10 @@ inline std::shared_ptr<T> GameObject::getComponent()
 {
     for (const auto& component : components)
     {
-        if (isType<T>(component))
+        auto casted = std::dynamic_pointer_cast<T>(component);
+        if (casted)
         {
-            return std::dynamic_pointer_cast<T>(component);
+            return casted;
         }
     }
     return nullptr;

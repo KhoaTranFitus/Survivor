@@ -4,17 +4,18 @@
 #include "Camera.h"
 #include "Shoot.h"
 #include "ItemEffect.h"
+#include "Heal.h"
+#include "Speed.h"
+#include "Shield.h"
 //#include "Assets.h"
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
     auto player = std::make_shared<Player>();
-
-    // bật tắt tùy ý các hành vi (component)
-    player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
+    player->addComponent(std::make_shared<KeyboardMove>(player, 1.0f)); // speed = 1.0f
     player->addComponent(std::make_shared<Stat>(player, 100, 20));
-    //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
-
+    auto stat = player->getComponent<Stat>();
+    if (stat) stat->baseSpeed = PLAYER_SPEED; // Đảm bảo baseSpeed đúng
     GameManager::getInstance().currentPlayer = player;
     return player;
 }
@@ -36,6 +37,7 @@ std::shared_ptr<Enemies> GameObjectFactory::createEnemy()
 
 	enemies->addComponent(std::make_shared<FollowTarget>(enemies, GameManager::getInstance().currentPlayer, 100.f));
     enemies->addComponent(std::make_shared<Stat>(enemies, 100, 20));
+	enemies->addComponent(std::make_shared<Shoot>(enemies, 1.f)); // Thêm hành vi bắn
 
     return enemies;
 }
@@ -75,16 +77,25 @@ std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, floa
             }
         ));
     }
-  //  else if (name == "move")
-  //  {
-		//powerUp->getHitbox().setFillColor(sf::Color::Green);
-  //      powerUp->addComponent(std::make_shared<ItemEffect>(
-  //          powerUp,
-  //          [](std::shared_ptr<GameObject> target) {
-  //              return std::make_shared<KeyboardMove>(target, 400.f, "arrows");
-  //          }
-  //      ));
-  //  }
+    else if (name == "heal")
+    {
+        powerUp->getHitbox().setFillColor(sf::Color::Green);
+        powerUp->addComponent(std::make_shared<Heal>(powerUp, 0.2f)); // Không cần add component mới
+    }
+    else if(name == "speed")
+    {
+        powerUp->getHitbox().setFillColor(sf::Color::Yellow);
+        powerUp->addComponent(std::make_shared<Speed>(powerUp, 0.3f)); // tăng 30% tốc độ
+    }
+    else if(name == "shield")
+    {
+        powerUp->getHitbox().setFillColor(sf::Color::Blue);
+        powerUp->addComponent(std::make_shared<Shield>(powerUp, 50.f));
+    }
+    else
+    {
+        std::cerr << "[ERROR] Unknown power-up type: " << name << "\n";
+	}
 
     return powerUp;
 }
