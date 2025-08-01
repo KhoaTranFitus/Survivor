@@ -10,7 +10,7 @@
 #include "ShooterEnemy.h"
 #include "DamageOnContact.h"
 #include "Boss.h"
-
+#include "Assets.h"
 //change here
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
