@@ -12,7 +12,7 @@
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
     auto player = std::make_shared<Player>();
-    player->addComponent(std::make_shared<KeyboardMove>(player, 1.0f)); // speed = 1.0f
+    player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
     player->addComponent(std::make_shared<Stat>(player, 100, 20));
     auto stat = player->getComponent<Stat>();
     if (stat) stat->baseSpeed = PLAYER_SPEED; // Đảm bảo baseSpeed đúng
