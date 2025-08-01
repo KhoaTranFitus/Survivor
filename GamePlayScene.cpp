@@ -15,9 +15,9 @@ GamePlayScene::GamePlayScene()
 	//thêm background
 	if (!fontLoaded) {
 		fontLoaded = font.loadFromFile("arial.ttf");
-		clockInGame = std::make_shared<Clock>();
-		gameObjects.push_back(GameObjectFactory::createBackground("./Resource/backGround/Game1.jpg"));
 	}
+		clockInGame = std::make_shared<Clock>();
+		gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/Game1.jpg"));
 	//player
 	auto player = GameObjectFactory::createPlayer();
 	gameObjects.push_back(player);
@@ -25,20 +25,20 @@ GamePlayScene::GamePlayScene()
 	//add item in game play scene
 	//gameObjects.push_back(GameObjectFactory::createPowerUp("shoot", 400, 400));
 	//gameObjects.push_back(GameObjectFactory::createPowerUp("move", 600, 400));
-	gameObjects.push_back(GameObjectFactory::createPowerUp("heal", 100, 100));
+	//gameObjects.push_back(GameObjectFactory::createPowerUp("heal", 100, 100));
 
 
 	// buttons
-	auto playBack = std::make_shared<Button>(
-		"Back", 100, 600, sf::Vector2f(50, 50),
-		std::make_shared<SwitchSceneCommand>([]() {
-			return std::make_shared<SelectLevelScene>();
-			})
-	);
-	buttons.push_back(playBack);
+	//auto playBack = std::make_shared<Button>(
+	//	"Back","type1", 100, 600, sf::Vector2f(50, 50),
+	//	std::make_shared<SwitchSceneCommand>([]() {
+	//		return std::make_shared<SelectLevelScene>();
+	//		})
+	//);
+	//buttons.push_back(playBack);
 
 	auto playPause = std::make_shared<Button>(
-		"Pause", 100, 100, sf::Vector2f(50, 50),
+		"Pause","type1", 100, 100, sf::Vector2f(50, 50),
 		std::make_shared<SwitchSceneCommand>([this]() {
 			return std::make_shared<PauseScene>(shared_from_this());
 			})
@@ -113,6 +113,12 @@ void GamePlayScene::update(float deltaTime)
 			enemy->getHitbox().setPosition(sf::Vector2f(spawnX, spawnY));
 			gameObjects.push_back(enemy);
 		}
+	}
+	if(!alivePlayer())
+	{
+		auto loseScene = std::make_shared<LoseScene>(shared_from_this());
+		GameManager::getInstance().setScene(loseScene);
+		return;
 	}
 }
 

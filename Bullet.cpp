@@ -16,6 +16,14 @@ Bullet::Bullet(sf::Vector2f position):
 	hitbox.setPosition(position);
 }
 
+Bullet::Bullet(sf::Vector2f position, sf::Vector2f size): 
+	GameObject()
+{
+	hitbox.setSize(size);
+	hitbox.setFillColor(sf::Color::Black);
+	hitbox.setPosition(position);
+}
+
 Bullet::~Bullet()
 {
 }

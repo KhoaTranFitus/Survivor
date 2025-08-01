@@ -199,6 +199,7 @@
     <ClInclude Include="LoseScene.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="MoveForward.h" />
+    <ClInclude Include="MusicManager.h" />
     <ClInclude Include="NoOverlapComponent.h" />
     <ClInclude Include="PauseScene.h" />
     <ClInclude Include="Player.h" />
@@ -212,7 +213,19 @@
     <ClInclude Include="SwitchSceneCommand.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\backGround\menuScene.png" />
+    <Image Include="Assets\backGround\selectLevel.png" />
+    <Image Include="Assets\button\button.png" />
+    <Image Include="Assets\button\button1.png" />
+    <Image Include="Assets\button\button1_hover.png" />
+    <Image Include="Assets\button\button2.png" />
+    <Image Include="Assets\button\button2_hovering.png" />
+    <Image Include="Assets\button\button_hover.png" />
+    <Image Include="Assets\player\newPlayer_FIRE.png" />
+    <Image Include="Assets\player\newPlayer_IDLE.png" />
+    <Image Include="Assets\player\newPlayer_RUN.png" />
     <Image Include="C:\Users\ADMIN\Downloads\player_IDLE.png" />
+    <Image Include="enemy_run.png" />
     <Image Include="Game1.jpg">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -222,6 +235,10 @@
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </Image>
     <Image Include="player_RUN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\music\music_basic.mp3" />
+    <Media Include="Assets\music\time_for_adventure.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

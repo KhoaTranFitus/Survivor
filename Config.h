@@ -31,4 +31,9 @@ const float ENEMY_SPEED = 200.f;
 enum class PLAYER_STATE {
     IDLE = 0,
     RUN = 1,
+	FIRE = 2,
+};
+enum class ENEMY_STATE {
+    IDLE = 1,
+    RUN = 0,
 };

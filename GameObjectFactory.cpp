@@ -17,7 +17,7 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
 
     // Thêm các component cho player
     player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
-    player->addComponent(std::make_shared<Stat>(player, 100, 20));
+    player->addComponent(std::make_shared<Stat>(player, 10000, 20));
     player->addComponent(std::make_shared<PlayerStat>(player));
 
     //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
@@ -44,16 +44,16 @@ std::shared_ptr<Enemies> GameObjectFactory::createEnemy()
 
 	enemies->addComponent(std::make_shared<FollowTarget>(enemies, GameManager::getInstance().currentPlayer, 100.f));
     enemies->addComponent(std::make_shared<Stat>(enemies, 100, 20));
-    enemies->addComponent(std::make_shared<Shoot>(enemies, 1.f));
+    enemies->addComponent(std::make_shared<Shoot>(enemies, 2.f));
 
     return enemies;
 }
 
 
 //tạo ra bullet
-std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position)
+std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position,sf:: Vector2f size)
 {
-	auto bullet = std::make_shared<Bullet>(position);
+	auto bullet = std::make_shared<Bullet>(position,size);
     bullet->setTag("bullet");
 
 	return bullet;

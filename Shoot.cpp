@@ -37,8 +37,21 @@ void Shoot::update(float deltaTime)
 
 			if (closestEnemy)
 			{
-				auto bullet = GameObjectFactory::createBullet(owner->getOrigin());
+				sf::Vector2f size(20.f, 5.f);
+
+				// Tính hướng từ player đến enemy
+				sf::Vector2f dir = closestEnemy->getOrigin() - owner->getOrigin();
+				float angle = std::atan2(dir.y, dir.x) * 180.f / 3.14159265f; // Đổi sang độ
+
+				// Lật player về phía enemy gần nhất
+				float playerX = owner->getOrigin().x;
+				float enemyX = closestEnemy->getOrigin().x;
+				bool flipped = (enemyX < playerX);// true nếu enemy bên trái, false nếu bên phải
+				owner->setFlipped(flipped);
+
+				auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size);
 				bullet->getHitbox().setFillColor(sf::Color::Green);
+				bullet->getHitbox().setRotation(angle); // Xoay viên đạn theo hướng bắn
 				bullet->addComponent(std::make_shared<MoveForward>(bullet, closestEnemy->getOrigin(), 700.f)); // Thêm speed
 				bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), closestEnemy->getTag())); // Thêm damage
 				GameManager::getInstance().getCurrentScene()->addGameObject(bullet);
@@ -51,7 +64,8 @@ void Shoot::update(float deltaTime)
 		if (elapsed >= cooldown)
 		{
 			elapsed = 0.f;
-			auto bullet = GameObjectFactory::createBullet(owner->getOrigin());
+			sf::Vector2f size(10.f, 10.f);
+			auto bullet = GameObjectFactory::createBullet(owner->getOrigin(),size);
 			bullet->getHitbox().setFillColor(sf::Color::Red);
 			bullet->addComponent(std::make_shared<MoveForward>(bullet, GameManager::getInstance().currentPlayer->getOrigin(), 300.f)); // Thêm speed
 			bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player")); // Thêm damage

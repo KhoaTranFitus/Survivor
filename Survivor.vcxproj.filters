@@ -29,6 +29,15 @@
     <Filter Include="Assets\player">
       <UniqueIdentifier>{88e13dbd-8ee7-48aa-9ced-b34f4933b2d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\enemy">
+      <UniqueIdentifier>{88600cce-9ff6-4453-a790-2a83d9d5375c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\button">
+      <UniqueIdentifier>{e09ea068-1c74-4d40-a9f1-719a0833fb37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\music">
+      <UniqueIdentifier>{28d202e1-e66c-436d-9ae3-3f4f44cc1461}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -128,6 +137,9 @@
     <ClCompile Include="Animation.cpp">
       <Filter>No Category</Filter>
     </ClCompile>
+    <ClCompile Include="Gem.cpp" />
+    <ClCompile Include="NoOverlapComponent.cpp" />
+    <ClCompile Include="PlayerStat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -224,6 +236,10 @@
     <ClInclude Include="Animation.h">
       <Filter>No Category</Filter>
     </ClInclude>
+    <ClInclude Include="Gem.h" />
+    <ClInclude Include="NoOverlapComponent.h" />
+    <ClInclude Include="PlayerStat.h" />
+    <ClInclude Include="MusicManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Game1.jpg">
@@ -235,5 +251,49 @@
     <Image Include="player_RUN.png">
       <Filter>Assets\player</Filter>
     </Image>
+    <Image Include="enemy_run.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
+    <Image Include="Assets\backGround\menuScene.png">
+      <Filter>Assets\backGround</Filter>
+    </Image>
+    <Image Include="Assets\button\button.png">
+      <Filter>Assets\button</Filter>
+    </Image>
+    <Image Include="Assets\button\button_hover.png">
+      <Filter>Assets\button</Filter>
+    </Image>
+    <Image Include="Assets\backGround\selectLevel.png">
+      <Filter>Assets\backGround</Filter>
+    </Image>
+    <Image Include="Assets\player\newPlayer_FIRE.png">
+      <Filter>Assets\player</Filter>
+    </Image>
+    <Image Include="Assets\player\newPlayer_IDLE.png">
+      <Filter>Assets\player</Filter>
+    </Image>
+    <Image Include="Assets\player\newPlayer_RUN.png">
+      <Filter>Assets\player</Filter>
+    </Image>
+    <Image Include="Assets\button\button2.png">
+      <Filter>Assets\button</Filter>
+    </Image>
+    <Image Include="Assets\button\button2_hovering.png">
+      <Filter>Assets\button</Filter>
+    </Image>
+    <Image Include="Assets\button\button1.png">
+      <Filter>Assets\button</Filter>
+    </Image>
+    <Image Include="Assets\button\button1_hover.png">
+      <Filter>Assets\button</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\music\time_for_adventure.mp3">
+      <Filter>Assets\music</Filter>
+    </Media>
+    <Media Include="Assets\music\music_basic.mp3">
+      <Filter>Assets\music</Filter>
+    </Media>
   </ItemGroup>
 </Project>

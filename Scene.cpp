@@ -28,7 +28,6 @@ void Scene::update(float deltaTime)
             ++it;
         }
     }
-  
     for (auto& obj : gameObjects)
     {
         obj->update(deltaTime);

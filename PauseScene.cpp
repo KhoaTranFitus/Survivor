@@ -19,7 +19,7 @@ PauseScene::PauseScene(std::shared_ptr<GamePlayScene> gameplayScene)
 
      //Resume button: resume lại gameplayScene cũ
     auto resumeButton = std::make_shared<Button>(
-        "Resume", 500, 300, sf::Vector2f(150, 60),
+        "Resume", "type1", 535, 300, sf::Vector2f(210, 50),
         std::make_shared<SwitchSceneCommand>([scene = gamePlayScene]() {
             scene->resumeClock();
             return scene;
@@ -28,9 +28,9 @@ PauseScene::PauseScene(std::shared_ptr<GamePlayScene> gameplayScene)
     buttons.push_back(resumeButton);
 
     auto menuButton = std::make_shared<Button>(
-        "Menu", 500, 400, sf::Vector2f(150, 50),
+        "Menu", "type1", 535, 400, sf::Vector2f(210, 50),
         std::make_shared<SwitchSceneCommand>([](){
-            return std::make_shared<MenuScene>();
+            return std::make_shared<SelectLevelScene>();
             })
     );
     buttons.push_back(menuButton);

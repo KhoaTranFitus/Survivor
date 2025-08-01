@@ -2,14 +2,14 @@
 
 Background::Background(const std::string& imagePath)
 {
-    if (!texture.loadFromFile("./Assets/backGround/Game1.jpg")) {
+    if (!texture.loadFromFile(imagePath)) {
         std::cerr << "Failed to load background image\n";
     }
     else {
         sprite.setTexture(texture);
     }
 
-    sprite.setScale(2.f, 2.f);
+    sprite.setScale(1.f, 1.f);
     sprite.setPosition(0, 0);
 }
 

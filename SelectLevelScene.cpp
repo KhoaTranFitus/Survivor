@@ -6,9 +6,12 @@
 
 SelectLevelScene::SelectLevelScene()
 {
+
+     gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/selectLevel.png"));
+    
      //Level 1 button
     auto level1Button = std::make_shared<Button>(
-        "Level 1", 500, 300, sf::Vector2f(200, 100),
+        "Level 1", "type1", 535, 300, sf::Vector2f(210, 50),
         std::make_shared<SwitchSceneCommand>([]() {
             return std::make_shared<GamePlayScene>();
         })
@@ -17,7 +20,7 @@ SelectLevelScene::SelectLevelScene()
 
     // Back button
     auto backButton = std::make_shared<Button>(
-        "Back", 100, 650, sf::Vector2f(50, 50),
+        "Back", "type2", 50, 650, sf::Vector2f(145, 50),
         std::make_shared<SwitchSceneCommand>([]() {
             return std::make_shared<MenuScene>();
         })
