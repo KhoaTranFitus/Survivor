@@ -78,14 +78,15 @@ void Shoot::update(float deltaTime)
 
 				for (int i = -1; i <= 1; ++i)
 				{
+					std::cout << i << std::endl;
 					float angle = angleToPlayer + i * spread;
 					sf::Vector2f dir(std::cos(angle), std::sin(angle));
 					sf::Vector2f bulletTarget = origin + dir * 100.f;
 
-					auto bullet = GameObjectFactory::createBullet(owner->getOrigin(),size);
+					sf::Vector2f bulletSize(30.f, 30.f);
+					auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), bulletSize);
 					bullet->getHitbox().setFillColor(sf::Color::Yellow);
-					bullet->getHitbox().setSize(sf::Vector2f(32, 32)); // Đạn to hơn
-					bullet->addComponent(std::make_shared<MoveForward>(bullet, GameManager::getInstance().currentPlayer->getOrigin(), 350.f));
+					bullet->addComponent(std::make_shared<MoveForward>(bullet, bulletTarget, 350.f));
 					bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player"));
 					GameManager::getInstance().getCurrentScene()->addGameObject(bullet);
 				}

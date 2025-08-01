@@ -148,6 +148,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="DamageOnContact.cpp" />
+    <ClCompile Include="DefaultEnemy.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="FollowTarget.cpp" />
     <ClCompile Include="Game.cpp" />

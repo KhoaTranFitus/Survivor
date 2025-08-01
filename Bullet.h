@@ -9,7 +9,7 @@ private:
 public:
 	Bullet(float x, float y);
 	Bullet(sf::Vector2f position);
-	Bullet(sf::Vector2f position,sf::Vector2f size);
+	Bullet(sf::Vector2f position, sf::Vector2f size); // Ensure constructor supports size
 	void update(float deltaTime) override;
 	virtual ~Bullet();
 };

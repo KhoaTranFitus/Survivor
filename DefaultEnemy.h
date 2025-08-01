@@ -2,6 +2,6 @@
 #include "Enemies.h"
 class DefaultEnemy : public Enemies {
 public:
-    DefaultEnemy() = default;
+    DefaultEnemy() ;
     ~DefaultEnemy() override = default;
 };

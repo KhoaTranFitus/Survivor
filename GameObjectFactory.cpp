@@ -76,12 +76,12 @@ std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
 
 
 //tạo ra bullet
-std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position,sf:: Vector2f size)
+std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position, sf::Vector2f size)
 {
-	auto bullet = std::make_shared<Bullet>(position,size);
+    auto bullet = std::make_shared<Bullet>(position, size);
     bullet->setTag("bullet");
 
-	return bullet;
+    return bullet;
 }
 // tạo ra enemy bắn được sau 1 khoảng thời gian nhất định, và ít hơn default enemy
 //std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
@@ -104,7 +104,7 @@ std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, floa
 {
     auto powerUp = std::make_shared<PowerUp>();
     powerUp->setTag("item");
-	powerUp->getHitbox().setPosition(x, y);
+    powerUp->getHitbox().setPosition(x, y);
 
     if (name == "shoot")
     {
@@ -117,7 +117,7 @@ std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, floa
     }
     else if (name == "move")
     {
-		powerUp->getHitbox().setFillColor(sf::Color::Green);
+        powerUp->getHitbox().setFillColor(sf::Color::Green);
         powerUp->addComponent(std::make_shared<ItemEffect>(
             powerUp,
             [](std::shared_ptr<GameObject> target) {
