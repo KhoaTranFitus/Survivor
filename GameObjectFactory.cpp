@@ -7,7 +7,7 @@
 #include "Heal.h"
 #include "Speed.h"
 #include "Shield.h"
-//#include "Assets.h"
+#include "Assets.h"
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
