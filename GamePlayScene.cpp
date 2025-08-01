@@ -7,6 +7,7 @@
 #include "PlayerStat.h"
 #include "NoOverlapComponent.h"
 #include "LoseScene.h"
+#include <cmath>
 
 sf::Font GamePlayScene::font;
 bool GamePlayScene::fontLoaded = false;
@@ -64,54 +65,120 @@ bool GamePlayScene::alivePlayer()
 	return false;
 }
 
+// Hàm tính khoảng cách 2 điểm
+float distance(sf::Vector2f a, sf::Vector2f b) {
+    float dx = a.x - b.x;
+    float dy = a.y - b.y;
+    return std::sqrt(dx * dx + dy * dy);
+}
+
+void GamePlayScene::spawnEnemyGeneric(
+    std::function<std::shared_ptr<Enemies>()> factory,
+    float& elapsed, float cooldown,
+    const sf::FloatRect& spawnRect,
+    const sf::FloatRect& viewRect,
+    const sf::Vector2f& playerPos,
+    float minDistanceToPlayer,
+    float deltaTime
+)
+{
+    elapsed += deltaTime;
+    if (elapsed >= cooldown)
+    {
+        elapsed = 0.0f;
+        float spawnX, spawnY;
+        int maxTry = 10;
+        bool valid = false;
+        for (int tryCount = 0; tryCount < maxTry && !valid; ++tryCount) {
+            spawnX = spawnRect.left + static_cast<float>(rand()) / RAND_MAX * spawnRect.width;
+            spawnY = spawnRect.top + static_cast<float>(rand()) / RAND_MAX * spawnRect.height;
+            if (distance(sf::Vector2f(spawnX, spawnY), playerPos) >= minDistanceToPlayer)
+                valid = true;
+        }
+        if (!valid) {
+            spawnX = viewRect.left - (spawnRect.left - viewRect.left);
+            spawnY = viewRect.top - (spawnRect.top - viewRect.top);
+        }
+        auto enemy = factory();
+        if (enemy)
+        {
+            enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, &gameObjects));
+            enemy->getHitbox().setPosition(sf::Vector2f(spawnX, spawnY));
+            gameObjects.push_back(enemy);
+        }
+    }
+}
+
 void GamePlayScene::update(float deltaTime)
 {
 	Scene::update(deltaTime);
 
 	this->camera.update(deltaTime, GameManager::getInstance().currentPlayer->getHitbox().getPosition());
+	// thời gian đến khi dừng game
+	float elapsed = getElapsedTime();
+	bool stopAll = (elapsed >= 5.f);
 
-	if (clockInGame && !clockInGame->isPaused()) clockInGame->update(deltaTime);
-
-
-	//cho enenmy spawn ow ngoai khung camera
-	enemySpawnElapsed += deltaTime;
-	if (GameManager::getInstance().isKeyPressed(sf::Keyboard::Enter))
-		//if (enemySpawnElapsed >= enemySpawnCooldown)
-	{
-		enemySpawnElapsed = 0.0f;
-		//check player is exist
-		sf::FloatRect viewRect = camera.getViewRect();
-		float spawnX = 0.f;
-		float spawnY = 0.f;
-		// Chọn 1 trong 4 phía: 0 = trái, 1 = phải, 2 = trên, 3 = dưới
-		int side = rand() % 4;
-		float margin = 100.f; // spawn cách rìa camera khoảng 100 px
-
-		switch (side)
-		{
-		case 0: // trái
-			spawnX = viewRect.left - margin;
-			spawnY = viewRect.top + rand() / viewRect.height;
-			break;
-		case 1: // phải
-			spawnX = viewRect.left + viewRect.width + margin;
-			spawnY = viewRect.top + rand() / viewRect.height;
-			break;
-		case 2: // trên
-			spawnX = viewRect.left + rand() / viewRect.width;
-			spawnY = viewRect.top - margin;
-			break;
-		case 3: // dưới
-			spawnX = viewRect.left + rand() / viewRect.width;
-			spawnY = viewRect.top + viewRect.height + margin;
-			break;
+	if (clockInGame && !clockInGame->isPaused()) {
+		if (stopAll) {
+			clockInGame->pause();
 		}
-		auto enemy = GameObjectFactory::createEnemy();
-		if (enemy)
-		{
-			enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, &gameObjects));
-			enemy->getHitbox().setPosition(sf::Vector2f(spawnX, spawnY));
-			gameObjects.push_back(enemy);
+		else {
+			clockInGame->update(deltaTime);
+		}
+	}
+
+	sf::FloatRect viewRect = camera.getViewRect();
+	float margin = 100.f;
+	float minDistanceToPlayer = 100.f;
+	sf::Vector2f playerPos = GameManager::getInstance().currentPlayer->getHitbox().getPosition();
+
+	sf::FloatRect spawnRect(
+		viewRect.left - margin,
+		viewRect.top - margin,
+		viewRect.width + 2 * margin,
+		viewRect.height + 2 * margin
+	);
+
+	// Nếu chưa đến 2 phút thì vẫn spawn enemy
+	if (!stopAll) {
+		spawnEnemyGeneric(
+			[]() { return GameObjectFactory::createDefaultEnemy(); },
+			defaultEnemyElapsed, defaultEnemyCooldown,
+			spawnRect, viewRect, playerPos, minDistanceToPlayer,
+			deltaTime
+		);
+
+		spawnEnemyGeneric(
+			[]() { return GameObjectFactory::createShooterEnemy(); },
+			shooterEnemyElapsed, shooterEnemyCooldown,
+			spawnRect, viewRect, playerPos, minDistanceToPlayer,
+			deltaTime
+		);
+	}
+	else {
+		// XÓA CHỈ 1 LẦN
+		if (!clearedEnemiesAndBullets) {
+			clearedEnemiesAndBullets = true;
+			gameObjects.erase(
+				std::remove_if(gameObjects.begin(), gameObjects.end(),
+					[](const std::shared_ptr<GameObject>& obj) {
+						if (obj->getTag() == "enemies") return true;
+						if (obj->getTag() == "bullet") return true;
+						return false;
+					}
+				),
+				gameObjects.end()
+			);
+		}
+		// Spawn boss như cũ
+		if (stopAll && !bossSpawned) {
+		    bossSpawned = true;
+		    sf::FloatRect viewRect = camera.getViewRect();
+		    float bossX = viewRect.left + viewRect.width / 2.f;
+		    float bossY = viewRect.top + viewRect.height / 2.f;
+		    auto boss = GameObjectFactory::createBoss();
+		    boss->getHitbox().setPosition(sf::Vector2f(bossX, bossY));
+		    gameObjects.push_back(boss);
 		}
 	}
 	if(!alivePlayer())
@@ -151,6 +218,14 @@ void GamePlayScene::render(sf::RenderWindow& window)
 		text.setPosition(10, 10); // Góc trên bên trái
 		window.draw(text);
 	}
+
+	auto player = GameManager::getInstance().currentPlayer;
+	if (fontLoaded && player) {
+	    auto playerStat = player->getComponent<PlayerStat>();
+	    if (playerStat) {
+	        playerStat->render(window, font);
+	    }
+	}
 }
 
 float GamePlayScene::getElapsedTime() const {
@@ -168,3 +243,4 @@ void GamePlayScene::pauseClock() {
 void GamePlayScene::resumeClock() {
 	if (clockInGame) clockInGame->resume();
 }
+

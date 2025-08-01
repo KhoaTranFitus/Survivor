@@ -16,5 +16,5 @@ public:
     int getExpToNextLevel() const { return expToNextLevel; }
 
     void update(float) override;
-    void render(sf::RenderWindow&) override {}
+    void render(sf::RenderWindow& window, const sf::Font& font);
 };

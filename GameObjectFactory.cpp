@@ -6,9 +6,11 @@
 #include "ItemEffect.h"
 #include "Gem.h"
 #include "PlayerStat.h"
-//#include "Heal.h"
-//#include "Assets.h"
-
+#include "DefaultEnemy.h"
+#include "ShooterEnemy.h"
+#include "DamageOnContact.h"
+#include "Boss.h"
+#include "Assets.h"
 //change here
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
@@ -32,21 +34,44 @@ std::shared_ptr<GameObject> GameObjectFactory::createBackground(const std::strin
     return std::make_shared<Background>(path);
 }
 //tạo default enemy
-std::shared_ptr<Enemies> GameObjectFactory::createEnemy()
+//std::shared_ptr<Enemies> GameObjectFactory::createEnemy()
+//{
+//    if (!GameManager::getInstance().currentPlayer)
+//    {
+//        std::cerr << "[ERROR] Cannot create enemy: player is null\n";
+//        return nullptr;
+//    }
+//	auto enemies = std::make_shared<Enemies>();
+//	enemies->setTag("enemies");
+//
+//	enemies->addComponent(std::make_shared<FollowTarget>(enemies, GameManager::getInstance().currentPlayer, 100.f));
+//    enemies->addComponent(std::make_shared<Stat>(enemies, 100, 20));
+//    enemies->addComponent(std::make_shared<Shoot>(enemies, 1.f));
+//
+//    return enemies;
+//}
+
+
+std::shared_ptr<Enemies> GameObjectFactory::createDefaultEnemy()
 {
-    if (!GameManager::getInstance().currentPlayer)
-    {
-        std::cerr << "[ERROR] Cannot create enemy: player is null\n";
-        return nullptr;
-    }
-	auto enemies = std::make_shared<Enemies>();
-	enemies->setTag("enemies");
+    auto enemy = std::make_shared<DefaultEnemy>();
+    enemy->setTag("enemies");
+    enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 100.f));
+    enemy->addComponent(std::make_shared<Stat>(enemy, 100, 20));
+    enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
+    // Không có Shoot
+    return enemy;
+}
 
-	enemies->addComponent(std::make_shared<FollowTarget>(enemies, GameManager::getInstance().currentPlayer, 100.f));
-    enemies->addComponent(std::make_shared<Stat>(enemies, 100, 20));
-    enemies->addComponent(std::make_shared<Shoot>(enemies, 2.f));
-
-    return enemies;
+std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
+{
+    auto enemy = std::make_shared<ShooterEnemy>();
+    enemy->setTag("enemies");
+    enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 80.f));
+    enemy->addComponent(std::make_shared<Stat>(enemy, 100, 20));
+    enemy->addComponent(std::make_shared<Shoot>(enemy, 1.5f)); // Có Shoot
+    enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
+    return enemy;
 }
 
 
@@ -59,14 +84,20 @@ std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position,sf
 	return bullet;
 }
 // tạo ra enemy bắn được sau 1 khoảng thời gian nhất định, và ít hơn default enemy
-std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
-{
-    return std::shared_ptr<Enemies>();
-}
+//std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
+//{
+//    return std::shared_ptr<Enemies>();
+//}
 
 std::shared_ptr<Enemies> GameObjectFactory::createBoss()
 {
-    return std::shared_ptr<Enemies>();
+    auto boss = std::make_shared<Boss>();
+    boss->setTag("boss");
+    boss->addComponent(std::make_shared<FollowTarget>(boss, GameManager::getInstance().currentPlayer, 60.f));
+    boss->addComponent(std::make_shared<Stat>(boss, 1000, 50)); // Máu và damage lớn hơn
+    boss->addComponent(std::make_shared<Shoot>(boss, 1.0f)); // Bắn 3 tia đã xử lý trong Shoot
+    boss->addComponent(std::make_shared<DamageOnContact>(boss, boss->getComponent<Stat>()->getDamage(), "player", 1.0f));
+    return boss;
 }
 
 std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, float x, float y)

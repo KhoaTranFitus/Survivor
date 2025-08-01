@@ -15,8 +15,9 @@ public:
 	static std::shared_ptr<Player> createPlayer();
 
 	static std::shared_ptr<GameObject> createBackground(const std::string& path);
-	static std::shared_ptr<Enemies> createEnemy();
+	static std::shared_ptr<Enemies> createDefaultEnemy();
 	static std::shared_ptr<Bullet> createBullet(sf::Vector2f position,sf::Vector2f size);
+
 
 	static std::shared_ptr<Enemies> createShooterEnemy();
 	static std::shared_ptr<Enemies> createBoss();
@@ -24,4 +25,4 @@ public:
 	static std::shared_ptr<GameObject> createGem(float x, float y);
 };
 
-// c·i n‡y l‡ Factory Pattern ?? t?o ra c·c ??i t??ng GameObject
+// c√°i n√†y l√† Factory Pattern ?? t?o ra c√°c ??i t??ng GameObject

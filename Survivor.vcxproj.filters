@@ -140,6 +140,10 @@
     <ClCompile Include="Gem.cpp" />
     <ClCompile Include="NoOverlapComponent.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="VictoryScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -239,6 +243,16 @@
     <ClInclude Include="Gem.h" />
     <ClInclude Include="NoOverlapComponent.h" />
     <ClInclude Include="PlayerStat.h" />
+    <ClInclude Include="DefaultEnemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ShooterEnemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="VictoryScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
     <ClInclude Include="MusicManager.h" />
   </ItemGroup>
   <ItemGroup>

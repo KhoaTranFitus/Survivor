@@ -2,6 +2,8 @@
 #include<iostream>
 #include "Scene.h"
 #include "Clock.h"
+#include <functional> // Đảm bảo include để dùng std::function
+
 class GamePlayScene : public Scene, public std::enable_shared_from_this<GamePlayScene>
 {
 private:
@@ -14,6 +16,15 @@ private:
 
 	float bulletCooldown = 0.75f; // bắn mỗi 0.5 giây
 	float bulletElapsed = 0.f;// thời gian đã trôi qua từ lần spawn trước
+
+	float defaultEnemyCooldown = 2.0f;
+	float defaultEnemyElapsed = 0.0f;
+	float shooterEnemyCooldown = 5.0f;
+	float shooterEnemyElapsed = 0.0f;
+	bool bossSpawned = false;
+
+	// Thêm biến này để chỉ xóa enemy và bullet 1 lần sau 2 phút
+	bool clearedEnemiesAndBullets = false;
 public:
 	GamePlayScene();
 	~GamePlayScene();
@@ -27,4 +38,15 @@ public:
 	void update(float deltaTime) override;
 	void render(sf::RenderWindow& window) override;
 
+private:
+	// Hàm spawn enemy generic
+	void spawnEnemyGeneric(
+		std::function<std::shared_ptr<Enemies>()> factory,
+		float& elapsed, float cooldown,
+		const sf::FloatRect& spawnRect,
+		const sf::FloatRect& viewRect,
+		const sf::Vector2f& playerPos,
+		float minDistanceToPlayer,
+		float deltaTime // cần truyền deltaTime vào
+	);
 };
