@@ -47,6 +47,7 @@ public:
     std::string getTag();
 
 	void setFlipped(bool flipped); 
+	void setState(int state) { currentState = state; } // Thêm hàm setState
 
     virtual void update(float deltaTime);
     virtual void render(sf::RenderWindow& window);

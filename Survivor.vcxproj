@@ -141,7 +141,10 @@
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossShoot.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BurstEnemy.cpp" />
+    <ClCompile Include="BurstEnemyShoot.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
@@ -150,6 +153,7 @@
     <ClCompile Include="DamageOnContact.cpp" />
     <ClCompile Include="DefaultEnemy.cpp" />
     <ClCompile Include="Enemies.cpp" />
+    <ClCompile Include="EnemyShoot.cpp" />
     <ClCompile Include="FollowTarget.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
@@ -167,14 +171,16 @@
     <ClCompile Include="NoOverlapComponent.cpp" />
     <ClCompile Include="PauseScene.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerShoot.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SelectLevelScene.cpp" />
     <ClCompile Include="SettingScene.cpp" />
-    <ClCompile Include="Shoot.cpp" />
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="SwitchSceneCommand.cpp" />
+    <ClCompile Include="TankerEnemy.cpp" />
+    <ClCompile Include="TankerEnemy.h" />
     <ClCompile Include="VictoryScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -182,15 +188,20 @@
     <ClInclude Include="Assets.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossShoot.h" />
+    <ClInclude Include="BurstEnemy.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BurstEnemyShoot.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="DamageOnContact.h" />
+    <ClInclude Include="DashEnemy.h" />
     <ClInclude Include="DefaultEnemy.h" />
     <ClInclude Include="Enemies.h" />
+    <ClInclude Include="EnemyShoot.h" />
     <ClInclude Include="FollowTarget.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjectFactory.h" />
@@ -208,12 +219,12 @@
     <ClInclude Include="NoOverlapComponent.h" />
     <ClInclude Include="PauseScene.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerShoot.h" />
     <ClInclude Include="PlayerStat.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SelectLevelScene.h" />
     <ClInclude Include="SettingScene.h" />
-    <ClInclude Include="Shoot.h" />
     <ClInclude Include="ShooterEnemy.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="SwitchSceneCommand.h" />

@@ -11,6 +11,8 @@ Stat::Stat(std::shared_ptr<GameObject> owner, float health, float damage) :
 	offset.x = hitbox.getPosition().x + hitbox.getSize().x / 2 - this->healthBar.getSize().x / 2;
 	offset.y = hitbox.getPosition().y - this->healthBar.getSize().y - 5;
 	offset = offset - hitbox.getPosition();
+
+	updateHealthBar();
 }
 
 //void Stat::takeDamage(float amount)
@@ -36,21 +38,6 @@ void Stat::render(sf::RenderWindow& window)
 	window.draw(this->healthBar);
 }
 
-void Stat::takeDamage(float amount)
-{
-	health -= amount;
-	if (health > maxHealth) health = maxHealth; // Không v??t quá max  
-	if (health < 0) health = 0;
-
-	float percent = health / maxHealth;
-	if (percent < 0) percent = 0;
-	healthBar.setSize(sf::Vector2f(50 * percent, 10));
-	
-	if (health == 0) {
-		owner->needDeleted = true; // Đánh d??i th??ng báo cho GameObject bi?t r?ng n??n xóa nó đi
-	} 
-}
-
 float Stat::getHealth()
 {
 	return this->health;
@@ -64,4 +51,19 @@ float Stat::getDamage()
 float Stat::getMaxHealth()
 {
 	return maxHealth;
+}
+
+void Stat::setHealth(float value)
+{
+	health = value;
+	if (health > maxHealth) health = maxHealth;
+	if (health < 0) health = 0;
+	updateHealthBar();
+}
+
+void Stat::updateHealthBar()
+{
+	float percent = (maxHealth > 0) ? (health / maxHealth) : 0.f;
+	if (percent < 0) percent = 0;
+	healthBar.setSize(sf::Vector2f(50 * percent, 10));
 }

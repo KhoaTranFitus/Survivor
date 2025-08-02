@@ -125,9 +125,6 @@
     <ClCompile Include="PowerUp.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Shoot.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
     <ClCompile Include="LoseScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -137,12 +134,44 @@
     <ClCompile Include="Animation.cpp">
       <Filter>No Category</Filter>
     </ClCompile>
-    <ClCompile Include="Gem.cpp" />
-    <ClCompile Include="NoOverlapComponent.cpp" />
-    <ClCompile Include="PlayerStat.cpp" />
-    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="VictoryScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultEnemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Gem.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="NoOverlapComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStat.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TankerEnemy.h">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TankerEnemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BossShoot.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="BurstEnemyShoot.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyShoot.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerShoot.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="BurstEnemy.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +257,6 @@
     <ClInclude Include="PowerUp.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Shoot.h">
-      <Filter>Component</Filter>
-    </ClInclude>
     <ClInclude Include="LoseScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -240,20 +266,48 @@
     <ClInclude Include="Animation.h">
       <Filter>No Category</Filter>
     </ClInclude>
-    <ClInclude Include="Gem.h" />
-    <ClInclude Include="NoOverlapComponent.h" />
-    <ClInclude Include="PlayerStat.h" />
     <ClInclude Include="DefaultEnemy.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="ShooterEnemy.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h" />
     <ClInclude Include="VictoryScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="MusicManager.h" />
+    <ClInclude Include="Boss.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Gem.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStat.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="NoOverlapComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicManager.h">
+      <Filter>No Category</Filter>
+    </ClInclude>
+    <ClInclude Include="BurstEnemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="DashEnemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BossShoot.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="BurstEnemyShoot.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyShoot.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShoot.h">
+      <Filter>Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Game1.jpg">
