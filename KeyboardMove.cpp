@@ -33,7 +33,7 @@ void KeyboardMove::update(float deltaTime)
     sf::Vector2f movement(0.f, 0.f);
 
     auto stat = owner->getComponent<Stat>();
-    float moveSpeed = stat ? stat->getSpeed() : speed;
+    float moveSpeed = stat ? stat->getCurrentSpeed() : speed;
 
     if (sf::Keyboard::isKeyPressed(this->up))
         movement.y -= moveSpeed * deltaTime;

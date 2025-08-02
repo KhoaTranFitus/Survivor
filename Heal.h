@@ -9,6 +9,7 @@ public:
     Heal(std::shared_ptr<GameObject> owner, float healAmount);
 
     void onCollisionEnter(std::shared_ptr<GameObject> other) override;
-    void update(float deltaTime) override {} // Bổ sung dòng này
-};
 
+    // Thêm dòng này để hiện thực update ảo
+    void update(float deltaTime) override {}
+};

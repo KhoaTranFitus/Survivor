@@ -21,6 +21,7 @@ const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
 
 const float PLAYER_SPEED = 400.f;
+const float PLAYER_DAMAGE = 5.f;
 const float BULLET_VELOCITY = 800.f;
 
 const float ENEMY_SPEED = 200.f;

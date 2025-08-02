@@ -13,9 +13,8 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
     auto player = std::make_shared<Player>();
     player->addComponent(std::make_shared<KeyboardMove>(player, 1.0f)); // speed = 1.0f
-    player->addComponent(std::make_shared<Stat>(player, 100, 20));
+    player->addComponent(std::make_shared<Stat>(player, 100.0f, 20.0f, PLAYER_SPEED));
     auto stat = player->getComponent<Stat>();
-    if (stat) stat->baseSpeed = PLAYER_SPEED; // Đảm bảo baseSpeed đúng
     GameManager::getInstance().currentPlayer = player;
     return player;
 }
@@ -36,7 +35,7 @@ std::shared_ptr<Enemies> GameObjectFactory::createEnemy()
 	enemies->setTag("enemies");
 
 	enemies->addComponent(std::make_shared<FollowTarget>(enemies, GameManager::getInstance().currentPlayer, 100.f));
-    enemies->addComponent(std::make_shared<Stat>(enemies, 100, 20));
+    enemies->addComponent(std::make_shared<Stat>(enemies, 100.0f, 20.0f, 400.0f));
 	enemies->addComponent(std::make_shared<Shoot>(enemies, 1.f)); // Thêm hành vi bắn
 
     return enemies;
@@ -79,18 +78,18 @@ std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, floa
     }
     else if (name == "heal")
     {
+        powerUp->getHitbox().setFillColor(sf::Color::Yellow);
         powerUp->getHitbox().setFillColor(sf::Color::Green);
         powerUp->addComponent(std::make_shared<Heal>(powerUp, 0.2f)); // Không cần add component mới
     }
     else if(name == "speed")
     {
-        powerUp->getHitbox().setFillColor(sf::Color::Yellow);
-        powerUp->addComponent(std::make_shared<Speed>(powerUp, 0.3f)); // tăng 30% tốc độ
+        powerUp->addComponent(std::make_shared<Speed>(powerUp, 0.3f, 5.f)); // tăng 30% tốc độ
     }
     else if(name == "shield")
     {
         powerUp->getHitbox().setFillColor(sf::Color::Blue);
-        powerUp->addComponent(std::make_shared<Shield>(powerUp, 50.f));
+        powerUp->addComponent(std::make_shared<Shield>(powerUp, 50.f, 5.f));
     }
     else
     {

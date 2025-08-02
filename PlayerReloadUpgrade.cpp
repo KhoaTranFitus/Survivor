@@ -9,7 +9,7 @@ void PlayerReloadUpgrade::onCollisionEnter(std::shared_ptr<GameObject> other)
 {
     auto stat = other->getComponent<Stat>();
     if (stat) {
-        stat->upgradeReload();
+        stat->upgradeBaseReload();
         owner->needDeleted = true;
     }
 }
