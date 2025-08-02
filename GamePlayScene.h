@@ -11,16 +11,17 @@ private:
 	static bool fontLoaded;
 	std::shared_ptr<Clock> clockInGame;
 
-	float enemySpawnCooldown = 3.0f;     // mỗi 3 giây spawn 1 enemy
-	float enemySpawnElapsed = 0.0f;
-
 	float bulletCooldown = 0.75f; // bắn mỗi 0.5 giây
 	float bulletElapsed = 0.f;// thời gian đã trôi qua từ lần spawn trước
 
-	float defaultEnemyCooldown = 2.0f;
+	float defaultEnemyCooldown = 3.0f;
 	float defaultEnemyElapsed = 0.0f;
-	float shooterEnemyCooldown = 5.0f;
+	float shooterEnemyCooldown = 15.0f;
 	float shooterEnemyElapsed = 0.0f;
+	float tankerEnemyCooldown = 60.0f; 
+	float tankerEnemyElapsed = 0.0f;
+	float burstEnemyCooldown = 30.0f; 
+	float burstEnemyElapsed = 0.0f;
 	bool bossSpawned = false;
 
 	// Thêm biến này để chỉ xóa enemy và bullet 1 lần sau 2 phút

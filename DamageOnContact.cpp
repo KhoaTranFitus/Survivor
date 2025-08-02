@@ -25,10 +25,15 @@ void DamageOnContact::onCollisionEnter(std::shared_ptr<GameObject> other)
         auto stat = other->getComponent<Stat>();
         if (stat)
         {
-            stat->takeDamage(damage);
+            float newHealth = stat->getHealth() - damage;
+            stat->setHealth(newHealth); // setter sẽ tự cập nhật healthBar
+
+            if (stat->getHealth() == 0) {
+                other->needDeleted = true;
+            }
+
             timer = cooldown;
         }
-        // Nếu là bullet thì xóa luôn sau va chạm
         if (owner && owner->getTag() == "bullet")
         {
             owner->needDeleted = true;
