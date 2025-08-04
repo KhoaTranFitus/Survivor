@@ -10,13 +10,17 @@
 #include "DamageOnContact.h"
 #include "Boss.h"
 #include "Assets.h"
+#include "Bullet.h"
+#include "PlayerShoot.h"
+#include "EnemyShoot.h"
+#include "BossShoot.h"
 #include "PlayerShoot.h"
 #include "BossShoot.h"
 #include "EnemyShoot.h"
 #include "BurstEnemyShoot.h"
 #include "BurstEnemy.h"
 #include "TankerEnemy.h"
-//change here
+
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
@@ -103,18 +107,13 @@ std::shared_ptr<Enemies> GameObjectFactory::createBurstEnemy() {
 
 
 //tạo ra bullet
-std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position, sf::Vector2f size)
+std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position, sf::Vector2f size, const std::string& tag)
 {
-    auto bullet = std::make_shared<Bullet>(position, size);
-    bullet->setTag("bullet");
-
+    auto bullet = std::make_shared<Bullet>(position, size, tag);
+    bullet->setImageScale(sf::Vector2f(2.f, 2.f)); // Scale hình ảnh, không đổi hitbox logic
+    bullet->setTag(tag);
     return bullet;
 }
-// tạo ra enemy bắn được sau 1 khoảng thời gian nhất định, và ít hơn default enemy
-//std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
-//{
-//    return std::shared_ptr<Enemies>();
-//}
 
 std::shared_ptr<Enemies> GameObjectFactory::createBoss()
 {

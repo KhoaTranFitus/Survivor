@@ -27,6 +27,27 @@ Button::Button(const std::string& n_text, std::string tag, float x, float y, sf:
         if (!textureHover.loadFromFile("./Assets/button/button2_hover.png"))
             std::cerr << "Error loading hover button texture\n";
     }
+    else if(tag == "pause")
+    {
+        if (!textureNormal.loadFromFile("./Assets/button/pause.png"))
+            std::cerr << "Error loading normal button texture\n";
+        if (!textureHover.loadFromFile("./Assets/button/pause_hover.png"))
+            std::cerr << "Error loading hover button texture\n";
+    }
+ //   else if (tag == "play")
+ //   {
+ //       if (!textureNormal.loadFromFile("./Assets/button/play.png"))
+ //           std::cerr << "Error loading normal button texture\n";
+ //       if (!textureHover.loadFromFile("./Assets/button/play_hover.png"))
+ //           std::cerr << "Error loading hover button texture\n";
+ //   }
+ //   else if (tag == "exit")
+ //   {
+ //       if (!textureNormal.loadFromFile("./Assets/button/exit.png"))
+ //           std::cerr << "Error loading normal button texture\n";
+ //       if (!textureHover.loadFromFile("./Assets/button/exit_hover.png"))
+ //           std::cerr << "Error loading hover button texture\n";
+	//}
 
 
     sprite.setTexture(textureNormal);

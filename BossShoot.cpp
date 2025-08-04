@@ -27,7 +27,8 @@ void BossShoot::update(float deltaTime)
             sf::Vector2f bulletTarget = origin + dir * 100.f;
 
             sf::Vector2f bulletSize(30.f, 30.f);
-            auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), bulletSize);
+            auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), bulletSize,"boss_bullet");
+
             bullet->getHitbox().setFillColor(sf::Color::Yellow);
             bullet->addComponent(std::make_shared<MoveForward>(bullet, bulletTarget, 350.f));
             bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player"));

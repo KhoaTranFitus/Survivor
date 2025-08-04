@@ -233,12 +233,16 @@
   <ItemGroup>
     <Image Include="Assets\backGround\menuScene.png" />
     <Image Include="Assets\backGround\selectLevel.png" />
+    <Image Include="Assets\bullet\arrow.png" />
     <Image Include="Assets\button\button.png" />
     <Image Include="Assets\button\button1.png" />
     <Image Include="Assets\button\button1_hover.png" />
     <Image Include="Assets\button\button2.png" />
     <Image Include="Assets\button\button2_hovering.png" />
     <Image Include="Assets\button\button_hover.png" />
+    <Image Include="Assets\button\pause.png" />
+    <Image Include="Assets\button\pause_hover.png" />
+    <Image Include="Assets\player\newPlayer_DIE.png" />
     <Image Include="Assets\player\newPlayer_FIRE.png" />
     <Image Include="Assets\player\newPlayer_IDLE.png" />
     <Image Include="Assets\player\newPlayer_RUN.png" />

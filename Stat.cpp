@@ -1,4 +1,4 @@
-﻿#include "Stat.h"
+#include "Stat.h"
 #include "GameObject.h"
 
 Stat::Stat(std::shared_ptr<GameObject> owner, float health, float damage) :
@@ -67,3 +67,4 @@ void Stat::updateHealthBar()
 	if (percent < 0) percent = 0;
 	healthBar.setSize(sf::Vector2f(50 * percent, 10));
 }
+

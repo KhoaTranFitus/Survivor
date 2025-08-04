@@ -32,6 +32,8 @@ enum class PLAYER_STATE {
     IDLE = 0,
     RUN = 1,
 	FIRE = 2,
+    HURT  = 3,
+    DIE = 4,
 };
 enum class ENEMY_STATE {
     IDLE = 1,

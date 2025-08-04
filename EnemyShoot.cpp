@@ -16,7 +16,7 @@ void EnemyShoot::update(float deltaTime)
         elapsed = 0.f;
 
         sf::Vector2f size(10.f, 10.f);
-        auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size);
+        auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size,"enemy_bullet"); // add tag
         bullet->getHitbox().setFillColor(sf::Color::Red);
         bullet->addComponent(std::make_shared<MoveForward>(bullet, GameManager::getInstance().currentPlayer->getOrigin(), 300.f));
         bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player"));

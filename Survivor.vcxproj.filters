@@ -38,6 +38,9 @@
     <Filter Include="Assets\music">
       <UniqueIdentifier>{28d202e1-e66c-436d-9ae3-3f4f44cc1461}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\bullet">
+      <UniqueIdentifier>{0fd466b8-85a2-48ae-b4f6-6104c3feda83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -137,6 +140,10 @@
     <ClCompile Include="VictoryScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="DefaultEnemy.cpp" />
+    <ClCompile Include="PlayerShoot.cpp" />
+    <ClCompile Include="EnemyShoot.cpp" />
+    <ClCompile Include="BossShoot.cpp" />
     <ClCompile Include="Boss.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -275,6 +282,10 @@
     <ClInclude Include="VictoryScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="MusicManager.h" />
+    <ClInclude Include="PlayerShoot.h" />
+    <ClInclude Include="EnemyShoot.h" />
+    <ClInclude Include="BossShoot.h" />
     <ClInclude Include="Boss.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -354,6 +365,18 @@
     </Image>
     <Image Include="Assets\button\button1_hover.png">
       <Filter>Assets\button</Filter>
+    </Image>
+    <Image Include="Assets\button\pause.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\button\pause_hover.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\player\newPlayer_DIE.png">
+      <Filter>Assets\player</Filter>
+    </Image>
+    <Image Include="Assets\bullet\arrow.png">
+      <Filter>Assets\bullet</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

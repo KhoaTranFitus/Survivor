@@ -1,7 +1,7 @@
 ﻿#include "KeyboardMove.h"
 #include <SFML/Window/Keyboard.hpp>
-//#include "CollideWithBounds.h"
 #include "GameManager.h"
+#include "Player.h"
 
 KeyboardMove::KeyboardMove(std::shared_ptr<GameObject> owner, float speed, std::string mode)
     : Component(owner),
@@ -17,6 +17,9 @@ KeyboardMove::KeyboardMove(std::shared_ptr<GameObject> owner, float speed, std::
     }
 
     else
+    {
+
+    }
     {
         // Mặc định là WASD nếu mode không hợp lệ
         up = sf::Keyboard::W;
@@ -44,6 +47,12 @@ sf::Vector2f KeyboardMove::getDirection() const
 
 void KeyboardMove::update(float deltaTime)
 {
+    auto player = std::dynamic_pointer_cast<Player>(owner);
+    if (player && !player->isControllable()) {
+        // Nếu player không thể điều khiển (đã chết), bỏ qua xử lý input
+        return;
+    }
+
     if (!owner) return;
 
     // Truy cập và di chuyển hitbox của GameObject
