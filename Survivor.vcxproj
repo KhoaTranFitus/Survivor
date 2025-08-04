@@ -143,6 +143,8 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossShoot.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BurstEnemy.cpp" />
+    <ClCompile Include="BurstEnemyShoot.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
@@ -177,6 +179,8 @@
     <ClCompile Include="SettingScene.cpp" />
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="SwitchSceneCommand.cpp" />
+    <ClCompile Include="TankerEnemy.cpp" />
+    <ClCompile Include="TankerEnemy.h" />
     <ClCompile Include="VictoryScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,13 +189,16 @@
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossShoot.h" />
+    <ClInclude Include="BurstEnemy.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BurstEnemyShoot.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="DamageOnContact.h" />
+    <ClInclude Include="DashEnemy.h" />
     <ClInclude Include="DefaultEnemy.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="EnemyShoot.h" />

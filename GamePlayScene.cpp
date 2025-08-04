@@ -151,6 +151,20 @@ void GamePlayScene::update(float deltaTime)
 			spawnRect, viewRect, playerPos, minDistanceToPlayer,
 			deltaTime
 		);
+
+		spawnEnemyGeneric(
+			[]() { return GameObjectFactory::createTankerEnemy(); },
+			tankerEnemyElapsed, tankerEnemyCooldown,
+			spawnRect, viewRect, playerPos, minDistanceToPlayer,
+			deltaTime
+		);
+
+		spawnEnemyGeneric(
+			[]() { return GameObjectFactory::createBurstEnemy(); },
+			burstEnemyElapsed, burstEnemyCooldown,
+			spawnRect, viewRect, playerPos, minDistanceToPlayer,
+			deltaTime
+		);
 	}
 	else {
 		// XÓA CHỈ 1 LẦN

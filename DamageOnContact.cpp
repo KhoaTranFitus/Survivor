@@ -19,7 +19,6 @@ void DamageOnContact::onCollisionEnter(std::shared_ptr<GameObject> other)
 {
 	if (!other) return;
 	if (other->getTag() != targetTag) return;
-
 	if (timer <= 0.0f)
 	{
 		auto stat = other->getComponent<Stat>();

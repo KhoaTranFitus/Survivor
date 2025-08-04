@@ -1,5 +1,6 @@
 ﻿#include "GameObject.h"
 #include "KeyboardMove.h"
+#include "PlayerShoot.h"
 GameObject::GameObject()
 {
 }
@@ -107,11 +108,14 @@ void GameObject::update(float deltaTime)
 	this->updateComponents(deltaTime);
 
 	auto move = getComponent<KeyboardMove>();
-	hurtTimer -= deltaTime;
-	if (move) {
-		sf::Vector2f currentDirection = move->getDirection();
 
-		// Determine state based on movement direction
+	auto shoot = getComponent<PlayerShoot>();
+	// Ưu tiên trạng thái bắn
+	if (shoot && shoot->isFiring) {
+		currentState = 2; // Fire
+	}
+	else if (move) {
+		sf::Vector2f currentDirection = move->getDirection();
 		if (currentDirection.x != 0.f || currentDirection.y != 0.f) {
 			currentState = 1; // Running
 		}

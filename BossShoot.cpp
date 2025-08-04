@@ -5,8 +5,7 @@
 #include "GameObjectFactory.h"
 
 BossShoot::BossShoot(std::shared_ptr<GameObject> owner, float cooldown)
-    : Component(owner), cooldown(cooldown), elapsed(0.f) {
-}
+    : Component(owner), cooldown(cooldown), elapsed(0.f) {}
 
 void BossShoot::update(float deltaTime)
 {
@@ -29,6 +28,7 @@ void BossShoot::update(float deltaTime)
 
             sf::Vector2f bulletSize(30.f, 30.f);
             auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), bulletSize,"boss_bullet");
+
             bullet->getHitbox().setFillColor(sf::Color::Yellow);
             bullet->addComponent(std::make_shared<MoveForward>(bullet, bulletTarget, 350.f));
             bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player"));

@@ -12,7 +12,7 @@ void PlayerShoot::update(float deltaTime)
 {
 	elapsed += deltaTime;
 
-	// N?u ?ang trong th?i gian animation fire
+	// Nếu đang trong thời gian animation fire
 	if (fireAnimTimer > 0.f) {
 		fireAnimTimer -= deltaTime;
 		isFiring = true;
@@ -21,8 +21,6 @@ void PlayerShoot::update(float deltaTime)
 		}
 		return;
 	}
-
-	// T? ??ng b?n khi ?? cooldown
 
 
 	auto gameObjects = GameManager::getInstance().getCurrentScene()->getGameObjects();
@@ -44,7 +42,6 @@ void PlayerShoot::update(float deltaTime)
 		}
 	}
 
-	// Ch? b?n khi c� enemy
 	if (elapsed >= cooldown && closestEnemy)
 	{
 		elapsed = 0.f;
@@ -53,25 +50,25 @@ void PlayerShoot::update(float deltaTime)
 
 		sf::Vector2f size(20.f, 5.f);
 
-		// T�nh h??ng t? player ??n enemy
+		// Tính hướng từ player đến enemy
 		sf::Vector2f dir = closestEnemy->getOrigin() - owner->getOrigin();
 		float angle = std::atan2(dir.y, dir.x) * 180.f / 3.14159265f;
 
-		// L?t player v? ph�a enemy g?n nh?t
 		float playerX = owner->getOrigin().x;
 		float enemyX = closestEnemy->getOrigin().x;
 		bool flipped = (enemyX < playerX);
 		owner->setFlipped(flipped);
 
+
 		auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size,"player_bullet");//add tag for each bullet
 		bullet->getHitbox().setFillColor(sf::Color::White);
+
 		bullet->getHitbox().setRotation(angle);
 		bullet->addComponent(std::make_shared<MoveForward>(bullet, closestEnemy->getOrigin(), 700.f));
 		bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "enemies"));
 		bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "boss"));
 		GameManager::getInstance().getCurrentScene()->addGameObject(bullet);
-	}
-	else {
+	} else {
 		isFiring = false;
 	}
 }

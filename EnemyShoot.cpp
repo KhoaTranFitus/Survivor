@@ -5,8 +5,7 @@
 #include "GameObjectFactory.h"
 
 EnemyShoot::EnemyShoot(std::shared_ptr<GameObject> owner, float cooldown)
-    : Component(owner), cooldown(cooldown), elapsed(0.f) {
-}
+    : Component(owner), cooldown(cooldown), elapsed(0.f) {}
 
 void EnemyShoot::update(float deltaTime)
 {

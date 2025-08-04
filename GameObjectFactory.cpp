@@ -14,6 +14,13 @@
 #include "PlayerShoot.h"
 #include "EnemyShoot.h"
 #include "BossShoot.h"
+#include "PlayerShoot.h"
+#include "BossShoot.h"
+#include "EnemyShoot.h"
+#include "BurstEnemyShoot.h"
+#include "BurstEnemy.h"
+#include "TankerEnemy.h"
+
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
@@ -59,7 +66,18 @@ std::shared_ptr<Enemies> GameObjectFactory::createDefaultEnemy()
     auto enemy = std::make_shared<DefaultEnemy>();
     enemy->setTag("enemies");
     enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 100.f));
-    enemy->addComponent(std::make_shared<Stat>(enemy, 100, 20));
+    enemy->addComponent(std::make_shared<Stat>(enemy, 100, 5));
+    enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
+    // Không có Shoot
+    return enemy;
+}
+
+std::shared_ptr<Enemies> GameObjectFactory::createTankerEnemy()
+{
+    auto enemy = std::make_shared<TankerEnemy>();
+    enemy->setTag("enemies");
+    enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 100.f));
+    enemy->addComponent(std::make_shared<Stat>(enemy, 300, 5));
     enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
     // Không có Shoot
     return enemy;
@@ -70,8 +88,19 @@ std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
     auto enemy = std::make_shared<ShooterEnemy>();
     enemy->setTag("enemies");
     enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 80.f));
-    enemy->addComponent(std::make_shared<Stat>(enemy, 100, 20));
+    enemy->addComponent(std::make_shared<Stat>(enemy, 100, 5));
     enemy->addComponent(std::make_shared<EnemyShoot>(enemy, 1.5f)); // Có Shoot
+    enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
+    return enemy;
+}
+
+std::shared_ptr<Enemies> GameObjectFactory::createBurstEnemy() {
+    auto enemy = std::make_shared<BurstEnemy>();
+    enemy->setTag("enemies");
+
+    enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 80.f));
+    enemy->addComponent(std::make_shared<Stat>(enemy, 100, 5));
+    enemy->addComponent(std::make_shared<BurstEnemyShoot>(enemy, 3.0f, 3)); // 3 bullets per burst
     enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
     return enemy;
 }
@@ -91,8 +120,8 @@ std::shared_ptr<Enemies> GameObjectFactory::createBoss()
     auto boss = std::make_shared<Boss>();
     boss->setTag("boss");
     boss->addComponent(std::make_shared<FollowTarget>(boss, GameManager::getInstance().currentPlayer, 60.f));
-    boss->addComponent(std::make_shared<Stat>(boss, 1000, 50)); // Máu và damage lớn hơn
-    boss->addComponent(std::make_shared<BossShoot>(boss, 1.0f)); // Bắn 3 tia đã xử lý trong Shoot
+    boss->addComponent(std::make_shared<Stat>(boss, 1000, 20)); // Máu và damage lớn hơn
+    boss->addComponent(std::make_shared<BossShoot>(boss, 2.0f)); // Bắn 3 tia đã xử lý trong Shoot
     boss->addComponent(std::make_shared<DamageOnContact>(boss, boss->getComponent<Stat>()->getDamage(), "player", 1.0f));
     return boss;
 }
