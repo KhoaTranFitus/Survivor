@@ -25,7 +25,7 @@ public:
 	static std::shared_ptr<Enemies> createBoss();
 
 	static std::shared_ptr<Bullet> createBullet(sf::Vector2f position, sf::Vector2f size, const std::string& tag);
-	//static std::shared_ptr<PowerUp> createPowerUp(std::string name, float x, float y);
+	static std::shared_ptr<PowerUp> createPowerUp(std::string name, float x, float y);
 	static std::shared_ptr<GameObject> createGem(float x, float y);
 };
 
