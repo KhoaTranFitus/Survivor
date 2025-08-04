@@ -61,6 +61,11 @@ void Stat::setHealth(float value)
 	updateHealthBar();
 }
 
+void Stat::setDamage(float value)
+{
+	damage = value;
+}
+
 void Stat::updateHealthBar()
 {
 	float percent = (maxHealth > 0) ? (health / maxHealth) : 0.f;

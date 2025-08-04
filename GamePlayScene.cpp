@@ -8,6 +8,8 @@
 #include "NoOverlapComponent.h"
 #include "LoseScene.h"
 #include <cmath>
+#include "Shield.h"
+#include "Speed.h"
 
 sf::Font GamePlayScene::font;
 bool GamePlayScene::fontLoaded = false;
@@ -24,10 +26,9 @@ GamePlayScene::GamePlayScene()
 	gameObjects.push_back(player);
 
 	//add item in game play scene
-	//gameObjects.push_back(GameObjectFactory::createPowerUp("shoot", 400, 400));
-	//gameObjects.push_back(GameObjectFactory::createPowerUp("move", 600, 400));
-	//gameObjects.push_back(GameObjectFactory::createPowerUp("heal", 100, 100));
-
+	gameObjects.push_back(GameObjectFactory::createPowerUp("shield", 100, 100));
+	gameObjects.push_back(GameObjectFactory::createPowerUp("speed", 200, 100));
+	gameObjects.push_back(GameObjectFactory::createPowerUp("heal", 300, 100));
 
 	// buttons
 	//auto playBack = std::make_shared<Button>(
@@ -239,6 +240,12 @@ void GamePlayScene::render(sf::RenderWindow& window)
 	    if (playerStat) {
 	        playerStat->render(window, font);
 	    }
+	
+	    auto shield = player->getComponent<Shield>();
+	    if (shield) shield->render(window);
+
+	    auto speed = player->getComponent<Speed>();
+	    if (speed) speed->render(window);
 	}
 }
 

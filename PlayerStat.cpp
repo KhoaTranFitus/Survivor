@@ -1,5 +1,8 @@
 ﻿#include "PlayerStat.h"
 #include <sstream>
+#include "GameManager.h"
+#include "LevelUpScene.h"
+#include "GamePlayScene.h"
 
 PlayerStat::PlayerStat(std::shared_ptr<GameObject> owner) :Component(owner)
 {
@@ -16,7 +19,12 @@ void PlayerStat::addExp(int amount)
         exp -= expToNextLevel;
         level++;
         std::cout << "Level up! New level: " << level << std::endl;
-        expToNextLevel *= 1.2f; // t?ng exp c?n cho level ti?p theo
+        expToNextLevel *= 1.2f;
+        // Show LevelUpScene
+        auto gameplayScene = std::dynamic_pointer_cast<GamePlayScene>(GameManager::getInstance().getCurrentScene());
+        GameManager::getInstance().setScene(
+            std::make_shared<LevelUpScene>(owner, gameplayScene)
+        );
     }
 }
 

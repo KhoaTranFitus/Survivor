@@ -17,7 +17,8 @@ public:
 	KeyboardMove(std::shared_ptr<GameObject> owner, float speed, std::string mode = "wasd");
 
 	sf::Vector2f getDirection() const;
-
+	float getSpeed() const { return speed; }
+	void setSpeed(float newSpeed) { speed = newSpeed; }
 	void update(float deltaTime) override;
 };
 
