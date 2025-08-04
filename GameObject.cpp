@@ -93,7 +93,6 @@ sf::RectangleShape& GameObject::getHitbox()
 
 void GameObject::update(float deltaTime)
 {
-	this->updateComponents(deltaTime);
 
 	// Ưu tiên trạng thái DIE
 	if (currentState == 4) {
@@ -105,6 +104,7 @@ void GameObject::update(float deltaTime)
 		}
 		return;
 	}
+	this->updateComponents(deltaTime);
 
 	auto move = getComponent<KeyboardMove>();
 	hurtTimer -= deltaTime;

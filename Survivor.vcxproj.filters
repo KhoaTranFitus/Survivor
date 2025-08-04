@@ -128,9 +128,6 @@
     <ClCompile Include="PowerUp.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Shoot.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
     <ClCompile Include="LoseScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -148,6 +145,9 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="DefaultEnemy.cpp" />
+    <ClCompile Include="PlayerShoot.cpp" />
+    <ClCompile Include="EnemyShoot.cpp" />
+    <ClCompile Include="BossShoot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -232,9 +232,6 @@
     <ClInclude Include="PowerUp.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Shoot.h">
-      <Filter>Component</Filter>
-    </ClInclude>
     <ClInclude Include="LoseScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -258,6 +255,9 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="MusicManager.h" />
+    <ClInclude Include="PlayerShoot.h" />
+    <ClInclude Include="EnemyShoot.h" />
+    <ClInclude Include="BossShoot.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Game1.jpg">

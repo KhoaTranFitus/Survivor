@@ -18,10 +18,10 @@ Player::Player()
 	animations.push_back(std::make_shared<Animation>(Assets::PLAYER_FIRE, 6, 0.05f, sf::Vector2i(25, 19)));
 	animations[INT(PLAYER_STATE::FIRE)]->setScale(sf::Vector2f(3, 3));
 
-	animations.push_back(std::make_shared<Animation>(Assets::PLAYER_HURT, 4, 0.1f, sf::Vector2i(19, 19)));
+	animations.push_back(std::make_shared<Animation>(Assets::PLAYER_HURT, 4, 0.05f, sf::Vector2i(19, 19)));
 	animations[INT(PLAYER_STATE::HURT)]->setScale(sf::Vector2f(3, 3));
 
-	animations.push_back(std::make_shared<Animation>(Assets::PLAYER_DIE, 4 , 0.7f, sf::Vector2i(19, 19)));
+	animations.push_back(std::make_shared<Animation>(Assets::PLAYER_DIE, 6 , 0.5f, sf::Vector2i(19, 19)));
 	animations[INT(PLAYER_STATE::DIE)]->setScale(sf::Vector2f(3, 3));
 
 }

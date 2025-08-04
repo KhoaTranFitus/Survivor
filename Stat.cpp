@@ -36,20 +36,20 @@ void Stat::render(sf::RenderWindow& window)
 	window.draw(this->healthBar);
 }
 
-void Stat::takeDamage(float amount)
-{
-	health -= amount;
-	if (health > maxHealth) health = maxHealth; // Không v??t quá max  
-	if (health < 0) health = 0;
-
-	float percent = health / maxHealth;
-	if (percent < 0) percent = 0;
-	healthBar.setSize(sf::Vector2f(50 * percent, 10));
-	
-	if (health == 0 && owner->getTag() == "enemies") {
-		owner->needDeleted = true; // Đánh d??i th??ng báo cho GameObject bi?t r?ng n??n xóa nó đi
-	} 
-}
+//void Stat::takeDamage(float amount)
+//{
+//	health -= amount;
+//	if (health > maxHealth) health = maxHealth; // Không v??t quá max  
+//	if (health < 0) health = 0;
+//
+//	float percent = health / maxHealth;
+//	if (percent < 0) percent = 0;
+//	healthBar.setSize(sf::Vector2f(50 * percent, 10));
+//	
+//	if (health == 0 && owner->getTag() == "enemies") {
+//		owner->needDeleted = true; // Đánh d??i th??ng báo cho GameObject bi?t r?ng n??n xóa nó đi
+//	} 
+//}
 
 float Stat::getHealth()
 {
@@ -64,4 +64,19 @@ float Stat::getDamage()
 float Stat::getMaxHealth()
 {
 	return maxHealth;
+}
+
+void Stat::setHealth(float value)
+{
+	health = value;
+	if (health > maxHealth) health = maxHealth;
+	if (health < 0) health = 0;
+	updateHealthBar();
+}
+
+void Stat::updateHealthBar()
+{
+	float percent = (maxHealth > 0) ? (health / maxHealth) : 0.f;
+	if (percent < 0) percent = 0;
+	healthBar.setSize(sf::Vector2f(50 * percent, 10));
 }

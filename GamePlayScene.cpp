@@ -23,21 +23,6 @@ GamePlayScene::GamePlayScene()
 	auto player = GameObjectFactory::createPlayer();
 	gameObjects.push_back(player);
 
-	//add item in game play scene
-	//gameObjects.push_back(GameObjectFactory::createPowerUp("shoot", 400, 400));
-	//gameObjects.push_back(GameObjectFactory::createPowerUp("move", 600, 400));
-	//gameObjects.push_back(GameObjectFactory::createPowerUp("heal", 100, 100));
-
-
-	// buttons
-	//auto playBack = std::make_shared<Button>(
-	//	"Back","type1", 100, 600, sf::Vector2f(50, 50),
-	//	std::make_shared<SwitchSceneCommand>([]() {
-	//		return std::make_shared<SelectLevelScene>();
-	//		})
-	//);
-	//buttons.push_back(playBack);
-
 	auto playPause = std::make_shared<Button>(
 		"", "pause", 50, 50, sf::Vector2f(50, 50),
 		std::make_shared<SwitchSceneCommand>([this]() {
@@ -65,10 +50,10 @@ bool GamePlayScene::alivePlayer()
 					// Chỉ set state DIE nếu chưa phải DIE
 					if (obj->getCurrentState() != 4) {
 						obj->setState(4); // Set DIE state
-						deadPlayerTimer = 2.0f; // Thời gian chờ xóa player và chuyển LoseScene
+						deadPlayerTimer = 1.55f; // Thời gian chờ xóa player và chuyển LoseScene
 						playerPendingDelete = true;
 						waitingForLose = true;
-						loseDelayTimer = 2.0f; // Đồng bộ với deadPlayerTimer
+						loseDelayTimer = 1.45f; // Đồng bộ với deadPlayerTimer
 					}
 				}
 			}
@@ -193,11 +178,21 @@ void GamePlayScene::update(float deltaTime)
 			gameObjects.push_back(boss);
 		}
 	}
-
+	
 	// Xử lý player chết: đếm ngược deadPlayerTimer và xóa player khi hết thời gian, đồng thời chuyển LoseScene
+	
+	//kiem tra alive player
+	if (!alivePlayer() && !playerPendingDelete) {
+		// Bắt đầu quá trình đếm ngược
+		playerPendingDelete = true;
+		deadPlayerTimer = 1.55f;  // thời gian hiển thị animation chết
+		loseDelayTimer = 1.45f;   // thời gian trước khi chuyển scene
+	}
+
 	if (playerPendingDelete) {
 		deadPlayerTimer -= deltaTime;
 		loseDelayTimer -= deltaTime;
+
 		if (deadPlayerTimer <= 0.f) {
 			// Xóa player khỏi gameObjects
 			gameObjects.erase(
@@ -208,19 +203,14 @@ void GamePlayScene::update(float deltaTime)
 				),
 				gameObjects.end()
 			);
-			playerPendingDelete = false;
 		}
+
 		if (loseDelayTimer <= 0.f) {
 			this->pauseClock();
 			auto loseScene = std::make_shared<LoseScene>(shared_from_this());
 			GameManager::getInstance().setScene(loseScene);
 			return;
 		}
-	}
-
-	if (!alivePlayer())
-	{
-		// Đã xử lý ở trên, không cần set lại timer ở đây
 	}
 }
 

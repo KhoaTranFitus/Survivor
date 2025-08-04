@@ -16,13 +16,16 @@ private:
 	sf::Vector2f offset;
 	sf::RectangleShape healthBar;
 
+	void updateHealthBar();
+
 public:
 	Stat(std::shared_ptr<GameObject> owner, float health = 100.f, float damage = 10.f);
-	void takeDamage(float amount);
 
 	float getHealth();
 	float getMaxHealth(); // Thêm getter
 	float getDamage();
+
+	void setHealth(float health);
 
 	void update(float deltaTime) override;
 	void render(sf::RenderWindow& window) override;

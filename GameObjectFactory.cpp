@@ -2,7 +2,6 @@
 #include "GameObjectFactory.h"
 #include "GameManager.h"
 #include "Camera.h"
-#include "Shoot.h"
 #include "ItemEffect.h"
 #include "Gem.h"
 #include "PlayerStat.h"
@@ -12,6 +11,9 @@
 #include "Boss.h"
 #include "Assets.h"
 #include "Bullet.h"
+#include "PlayerShoot.h"
+#include "EnemyShoot.h"
+#include "BossShoot.h"
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
@@ -19,11 +21,11 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
 
     // Thêm các component cho player
     player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
-    player->addComponent(std::make_shared<Stat>(player, 10, 20));
+    player->addComponent(std::make_shared<Stat>(player, 100, 20));
     player->addComponent(std::make_shared<PlayerStat>(player));
 
     //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
-    player->addComponent(std::make_shared<Shoot>(player, 5.f));
+    player->addComponent(std::make_shared<PlayerShoot>(player, 0.3f));
 
     GameManager::getInstance().currentPlayer = player;
     return player;
@@ -69,7 +71,7 @@ std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
     enemy->setTag("enemies");
     enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 80.f));
     enemy->addComponent(std::make_shared<Stat>(enemy, 100, 20));
-    enemy->addComponent(std::make_shared<Shoot>(enemy, 1.5f)); // Có Shoot
+    enemy->addComponent(std::make_shared<EnemyShoot>(enemy, 1.5f)); // Có Shoot
     enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
     return enemy;
 }
@@ -90,38 +92,38 @@ std::shared_ptr<Enemies> GameObjectFactory::createBoss()
     boss->setTag("boss");
     boss->addComponent(std::make_shared<FollowTarget>(boss, GameManager::getInstance().currentPlayer, 60.f));
     boss->addComponent(std::make_shared<Stat>(boss, 1000, 50)); // Máu và damage lớn hơn
-    boss->addComponent(std::make_shared<Shoot>(boss, 1.0f)); // Bắn 3 tia đã xử lý trong Shoot
+    boss->addComponent(std::make_shared<BossShoot>(boss, 1.0f)); // Bắn 3 tia đã xử lý trong Shoot
     boss->addComponent(std::make_shared<DamageOnContact>(boss, boss->getComponent<Stat>()->getDamage(), "player", 1.0f));
     return boss;
 }
 
-std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, float x, float y)
-{
-    auto powerUp = std::make_shared<PowerUp>();
-    powerUp->setTag("item");
-    powerUp->getHitbox().setPosition(x, y);
-
-    if (name == "shoot")
-    {
-        powerUp->addComponent(std::make_shared<ItemEffect>(
-            powerUp,
-            [](std::shared_ptr<GameObject> target) {
-                return std::make_shared<Shoot>(target, 1.f);
-            }
-        ));
-    }
-    else if (name == "move")
-    {
-        powerUp->getHitbox().setFillColor(sf::Color::Green);
-        powerUp->addComponent(std::make_shared<ItemEffect>(
-            powerUp,
-            [](std::shared_ptr<GameObject> target) {
-                return std::make_shared<KeyboardMove>(target, 400.f, "arrows");
-            }
-        ));
-    }
-    return powerUp;
-}
+//std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, float x, float y)
+//{
+//    auto powerUp = std::make_shared<PowerUp>();
+//    powerUp->setTag("item");
+//    powerUp->getHitbox().setPosition(x, y);
+//
+//    if (name == "shoot")
+//    {
+//        powerUp->addComponent(std::make_shared<ItemEffect>(
+//            powerUp,
+//            [](std::shared_ptr<GameObject> target) {
+//                return std::make_shared<Shoot>(target, 1.f);
+//            }
+//        ));
+//    }
+//    else if (name == "move")
+//    {
+//        powerUp->getHitbox().setFillColor(sf::Color::Green);
+//        powerUp->addComponent(std::make_shared<ItemEffect>(
+//            powerUp,
+//            [](std::shared_ptr<GameObject> target) {
+//                return std::make_shared<KeyboardMove>(target, 400.f, "arrows");
+//            }
+//        ));
+//    }
+//    return powerUp;
+//}
 
 std::shared_ptr<GameObject> GameObjectFactory::createGem(float x, float y)
 {
