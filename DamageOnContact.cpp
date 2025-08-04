@@ -37,7 +37,6 @@ void DamageOnContact::onCollisionEnter(std::shared_ptr<GameObject> other)
 				{
 					// Đặt trạng thái DIE cho player
 					other->setState(4);
-					other->setHurtTime(2.0f); // đợi 2s cho animation DIE chạy
 				}
 				else if (other->getTag() == "enemies" || other->getTag() == "boss")
 				{

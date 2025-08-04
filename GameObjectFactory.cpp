@@ -32,7 +32,7 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
     player->addComponent(std::make_shared<PlayerStat>(player));
 
     //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
-    player->addComponent(std::make_shared<PlayerShoot>(player, 0.3f));
+    player->addComponent(std::make_shared<PlayerShoot>(player, 0.5f));
 
     GameManager::getInstance().currentPlayer = player;
     return player;

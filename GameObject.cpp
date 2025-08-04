@@ -108,7 +108,7 @@ void GameObject::update(float deltaTime)
 	this->updateComponents(deltaTime);
 
 	auto move = getComponent<KeyboardMove>();
-
+	hurtTimer -= deltaTime;
 	auto shoot = getComponent<PlayerShoot>();
 	// Ưu tiên trạng thái bắn
 	if (shoot && shoot->isFiring) {
@@ -129,6 +129,7 @@ void GameObject::update(float deltaTime)
 		{
 			currentState = 3;
 		}
+
 		else isAttacked = false;
 		// Compare new direction with the previous direction (on the x-axis)
 		if (currentDirection.x != 0 || lastDirection.x != 0) {

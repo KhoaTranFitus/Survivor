@@ -19,10 +19,8 @@ public:
 	static std::shared_ptr<Enemies> createDefaultEnemy();
 	static std::shared_ptr<Enemies> createTankerEnemy();
 	static std::shared_ptr<Enemies> createBurstEnemy();
-	static std::shared_ptr<Bullet> createBullet(sf::Vector2f position,sf::Vector2f size);
 
 
-	static std::shared_ptr<Enemies> createDefaultEnemy();
 	static std::shared_ptr<Enemies> createShooterEnemy();
 	static std::shared_ptr<Enemies> createBoss();
 
