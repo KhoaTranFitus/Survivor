@@ -26,11 +26,18 @@ void DamageOnContact::onCollisionEnter(std::shared_ptr<GameObject> other)
         if (stat)
         {
             stat->takeDamage(damage);
+            other->setAttacked(true);
+
+            other->setHurtTime(0.2f);
             timer = cooldown;
         }
         // Nếu là bullet thì xóa luôn sau va chạm
-        if (owner && owner->getTag() == "bullet")
+        if (owner && owner->getTag() == "player_bullet")
         {
+            if (other->getTag() == "player") {
+                other->setAttacked(true);
+                other->setHurtTime(0.2f);
+            }
             owner->needDeleted = true;
         }
     }

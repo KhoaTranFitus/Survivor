@@ -11,7 +11,7 @@
 #include "DamageOnContact.h"
 #include "Boss.h"
 #include "Assets.h"
-//change here
+#include "Bullet.h"
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
@@ -19,11 +19,11 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
 
     // Thêm các component cho player
     player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
-    player->addComponent(std::make_shared<Stat>(player, 10000, 20));
+    player->addComponent(std::make_shared<Stat>(player, 10, 20));
     player->addComponent(std::make_shared<PlayerStat>(player));
 
     //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
-    player->addComponent(std::make_shared<Shoot>(player, 0.75f));
+    player->addComponent(std::make_shared<Shoot>(player, 5.f));
 
     GameManager::getInstance().currentPlayer = player;
     return player;
@@ -76,18 +76,13 @@ std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
 
 
 //tạo ra bullet
-std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position, sf::Vector2f size)
+std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position, sf::Vector2f size, const std::string& tag)
 {
-    auto bullet = std::make_shared<Bullet>(position, size);
-    bullet->setTag("bullet");
-
+    auto bullet = std::make_shared<Bullet>(position, size, tag);
+    bullet->setImageScale(sf::Vector2f(2.f, 2.f)); // Scale hình ảnh, không đổi hitbox logic
+    bullet->setTag(tag);
     return bullet;
 }
-// tạo ra enemy bắn được sau 1 khoảng thời gian nhất định, và ít hơn default enemy
-//std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
-//{
-//    return std::shared_ptr<Enemies>();
-//}
 
 std::shared_ptr<Enemies> GameObjectFactory::createBoss()
 {

@@ -29,6 +29,11 @@ void GameObject::setFlipped(bool flipped)
 	this->flipped = flipped;
 }
 
+int GameObject::getCurrentState()
+{
+	return this->currentState;
+}
+
 
 void GameObject::updateComponents(float deltaTime)
 {
@@ -61,6 +66,21 @@ void GameObject::onCollisionEnter(std::shared_ptr<GameObject> other)
 	}
 }
 
+void GameObject::setState(int num)
+{
+	this->currentState = num;
+}
+
+void GameObject::setAttacked(bool attacked)
+{
+	this->isAttacked = attacked;
+}
+
+void GameObject::setHurtTime(float time)
+{
+	this->hurtTimer = time;
+}
+
 void GameObject::move(sf::Vector2f offset)
 {
 	this->hitbox.move(offset);
@@ -75,8 +95,19 @@ void GameObject::update(float deltaTime)
 {
 	this->updateComponents(deltaTime);
 
-	auto move = getComponent<KeyboardMove>();
+	// Ưu tiên trạng thái DIE
+	if (currentState == 4) {
+		if (!this->animations.empty()) {
+			for (auto& a : animations) {
+				a->update(deltaTime, flipped);
+				a->setPosition(this->hitbox.getPosition());
+			}
+		}
+		return;
+	}
 
+	auto move = getComponent<KeyboardMove>();
+	hurtTimer -= deltaTime;
 	if (move) {
 		sf::Vector2f currentDirection = move->getDirection();
 
@@ -90,6 +121,11 @@ void GameObject::update(float deltaTime)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 			currentState = 2; // Update state to 2 when Enter key is pressed
 		}
+		if (isAttacked && hurtTimer > 0)
+		{
+			currentState = 3;
+		}
+		else isAttacked = false;
 		// Compare new direction with the previous direction (on the x-axis)
 		if (currentDirection.x != 0 || lastDirection.x != 0) {
 			if (lastDirection.x <= 0) {

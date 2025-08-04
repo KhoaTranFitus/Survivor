@@ -18,8 +18,9 @@ protected:
     bool flipped = false  ;              // true = sang trái
     sf::Vector2f lastDirection = { 0.f,0.f }; // để biết đang đi hướng nào
 
-
+    bool isAttacked = false;
     int currentState = 0;
+    float hurtTimer = 0.f;
 
 public:
     GameObject();
@@ -34,6 +35,9 @@ public:
     sf::Vector2f getOrigin() const;
     virtual void onCollisionEnter(std::shared_ptr<GameObject> other);
 
+    void setState(int num);
+    void setAttacked(bool attacked);
+    void setHurtTime(float time);
     template<class T>
     std::shared_ptr<T> getComponent();
 
@@ -47,10 +51,10 @@ public:
     std::string getTag();
 
 	void setFlipped(bool flipped); 
+    int getCurrentState();
 
     virtual void update(float deltaTime);
     virtual void render(sf::RenderWindow& window);
-
 };
 
 template<class T>

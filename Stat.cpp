@@ -46,7 +46,7 @@ void Stat::takeDamage(float amount)
 	if (percent < 0) percent = 0;
 	healthBar.setSize(sf::Vector2f(50 * percent, 10));
 	
-	if (health == 0) {
+	if (health == 0 && owner->getTag() == "enemies") {
 		owner->needDeleted = true; // Đánh d??i th??ng báo cho GameObject bi?t r?ng n??n xóa nó đi
 	} 
 }

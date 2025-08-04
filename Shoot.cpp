@@ -3,6 +3,8 @@
 #include "GameManager.h"
 #include "MoveForward.h"
 #include "DamageOnContact.h"
+#include "Bullet.h"
+
 Shoot::Shoot(std::shared_ptr<GameObject> owner, float cooldown) :
 	Component(owner),
 	cooldown(cooldown)
@@ -38,7 +40,7 @@ void Shoot::update(float deltaTime)
 
 			if (closestEnemy)
 			{
-				sf::Vector2f size(20.f, 5.f);
+				sf::Vector2f size(20.f, 7.f);
 
 				// Tính hướng từ player đến enemy
 				sf::Vector2f dir = closestEnemy->getOrigin() - owner->getOrigin();
@@ -50,12 +52,15 @@ void Shoot::update(float deltaTime)
 				bool flipped = (enemyX < playerX);// true nếu enemy bên trái, false nếu bên phải
 				owner->setFlipped(flipped);
 
-				auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size);
-				bullet->getHitbox().setFillColor(sf::Color::Green);
+				auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size, "player_bullet");
 				bullet->getHitbox().setRotation(angle); // Xoay viên đạn theo hướng bắn
 				bullet->addComponent(std::make_shared<MoveForward>(bullet, closestEnemy->getOrigin(), 700.f)); // Thêm speed
 				bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "enemies")); // Thêm damage
 				bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "boss")); // Thêm damage
+				
+				// Set scale cho đạn của player (ví dụ scale 2x)
+				bullet->setImageScale(sf::Vector2f(2.f, 2.f));
+
 				GameManager::getInstance().getCurrentScene()->addGameObject(bullet);
 			}
 		}
@@ -84,7 +89,7 @@ void Shoot::update(float deltaTime)
 					sf::Vector2f bulletTarget = origin + dir * 100.f;
 
 					sf::Vector2f bulletSize(30.f, 30.f);
-					auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), bulletSize);
+					auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), bulletSize, "bullet_enemy");
 					bullet->getHitbox().setFillColor(sf::Color::Yellow);
 					bullet->addComponent(std::make_shared<MoveForward>(bullet, bulletTarget, 350.f));
 					bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player"));
@@ -93,7 +98,7 @@ void Shoot::update(float deltaTime)
 			}
 			else // enemy thường
 			{
-				auto bullet = GameObjectFactory::createBullet(owner->getOrigin(),size);
+				auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size, "bullet_enemy");
 				bullet->getHitbox().setFillColor(sf::Color::Red);
 				bullet->addComponent(std::make_shared<MoveForward>(bullet, GameManager::getInstance().currentPlayer->getOrigin(), 300.f));
 				bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player"));
