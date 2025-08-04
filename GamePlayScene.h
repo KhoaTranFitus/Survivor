@@ -26,6 +26,13 @@ private:
 
 	// Thêm biến này để chỉ xóa enemy và bullet 1 lần sau 2 phút
 	bool clearedEnemiesAndBullets = false;
+
+    float loseDelayTimer = 2.f; // Thời gian chờ trước khi chuyển sang LoseScene sau khi player chết
+    bool waitingForLose = false;
+
+    float deadPlayerTimer = 0.f; // Thời gian chờ xóa player và chuyển LoseScene
+    bool playerPendingDelete = false; // Đánh dấu player đã chết và đang chờ xóa
+
 public:
 	GamePlayScene();
 	~GamePlayScene();

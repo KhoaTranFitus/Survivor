@@ -1,4 +1,4 @@
-﻿#include "PlayerShoot.h"
+#include "PlayerShoot.h"
 #include "GameManager.h"
 #include "MoveForward.h"
 #include "DamageOnContact.h"
@@ -22,8 +22,6 @@ void PlayerShoot::update(float deltaTime)
 		return;
 	}
 
-	// Tự động bắn khi đủ cooldown
-
 
 	auto gameObjects = GameManager::getInstance().getCurrentScene()->getGameObjects();
 	std::shared_ptr<GameObject> closestEnemy = nullptr;
@@ -44,7 +42,6 @@ void PlayerShoot::update(float deltaTime)
 		}
 	}
 
-	// Chỉ bắn khi có enemy
 	if (elapsed >= cooldown && closestEnemy)
 	{
 		elapsed = 0.f;
@@ -57,14 +54,15 @@ void PlayerShoot::update(float deltaTime)
 		sf::Vector2f dir = closestEnemy->getOrigin() - owner->getOrigin();
 		float angle = std::atan2(dir.y, dir.x) * 180.f / 3.14159265f;
 
-		// Lật player về phía enemy gần nhất
 		float playerX = owner->getOrigin().x;
 		float enemyX = closestEnemy->getOrigin().x;
 		bool flipped = (enemyX < playerX);
 		owner->setFlipped(flipped);
 
-		auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size);
-		bullet->getHitbox().setFillColor(sf::Color::Green);
+
+		auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size,"player_bullet");//add tag for each bullet
+		bullet->getHitbox().setFillColor(sf::Color::White);
+
 		bullet->getHitbox().setRotation(angle);
 		bullet->addComponent(std::make_shared<MoveForward>(bullet, closestEnemy->getOrigin(), 700.f));
 		bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "enemies"));

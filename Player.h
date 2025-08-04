@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "Config.h"
@@ -10,6 +10,5 @@ class Player : public GameObject
 public:
 	Player();
 	virtual ~Player();
-	/*void getPositionPlayer();*/
-
+	bool isControllable() const; // Thêm hàm kiểm tra có thể điều khiển không
 };

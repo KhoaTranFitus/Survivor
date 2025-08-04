@@ -15,15 +15,17 @@ public:
 	static std::shared_ptr<Player> createPlayer();
 
 	static std::shared_ptr<GameObject> createBackground(const std::string& path);
+
 	static std::shared_ptr<Enemies> createDefaultEnemy();
 	static std::shared_ptr<Enemies> createTankerEnemy();
 	static std::shared_ptr<Enemies> createBurstEnemy();
-	static std::shared_ptr<Bullet> createBullet(sf::Vector2f position,sf::Vector2f size);
 
 
 	static std::shared_ptr<Enemies> createShooterEnemy();
 	static std::shared_ptr<Enemies> createBoss();
-	static std::shared_ptr<PowerUp> createPowerUp(std::string name, float x, float y);
+
+	static std::shared_ptr<Bullet> createBullet(sf::Vector2f position, sf::Vector2f size, const std::string& tag);
+	//static std::shared_ptr<PowerUp> createPowerUp(std::string name, float x, float y);
 	static std::shared_ptr<GameObject> createGem(float x, float y);
 };
 
