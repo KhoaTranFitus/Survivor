@@ -1,6 +1,8 @@
 ﻿#include "GameObject.h"
 #include "KeyboardMove.h"
 #include "PlayerShoot.h"
+#include "Shield.h"
+#include "Speed.h"
 GameObject::GameObject()
 {
 }
@@ -168,4 +170,10 @@ void GameObject::render(sf::RenderWindow& window)
 			component->render(window);
 		}
 	}
+
+	/*auto shield = getComponent<Shield>();
+	if (shield) shield->render(window);
+
+	auto speed = getComponent<Speed>();
+	if (speed) speed->render(window);*/
 }

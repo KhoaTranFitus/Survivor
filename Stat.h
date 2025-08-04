@@ -26,7 +26,7 @@ public:
 	float getDamage();
 
 	void setHealth(float value);
-
+	void setDamage(float value);
 	void update(float deltaTime) override;
 	void render(sf::RenderWindow& window) override;
 };
