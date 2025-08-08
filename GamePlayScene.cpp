@@ -26,9 +26,6 @@ GamePlayScene::GamePlayScene()
 	gameObjects.push_back(player);
 
 	//add item in game play scene
-	gameObjects.push_back(GameObjectFactory::createPowerUp("shield", 100, 100));
-	gameObjects.push_back(GameObjectFactory::createPowerUp("speed", 200, 100));
-	gameObjects.push_back(GameObjectFactory::createPowerUp("heal", 300, 100));
 
 	auto playPause = std::make_shared<Button>(
 		"", "pause", 50, 50, sf::Vector2f(50, 50),
@@ -42,34 +39,6 @@ GamePlayScene::GamePlayScene()
 GamePlayScene::~GamePlayScene()
 {
 }
-bool GamePlayScene::alivePlayer()
-{
-	for (auto& obj : gameObjects)
-	{
-		if (obj->getTag() == "player")
-		{
-			auto stat = obj->getComponent<Stat>();
-			if (stat) {
-				if (stat->getHealth() > 0) {
-					return true;
-				}
-				else {
-					// Chỉ set state DIE nếu chưa phải DIE
-					if (obj->getCurrentState() != 4) {
-						obj->setState(4); // Set DIE state
-						deadPlayerTimer = 1.55f; // Thời gian chờ xóa player và chuyển LoseScene
-						playerPendingDelete = true;
-						waitingForLose = true;
-						loseDelayTimer = 1.45f; // Đồng bộ với deadPlayerTimer
-					}
-				}
-			}
-		}
-	}
-	return false;
-}
-
-// Hàm tính khoảng cách 2 điểm
 float distance(sf::Vector2f a, sf::Vector2f b) {
 	float dx = a.x - b.x;
 	float dy = a.y - b.y;
@@ -235,6 +204,7 @@ void GamePlayScene::update(float deltaTime)
 	}
 }
 
+
 void GamePlayScene::render(sf::RenderWindow& window)
 {
 	window.setView(camera.getView(window.getSize())); // Cập nhật camera theo vị trí của người chơi
@@ -248,21 +218,7 @@ void GamePlayScene::render(sf::RenderWindow& window)
 	}
 
 	// Render the clock in game play scene with form "Time: mm:ss"
-	if (fontLoaded) {
-		int elapsed = static_cast<int>(getElapsedTime());
-		int minutes = elapsed / 60;
-		int seconds = elapsed % 60;
-		std::ostringstream oss;
-		oss << "Time: ";
-		if (minutes < 10) oss << '0';
-		oss << minutes << ":";
-		if (seconds < 10) oss << '0';
-		oss << seconds;
-		sf::Text text(oss.str(), font, 24);
-		text.setFillColor(sf::Color::Green);
-		text.setPosition(10, 10); // Góc trên bên trái
-		window.draw(text);
-	}
+
 
 	auto player = GameManager::getInstance().currentPlayer;
 	if (fontLoaded && player) {
@@ -271,15 +227,34 @@ void GamePlayScene::render(sf::RenderWindow& window)
 	        playerStat->render(window, font);
 	    }
 	
-	    auto shield = player->getComponent<Shield>();
+	   auto shield = player->getComponent<Shield>();
 	    if (shield) shield->render(window);
 
 	    auto speed = player->getComponent<Speed>();
 	    if (speed) speed->render(window);
 
 	}
+	renderClock(window);
 }
 
+void GamePlayScene::renderClock(sf::RenderWindow& window, sf::Vector2f position, sf::Color color, unsigned int size)
+{
+    if (fontLoaded) {
+        int elapsed = static_cast<int>(getElapsedTime());
+        int minutes = elapsed / 60;
+        int seconds = elapsed % 60;
+        std::ostringstream oss;
+        oss << "Time: ";
+        if (minutes < 10) oss << '0';
+        oss << minutes << ":";
+        if (seconds < 10) oss << '0';
+        oss << seconds;
+        sf::Text text(oss.str(), font, size);
+        text.setFillColor(color);
+        text.setPosition(position);
+        window.draw(text);
+    }
+}
 float GamePlayScene::getElapsedTime() const {
 	if (clockInGame)
 	{
@@ -296,3 +271,29 @@ void GamePlayScene::resumeClock() {
 	if (clockInGame) clockInGame->resume();
 }
 
+bool GamePlayScene::alivePlayer()
+{
+	for (auto& obj : gameObjects)
+	{
+		if (obj->getTag() == "player")
+		{
+			auto stat = obj->getComponent<Stat>();
+			if (stat) {
+				if (stat->getHealth() > 0) {
+					return true;
+				}
+				else {
+					// Chỉ set state DIE nếu chưa phải DIE
+					if (obj->getCurrentState() != 4) {
+						obj->setState(4); // Set DIE state
+						deadPlayerTimer = 1.55f; // Thời gian chờ xóa player và chuyển LoseScene
+						playerPendingDelete = true;
+						waitingForLose = true;
+						loseDelayTimer = 1.45f; // Đồng bộ với deadPlayerTimer
+					}
+				}
+			}
+		}
+	}
+	return false;
+}

@@ -7,7 +7,7 @@ Speed::Speed(std::shared_ptr<GameObject> owner, float multiplier, float duration
     auto move = owner->getComponent<KeyboardMove>();
     if (move) {
         originalSpeed = move->getSpeed();
-        move->setSpeed(originalSpeed * multiplier);
+        move->setSpeed(originalSpeed + multiplier);
     }
 }
 

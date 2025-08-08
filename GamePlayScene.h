@@ -18,7 +18,7 @@ private:
 	float defaultEnemyElapsed = 0.0f;
 	float shooterEnemyCooldown = 15.0f;
 	float shooterEnemyElapsed = 0.0f;
-	float tankerEnemyCooldown = 60.0f; 
+	float tankerEnemyCooldown = 10.0f; 
 	float tankerEnemyElapsed = 0.0f;
 	float burstEnemyCooldown = 30.0f; 
 	float burstEnemyElapsed = 0.0f;
@@ -44,6 +44,9 @@ public:
 
 	bool alivePlayer();
 	void update(float deltaTime) override;
+
+	void renderClock(sf::RenderWindow& window, sf::Vector2f position = { 10, 10 },
+		sf::Color color = sf::Color::Green, unsigned int size = 24);	
 	void render(sf::RenderWindow& window) override;
 
 private:

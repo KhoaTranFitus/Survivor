@@ -166,7 +166,6 @@
     <ClCompile Include="ItemEffect.cpp" />
     <ClCompile Include="KeyboardMove.cpp" />
     <ClCompile Include="LevelUpScene.cpp" />
-    <ClCompile Include="LevelUpSence.cpp" />
     <ClCompile Include="LoseScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuScene.cpp" />
@@ -186,6 +185,7 @@
     <ClCompile Include="SelectLevelScene.cpp" />
     <ClCompile Include="SettingScene.cpp" />
     <ClCompile Include="Shield.cpp" />
+    <ClCompile Include="ShooterEnemy.cpp" />
     <ClCompile Include="Speed.cpp" />
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="SwitchSceneCommand.cpp" />
@@ -224,7 +224,6 @@
     <ClInclude Include="ItemEffect.h" />
     <ClInclude Include="KeyboardMove.h" />
     <ClInclude Include="LevelUpScene.h" />
-    <ClInclude Include="LevelUpSence.h" />
     <ClInclude Include="LoseScene.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="MoveForward.h" />
@@ -254,6 +253,7 @@
     <Image Include="Assets\backGround\menuScene.png" />
     <Image Include="Assets\backGround\selectLevel.png" />
     <Image Include="Assets\bullet\arrow.png" />
+    <Image Include="Assets\bullet\enemy_bullet.png" />
     <Image Include="Assets\button\button.png" />
     <Image Include="Assets\button\button1.png" />
     <Image Include="Assets\button\button1_hover.png" />
@@ -262,12 +262,21 @@
     <Image Include="Assets\button\button_hover.png" />
     <Image Include="Assets\button\pause.png" />
     <Image Include="Assets\button\pause_hover.png" />
+    <Image Include="Assets\enemy\enemy_run.png" />
+    <Image Include="Assets\enemy\shooter_run.png" />
+    <Image Include="Assets\enemy\shoot_enemy.png" />
+    <Image Include="Assets\gem\gem_type1.png" />
+    <Image Include="Assets\gem\gem_type2.png" />
+    <Image Include="Assets\gem\gem_type3.png" />
     <Image Include="Assets\player\newPlayer_DIE.png" />
     <Image Include="Assets\player\newPlayer_FIRE.png" />
     <Image Include="Assets\player\newPlayer_IDLE.png" />
     <Image Include="Assets\player\newPlayer_RUN.png" />
+    <Image Include="Assets\powerUp\health_type1.png" />
+    <Image Include="Assets\powerUp\health_type2.png" />
+    <Image Include="Assets\powerUp\shield.png" />
+    <Image Include="Assets\powerUp\speed.png" />
     <Image Include="C:\Users\ADMIN\Downloads\player_IDLE.png" />
-    <Image Include="enemy_run.png" />
     <Image Include="Game1.jpg">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

@@ -23,7 +23,12 @@ void FollowTarget::update(float deltaTime)
 
     // Lúc này target còn sống, được phép truy cập hitbox
     sf::Vector2f direction = target->getHitbox().getPosition() - owner->getHitbox().getPosition();
-
+    if (direction.x < 0) {
+        owner->setFlipped(true);
+    }
+    else if (direction.x > 0) {
+        owner->setFlipped(false);
+    }
     float length = std::hypot(direction.x, direction.y);
     if (length > 0.1f)
     {

@@ -23,7 +23,7 @@
 #include "Heal.h"
 #include "Shield.h"
 #include "Speed.h"
-
+#include <random>
 
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
@@ -32,11 +32,11 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
 
     // Thêm các component cho player
     player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
-    player->addComponent(std::make_shared<Stat>(player, 100, 20));
+    player->addComponent(std::make_shared<Stat>(player, 10000, 50));
     player->addComponent(std::make_shared<PlayerStat>(player));
 
     //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
-    player->addComponent(std::make_shared<PlayerShoot>(player, 0.5f));
+    player->addComponent(std::make_shared<PlayerShoot>(player, 0.1f));
 
     GameManager::getInstance().currentPlayer = player;
     return player;
@@ -109,7 +109,6 @@ std::shared_ptr<Enemies> GameObjectFactory::createBurstEnemy() {
     return enemy;
 }
 
-
 //tạo ra bullet
 std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position, sf::Vector2f size, const std::string& tag)
 {
@@ -132,113 +131,37 @@ std::shared_ptr<Enemies> GameObjectFactory::createBoss()
 
 std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, float x, float y)
 {
-    auto powerUp = std::make_shared<PowerUp>();
-    powerUp->setTag("item");
-    powerUp->getHitbox().setPosition(x, y);
-
-    if (name == "shoot")
-    {
-        powerUp->addComponent(std::make_shared<ItemEffect>(
-            powerUp,
-            [](std::shared_ptr<GameObject> target) {
-                return std::make_shared<PlayerShoot>(target, 1.f);
-            }
-        ));
-    }
-    else if (name == "move")
-    {
-        powerUp->getHitbox().setFillColor(sf::Color::Green);
-        powerUp->addComponent(std::make_shared<ItemEffect>(
-            powerUp,
-            [](std::shared_ptr<GameObject> target) {
-                return std::make_shared<KeyboardMove>(target, 400.f, "arrows");
-            }
-        ));
-    }
-    //else if(name == "health")
-    //{
-    //    powerUp->getHitbox().setFillColor(sf::Color::Red);
-    //    powerUp->addComponent(std::make_shared<ItemEffect>(
-    //        powerUp,
-    //        [](std::shared_ptr<GameObject> target) {
-    //            auto playerStat = target->getComponent<PlayerStat>();
-    //            if (playerStat) {
-    //                playerStat->addHealth(50); // Tăng máu
-    //            }
-    //            return nullptr;
-    //        }
-    //    ));
-    //}
-    else if (name == "shield")
-    {
-        powerUp->getHitbox().setFillColor(sf::Color::Blue);
-        powerUp->addComponent(std::make_shared<ItemEffect>(
-            powerUp,
-            [](std::shared_ptr<GameObject> target) {
-                // Add Shield to the player (target)
-                return std::make_shared<Shield>(target, 50.f, 5.f);
-            }
-        ));
-    }
-    //else if (name == "heal")
-    //{
-    //    powerUp->getHitbox().setFillColor(sf::Color::Magenta);
-    //    powerUp->addComponent(std::make_shared<ItemEffect>(
-    //        powerUp,
-    //        [](std::shared_ptr<GameObject> target) {
-    //            auto playerStat = target->getComponent<PlayerStat>();
-    //            if (playerStat) {
-    //                playerStat->addHealth(50); // Tăng máu
-    //            }
-    //            return nullptr;
-    //        }
-    //    ));
-    //}
-    /*else if (name == "gem")
-    {
-        powerUp->getHitbox().setFillColor(sf::Color::Yellow);
-        powerUp->addComponent(std::make_shared<ItemEffect>(
-            powerUp,
-            [](std::shared_ptr<GameObject> target) {
-                return GameObjectFactory::createGem(target->getHitbox().getPosition().x, target->getHitbox().getPosition().y);
-            }
-        ));
-    }*/
-    else if (name == "speed")
-    {
-        powerUp->getHitbox().setFillColor(sf::Color::Yellow);
-        powerUp->addComponent(std::make_shared<ItemEffect>(
-            powerUp,
-            [](std::shared_ptr<GameObject> target) {
-                return std::make_shared<Speed>(target, 1.5f, 5.f); // Tăng 50% trong 5s
-            }
-        ));
-    }
-    else if (name == "heal")
-    {
-        powerUp->getHitbox().setFillColor(sf::Color::Green);
-        powerUp->addComponent(std::make_shared<ItemEffect>(
-            powerUp,
-            [](std::shared_ptr<GameObject> target) {
-				return std::make_shared<Heal>(target, 0.2f); // Tăng 20% máu hiện tại
-            }
-        ));
-    }
-    return powerUp;
+    // Factory only manages, delegates creation to PowerUp
+    return PowerUp::Create(name, x, y);
 }
-
-
 
 std::shared_ptr<GameObject> GameObjectFactory::createGem(float x, float y)
 {
-    auto gem = std::make_shared<Gem>(sf::Vector2f(x, y));
-    gem->setTag("gem"); // Đảm bảo tag được set
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(0, 99);
+    int r = dist(gen);
+
+    std::string tag;
+    int exp = 10;
+    if (r < 70) {
+        tag = "gem_type1";
+        exp = 10;
+    } else if (r < 90) {
+        tag = "gem_type2";
+        exp = 20;
+    } else {
+        tag = "gem_type3";
+        exp = 50;
+    }
+
+    auto gem = std::make_shared<Gem>(sf::Vector2f(x, y), tag);
     gem->addComponent(std::make_shared<ItemEffect>(
         gem,
-        [](std::shared_ptr<GameObject> target) {
+        [exp](std::shared_ptr<GameObject> target) {
             auto playerStat = target->getComponent<PlayerStat>();
             if (playerStat) {
-                playerStat->addExp(100);
+                playerStat->addExp(exp);
             }
             return nullptr;
         }

@@ -41,6 +41,12 @@
     <Filter Include="Assets\bullet">
       <UniqueIdentifier>{0fd466b8-85a2-48ae-b4f6-6104c3feda83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\gem">
+      <UniqueIdentifier>{576282f4-0661-4cec-9dd5-499c4db5dd40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\powerUp">
+      <UniqueIdentifier>{8f1dd18f-2285-43f8-bcb2-cd3cc4f47825}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -140,10 +146,6 @@
     <ClCompile Include="VictoryScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultEnemy.cpp" />
-    <ClCompile Include="PlayerShoot.cpp" />
-    <ClCompile Include="EnemyShoot.cpp" />
-    <ClCompile Include="BossShoot.cpp" />
     <ClCompile Include="Boss.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -179,6 +181,48 @@
     </ClCompile>
     <ClCompile Include="BurstEnemy.cpp">
       <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ShooterEnemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BossShoot.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultEnemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyShoot.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelUpScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Heal.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDamageUpgrade.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHealthUpgrade.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMagnetUpgrade.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerReloadUpgrade.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Speed.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerShoot.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSpeedUpgrade.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -282,10 +326,6 @@
     <ClInclude Include="VictoryScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="MusicManager.h" />
-    <ClInclude Include="PlayerShoot.h" />
-    <ClInclude Include="EnemyShoot.h" />
-    <ClInclude Include="BossShoot.h" />
     <ClInclude Include="Boss.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -319,6 +359,45 @@
     <ClInclude Include="PlayerShoot.h">
       <Filter>Component</Filter>
     </ClInclude>
+    <ClInclude Include="BossShoot.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyShoot.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelUpScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Heal.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDamageUpgrade.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHealthUpgrade.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMagnetUpgrade.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerReloadUpgrade.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicManager.h">
+      <Filter>No Category</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Speed.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShoot.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSpeedUpgrade.h">
+      <Filter>Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Game1.jpg">
@@ -329,9 +408,6 @@
     </Image>
     <Image Include="player_RUN.png">
       <Filter>Assets\player</Filter>
-    </Image>
-    <Image Include="enemy_run.png">
-      <Filter>Assets\enemy</Filter>
     </Image>
     <Image Include="Assets\backGround\menuScene.png">
       <Filter>Assets\backGround</Filter>
@@ -376,6 +452,39 @@
       <Filter>Assets\player</Filter>
     </Image>
     <Image Include="Assets\bullet\arrow.png">
+      <Filter>Assets\bullet</Filter>
+    </Image>
+    <Image Include="Assets\enemy\shoot_enemy.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
+    <Image Include="Assets\gem\gem_type1.png">
+      <Filter>Assets\gem</Filter>
+    </Image>
+    <Image Include="Assets\gem\gem_type2.png">
+      <Filter>Assets\gem</Filter>
+    </Image>
+    <Image Include="Assets\gem\gem_type3.png">
+      <Filter>Assets\gem</Filter>
+    </Image>
+    <Image Include="Assets\powerUp\health_type1.png">
+      <Filter>Assets\powerUp</Filter>
+    </Image>
+    <Image Include="Assets\powerUp\health_type2.png">
+      <Filter>Assets\powerUp</Filter>
+    </Image>
+    <Image Include="Assets\powerUp\shield.png">
+      <Filter>Assets\powerUp</Filter>
+    </Image>
+    <Image Include="Assets\enemy\shooter_run.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
+    <Image Include="Assets\powerUp\speed.png">
+      <Filter>Assets\powerUp</Filter>
+    </Image>
+    <Image Include="Assets\enemy\enemy_run.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
+    <Image Include="Assets\bullet\enemy_bullet.png">
       <Filter>Assets\bullet</Filter>
     </Image>
   </ItemGroup>

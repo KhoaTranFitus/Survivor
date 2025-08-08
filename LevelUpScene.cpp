@@ -160,13 +160,6 @@ void LevelUpScene::render(sf::RenderWindow& window) {
     float buttonY = 400.f;
     float buttonX = (windowWidth - totalWidth) / 2.f;
 
-    // Vẽ khung tổng (nếu muốn)
-    /*sf::RectangleShape frame(sf::Vector2f(totalWidth + 60.f, buttonHeight + 60.f));
-    frame.setFillColor(sf::Color(30, 30, 30, 220));
-    frame.setOutlineColor(sf::Color::White);
-    frame.setOutlineThickness(4.f);
-    frame.setPosition((windowWidth - frame.getSize().x) / 2.f, buttonY - 30.f);
-    window.draw(frame);*/
 
     // Vẽ từng khung cho mỗi nút
     for (size_t i = 0; i < buttons.size(); ++i) {

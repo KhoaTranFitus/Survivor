@@ -3,6 +3,7 @@
 #include "PlayerShoot.h"
 #include "Shield.h"
 #include "Speed.h"
+#include "Stat.h"
 GameObject::GameObject()
 {
 }
@@ -150,7 +151,8 @@ void GameObject::update(float deltaTime)
 	if (!this->animations.empty()) {
 		for (auto& a : animations) {
 			a->update(deltaTime, flipped);
-			a->setPosition(this->hitbox.getPosition());
+			a->setCenter();
+			a->setPosition(this->hitbox.getPosition() + this->hitbox.getSize()/2.f);
 		}
 	}
 }
@@ -160,20 +162,16 @@ void GameObject::render(sf::RenderWindow& window)
 	if (!animations.empty()) {
 		animations[currentState]->render(window);
 	}
-
 	else window.draw(this->hitbox);
+
 
 	for (const auto& component : this->components)
 	{
-		if (component)
+		if (!component) continue;
+
+		if (isType<Stat>(component))
 		{
 			component->render(window);
 		}
 	}
-
-	/*auto shield = getComponent<Shield>();
-	if (shield) shield->render(window);
-
-	auto speed = getComponent<Speed>();
-	if (speed) speed->render(window);*/
 }

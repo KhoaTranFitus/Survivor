@@ -19,4 +19,6 @@ private:
 	static sf::Texture enemyTexture;
 	static bool texturesLoaded;
 	void loadTextures();
+
+	std::shared_ptr<Animation> animations;
 };

@@ -2,13 +2,13 @@
 #include "GameObject.h"
 
 class Gem : public GameObject {
+private:
+	std::shared_ptr<Animation>animation;
+	std::string tag;
+
 public:
-    Gem(sf::Vector2f position, const std::string& tag = "gem") {
-        hitbox.setSize(sf::Vector2f(15.f, 15.f));
-        hitbox.setFillColor(sf::Color::Yellow);
-        hitbox.setPosition(position);
-        setTag(tag);
-    }
-    void update(float deltaTime);
-    void render(sf::RenderWindow& window);
+
+	Gem(sf::Vector2f position, const std::string tag );
+	void update(float deltaTime);
+	void render(sf::RenderWindow& window);
 };

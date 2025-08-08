@@ -1,5 +1,5 @@
 ﻿#include "Bullet.h"
-
+#include "Assets.h"
 sf::Texture Bullet::playerTexture;
 sf::Texture Bullet::enemyTexture;
 bool Bullet::texturesLoaded = false;
@@ -7,7 +7,6 @@ bool Bullet::texturesLoaded = false;
 void Bullet::loadTextures() {
     if (!texturesLoaded) {
         playerTexture.loadFromFile("./Assets/bullet/arrow.png");
-        enemyTexture.loadFromFile("./Assets/bullet/bullet_enemy.png");
         texturesLoaded = true;
     }
 }
@@ -24,11 +23,17 @@ Bullet::Bullet(sf::Vector2f position, sf::Vector2f size, std::string tag):
     loadTextures();
     if (tag == "player_bullet") {
         hitbox.setTexture(&playerTexture);
-        hitbox.setFillColor(sf::Color::White); // Sửa ở đây
-    } else if (tag == "bullet_enemy") {
-        hitbox.setTexture(&enemyTexture);
-        hitbox.setFillColor(sf::Color::White); // Sửa ở đây
+        hitbox.setFillColor(sf::Color::White); 
+    } else if (tag == "enemy_bullet") {
+        //hitbox.setFillColor(sf::Color::White); 
+
+        animations = std::make_shared<Animation>(Assets::ENEMY_BULLET,4,0.1,
+            sf::Vector2i(10, 10));
+		animations->setScale(sf::Vector2f(2.f,2.f));
+		animations->setCenter();
+		animations->setPosition(position + size/2.f);
     }
+
 }
 
 Bullet::~Bullet()
@@ -43,6 +48,10 @@ void Bullet::update(float deltaTime)
     {
         needDeleted = true;
     }
+    if (animations) {
+        animations->update(deltaTime, false);
+        animations->setPosition(hitbox.getPosition() + hitbox.getSize() / 2.f);
+    }
 }
 
 void Bullet::setImageScale(const sf::Vector2f& scale) {
@@ -51,9 +60,11 @@ void Bullet::setImageScale(const sf::Vector2f& scale) {
 
 void Bullet::render(sf::RenderWindow& window)
 {
-    if (hitbox.getTexture()) {
-        window.draw(hitbox); // Vẽ hình (ảnh)
+    if (animations) {
+        animations->render(window);
+    } else if (hitbox.getTexture()) {
+        window.draw(hitbox);
     } else {
-        window.draw(hitbox); // Vẽ hitbox (màu)
+        window.draw(hitbox);
     }
 }

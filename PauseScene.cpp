@@ -34,15 +34,6 @@ PauseScene::PauseScene(std::shared_ptr<GamePlayScene> gameplayScene)
             })
     );
     buttons.push_back(menuButton);
-
-    //auto resumePlay = std::make_shared<Button>()
-    // Level button
-   /* gameObjects.push_back(std::make_shared<Button>(
-        "Menu", 540, 350, sf::Vector2f(200.f, 60.f),
-        std::make_shared<SwitchSceneCommand>([]() {
-            return std::make_shared<SelectLevelScene>();
-            })
-    ));*/
 }
 
 void PauseScene::update(float deltaTime) {
@@ -60,21 +51,7 @@ void PauseScene::render(sf::RenderWindow& window) {
 
     // Hiển thị thời gian tạm dừng với định dạng MM:SS
     if (gamePlayScene) {
-        int elapsed = static_cast<int>(gamePlayScene->getElapsedTime());
-        int minutes = elapsed / 60;
-        int seconds = elapsed % 60;
-        sf::Font font;
-        font.loadFromFile("arial.ttf");
-        std::ostringstream oss;
-        oss << "Time: ";
-        if (minutes < 10) oss << '0';
-        oss << minutes << ":";
-        if (seconds < 10) oss << '0';
-        oss << seconds;
-        sf::Text text(oss.str(), font, 28);
-        text.setFillColor(sf::Color::White);
-        text.setPosition(555, 180);
-        window.draw(text);
+        gamePlayScene->renderClock(window, { 555, 180 }, sf::Color::White,28);
     }
 
     // Sau đó vẽ các đối tượng giao diện (nút Resume, Menu) lên trên lớp phủ
