@@ -7,7 +7,7 @@ Button::Button(const std::string& n_text, std::string tag, float x, float y, sf:
     //text at button
     static bool fontLoaded = false;
     if (!fontLoaded) {
-        if (!font.loadFromFile("arial.ttf")) {
+        if (!font.loadFromFile("PixelOperator8.ttf")) {
             std::cout << "Khong load duoc font" << std::endl;
         }
         fontLoaded = true;
@@ -42,8 +42,8 @@ Button::Button(const std::string& n_text, std::string tag, float x, float y, sf:
 
     text.setFont(font);
     text.setString(n_text);
-    text.setCharacterSize(30);
-    text.setFillColor(sf::Color::Red);
+    text.setCharacterSize(25);
+    text.setFillColor(sf::Color(107, 85, 74));
     // can giua nut
     sf::FloatRect textRect = text.getLocalBounds();
     text.setOrigin(textRect.left + textRect.width / 2.f,
@@ -66,9 +66,9 @@ void Button::update(float deltaTime)
     sf::Vector2f mousePos = mousePosition;
     sf::Vector2f posF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 
+    
     if (hitbox.getGlobalBounds().contains(posF)) {
         if (!isHovered) {
-            //hitbox.setFillColor(sf::Color::Green);
 			sprite.setTexture(textureHover,true);
             sprite.setPosition(hitbox.getPosition().x - 20.f, hitbox.getPosition().y);
             isHovered = true;
@@ -80,13 +80,16 @@ void Button::update(float deltaTime)
     }
     else {
         if (isHovered) {
-            //hitbox.setFillColor(sf::Color::Blue);
 			sprite.setTexture(textureNormal,true);
             sprite.setPosition(hitbox.getPosition().x - 20.f, hitbox.getPosition().y);
 
             isHovered = false;
         }
     }
+    if(this->tag == "pause")
+    {
+		sprite.setPosition(hitbox.getPosition().x, hitbox.getPosition().y);
+	}
     wasMouseDown = mouseNowDown;
 }
 

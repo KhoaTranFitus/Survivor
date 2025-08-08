@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 
 class Assets
@@ -23,10 +24,22 @@ public:
 
 	static sf::Texture HEALTH_TYPE1;
 	static sf::Texture HEALTH_TYPE2;
-
 	static sf::Texture SHIELD;
 	static sf::Texture SPEED;
 
 	static sf::Texture ENEMY_BULLET;
+
+	static sf::SoundBuffer GEM_PICKUP_S;
+	static sf::Sound GEM_PICKUP_SOUND;
+	static sf::SoundBuffer POWERUP_PICKUP_S;
+	static sf::Sound POWERUP_PICKUP_SOUND;
+
+	static sf::SoundBuffer PLAYER_HURT_S;
+	static sf::Sound PLAYER_HURT_SOUND;
+
+
+
+
+
 	static void init();
 };

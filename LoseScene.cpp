@@ -3,10 +3,11 @@
 #include "Button.h"
 #include "SwitchSceneCommand.h"
 #include "MenuScene.h"
-
+#include "MusicManager.h"
 LoseScene::LoseScene(std::shared_ptr<GamePlayScene> gamePlayScene) :
     gamePlayScene(gamePlayScene)
 {
+	MusicManager::getInstance().play("./Assets/music/lose_scene.mp3", 40, true);
     int elapsed = 0;
     if (gamePlayScene)
     {
@@ -62,16 +63,16 @@ void LoseScene::render(sf::RenderWindow& window)
     window.draw(overlap);
 
     sf::Font font;
-    font.loadFromFile("arial.ttf");
+    font.loadFromFile("PixelOperator8-Bold.ttf");
     sf::Text gameover("Game Over", font, 80);
-    gameover.setPosition(430, 50);
+    gameover.setPosition(300, 50);
     gameover.setFillColor(sf::Color::Red);
     gameover.setStyle(sf::Text::Bold);
     window.draw(gameover);
 
     sf::Text time(timeString, font, 30);
     time.setFillColor(sf::Color::Red);
-    time.setPosition(550, 180);
+    time.setPosition(500, 180);
     window.draw(time);
 
     for (auto but : buttons)

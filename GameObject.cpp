@@ -4,6 +4,7 @@
 #include "Shield.h"
 #include "Speed.h"
 #include "Stat.h"
+#include "Assets.h"
 GameObject::GameObject()
 {
 }
@@ -114,26 +115,24 @@ void GameObject::update(float deltaTime)
 	hurtTimer -= deltaTime;
 	auto shoot = getComponent<PlayerShoot>();
 	// Ưu tiên trạng thái bắn
-	if (shoot && shoot->isFiring) {
-		currentState = 2; // Fire
-	}
-	else if (move) {
+	if (move) {
 		sf::Vector2f currentDirection = move->getDirection();
+		if (isAttacked && hurtTimer > 0)
+		{
+			currentState = 3; // HURT
+			Assets::PLAYER_HURT_SOUND.play();
+		}
+		else if (shoot && shoot->isFiring) {
+			currentState = 2; // Fire
+		}
+
+		else isAttacked = false;
 		if (currentDirection.x != 0.f || currentDirection.y != 0.f) {
-			currentState = 1; // Running
+			currentState = 1; // Running 
 		}
 		else {
 			currentState = 0; // Idle
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-			currentState = 2; // Update state to 2 when Enter key is pressed
-		}
-		if (isAttacked && hurtTimer > 0)
-		{
-			currentState = 3;
-		}
-
-		else isAttacked = false;
 		// Compare new direction with the previous direction (on the x-axis)
 		if (currentDirection.x != 0 || lastDirection.x != 0) {
 			if (lastDirection.x <= 0) {
@@ -152,7 +151,7 @@ void GameObject::update(float deltaTime)
 		for (auto& a : animations) {
 			a->update(deltaTime, flipped);
 			a->setCenter();
-			a->setPosition(this->hitbox.getPosition() + this->hitbox.getSize()/2.f);
+			a->setPosition(this->hitbox.getPosition() + this->hitbox.getSize() / 2.f);
 		}
 	}
 }

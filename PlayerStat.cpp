@@ -3,7 +3,7 @@
 #include "GameManager.h"
 #include "LevelUpScene.h"
 #include "GamePlayScene.h"
-
+#include "Assets.h"
 PlayerStat::PlayerStat(std::shared_ptr<GameObject> owner) :Component(owner)
 {
     this->owner = owner;

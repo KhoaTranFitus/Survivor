@@ -8,10 +8,17 @@ sf::Font MenuScene::font;
 bool MenuScene::fontLoaded = false;
 MenuScene::MenuScene()
 {
+	MusicManager::getInstance().stop();
 	if (!fontLoaded) {
-		fontLoaded = font.loadFromFile("arial.ttf");
+		fontLoaded = font.loadFromFile("PixelOperator8-Bold.ttf");
 	}
-	gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/menuScene.png"));
+	gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/background.png"));
+
+	title  =sf::Text("Survivor", font, 40);
+	title.setFillColor(sf::Color(107, 85, 74));
+	title.setStyle(sf::Text::Italic);
+	title.setPosition(490.f, 125.f);
+
 	// Phát nhạc nền nếu chưa phát
 	if (!MusicManager::getInstance().isPlaying()) {
 		MusicManager::getInstance().play("./Assets/music/music_basic.mp3", 40.f, true);
@@ -35,5 +42,12 @@ MenuScene::MenuScene()
 
 MenuScene::~MenuScene()
 {
+}
+
+void MenuScene::render(sf::RenderWindow& window) 
+{
+	Scene::render(window);
+
+	window.draw(title);
 }
 

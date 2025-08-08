@@ -22,6 +22,17 @@ sf::Texture Assets::SHIELD;
 sf::Texture	Assets::SPEED;
 
 sf::Texture Assets::ENEMY_BULLET;
+
+sf::SoundBuffer Assets::GEM_PICKUP_S;
+sf::Sound Assets::GEM_PICKUP_SOUND;
+sf::SoundBuffer Assets::POWERUP_PICKUP_S;
+sf::Sound Assets::POWERUP_PICKUP_SOUND;
+
+sf::SoundBuffer Assets::PLAYER_HURT_S;
+sf::Sound Assets::PLAYER_HURT_SOUND;
+
+
+
 void Assets::init()
 {
 	if (!PLAYER_TEXTURE.loadFromFile("./Assets/player/newPlayer_IDLE.png")) {
@@ -84,7 +95,24 @@ void Assets::init()
 		std::cerr << "[ERROR] Failed to load enemy_bullet from './Assets/bullet/enemy_bullet.png'\n";
 	}
 
-	if(!TANKER_RUN.loadFromFile("./Assets/enemy/tanker_run.png")) {
+	if (!TANKER_RUN.loadFromFile("./Assets/enemy/tanker_run.png")) {
 		std::cerr << "[ERROR] Failed to load tank_run from './Assets/tank/tanker_run.png'\n";
 	}
+
+	// add sound for game
+
+	if(!GEM_PICKUP_S.loadFromFile("./Assets/sound/gem_pickup.mp3")) {
+		std::cerr << "[ERROR] Failed to load GEM_PICKUP sound from './Assets/sound/gem_pickup.wav'\n";
+	}
+	GEM_PICKUP_SOUND.setBuffer(GEM_PICKUP_S);
+
+	if(!POWERUP_PICKUP_S.loadFromFile("./Assets/sound/powerup_pickup.wav")) {
+		std::cerr << "[ERROR] Failed to load POWERUP_PICKUP sound from './Assets/sound/powerup_pickup.wav'\n";
+	}
+	POWERUP_PICKUP_SOUND.setBuffer(POWERUP_PICKUP_S);
+
+	if(!PLAYER_HURT_S.loadFromFile("./Assets/sound/player_hurt.wav")) {
+		std::cerr << "[ERROR] Failed to load PLAYER_HURT sound from './Assets/sound/player_hurt.wav'\n";
+	}
+	PLAYER_HURT_SOUND.setBuffer(PLAYER_HURT_S);
 }

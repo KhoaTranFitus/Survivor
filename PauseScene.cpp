@@ -51,7 +51,7 @@ void PauseScene::render(sf::RenderWindow& window) {
 
     // Hiển thị thời gian tạm dừng với định dạng MM:SS
     if (gamePlayScene) {
-        gamePlayScene->renderClock(window, { 555, 180 }, sf::Color::White,28);
+        gamePlayScene->renderClock(window, { 530, 200 }, sf::Color::White,28);
     }
 
     // Sau đó vẽ các đối tượng giao diện (nút Resume, Menu) lên trên lớp phủ

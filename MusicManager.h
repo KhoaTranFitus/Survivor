@@ -16,8 +16,9 @@ public:
         }
         music.setVolume(volume);
         music.setLoop(loop);
-        if (music.getStatus() != sf::Music::Playing)
-            music.play();
+        if (music.getStatus() == sf::Music::Playing)
+            music.stop();
+		music.play();
     }
 
     void setVolume(float volume) { music.setVolume(volume); }

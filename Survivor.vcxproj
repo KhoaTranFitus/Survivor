@@ -288,8 +288,16 @@
     <Image Include="player_RUN.png" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="Assets\music\lose_scene.mp3" />
     <Media Include="Assets\music\music_basic.mp3" />
-    <Media Include="Assets\music\time_for_adventure.mp3" />
+    <Media Include="Assets\music\victory_scene.mp3" />
+    <Media Include="Assets\sound\gem_pickup.mp3" />
+    <Media Include="Assets\sound\player_hurt.wav" />
+    <Media Include="Assets\sound\player_tap.wav" />
+    <Media Include="Assets\sound\powerup_pickup.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\music\gameplay.ogg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -10,14 +10,17 @@
 #include <cmath>
 #include "Shield.h"
 #include "Speed.h"
+#include "MusicManager.h"
 
 sf::Font GamePlayScene::font;
 bool GamePlayScene::fontLoaded = false;
 GamePlayScene::GamePlayScene()
 {
 	//thêm background
+	MusicManager::getInstance().stop();
+	MusicManager::getInstance().play("./Assets/music/gameplay.ogg",30, true);
 	if (!fontLoaded) {
-		fontLoaded = font.loadFromFile("arial.ttf");
+		fontLoaded = font.loadFromFile("PixelOperator8-Bold.ttf");
 	}
 	clockInGame = std::make_shared<Clock>();
 	gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/Game1.jpg"));
@@ -217,8 +220,6 @@ void GamePlayScene::render(sf::RenderWindow& window)
 		button->render(window);
 	}
 
-	// Render the clock in game play scene with form "Time: mm:ss"
-
 
 	auto player = GameManager::getInstance().currentPlayer;
 	if (fontLoaded && player) {
@@ -234,7 +235,7 @@ void GamePlayScene::render(sf::RenderWindow& window)
 	    if (speed) speed->render(window);
 
 	}
-	renderClock(window);
+	renderClock(window, {10,10},sf::Color(10, 20, 15), 20);
 }
 
 void GamePlayScene::renderClock(sf::RenderWindow& window, sf::Vector2f position, sf::Color color, unsigned int size)

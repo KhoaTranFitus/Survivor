@@ -6,8 +6,15 @@ class SettingScene :public Scene
 private:
 	sf::RectangleShape volumeBar;
 	sf::CircleShape volumeDot;
-	bool isDragging = false;
 	float volume = 50.f;
+
+	sf::RectangleShape sfxBar;
+	sf::CircleShape sfxDot;
+	float sfxVolume = 50.f;
+	
+	bool isDragging = false;
+	bool isDraggingSFX = false;
+
 
 public:
 	SettingScene();
