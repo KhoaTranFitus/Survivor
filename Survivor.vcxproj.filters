@@ -47,6 +47,9 @@
     <Filter Include="Assets\powerUp">
       <UniqueIdentifier>{8f1dd18f-2285-43f8-bcb2-cd3cc4f47825}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sound">
+      <UniqueIdentifier>{3046f9bd-bf24-4fa0-a3c3-251c9c9a4a13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -489,11 +492,31 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="Assets\music\time_for_adventure.mp3">
-      <Filter>Assets\music</Filter>
-    </Media>
     <Media Include="Assets\music\music_basic.mp3">
       <Filter>Assets\music</Filter>
     </Media>
+    <Media Include="Assets\sound\gem_pickup.mp3">
+      <Filter>Assets\sound</Filter>
+    </Media>
+    <Media Include="Assets\sound\player_hurt.wav">
+      <Filter>Assets\sound</Filter>
+    </Media>
+    <Media Include="Assets\sound\player_tap.wav">
+      <Filter>Assets\sound</Filter>
+    </Media>
+    <Media Include="Assets\sound\powerup_pickup.wav">
+      <Filter>Assets\sound</Filter>
+    </Media>
+    <Media Include="Assets\music\lose_scene.mp3">
+      <Filter>Assets\music</Filter>
+    </Media>
+    <Media Include="Assets\music\victory_scene.mp3">
+      <Filter>Assets\music</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\music\gameplay.ogg">
+      <Filter>Assets\music</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿#include "ItemEffect.h"
-
+#include "Assets.h"
 ItemEffect::ItemEffect(std::shared_ptr<GameObject> owner,
 	std::function<std::shared_ptr<Component>(std::shared_ptr<GameObject>)> creator)
 	:Component(owner), componentCreator(creator) {}
@@ -16,6 +16,15 @@ void ItemEffect::onCollisionEnter(std::shared_ptr<GameObject> other) {
 			if (component) {
 				component->setOwner(other);
 				other->addComponent(component);
+			}
+			if (owner->getTag().find("gem") != std::string::npos ) // find tag have "gem" 
+			{
+				Assets::GEM_PICKUP_SOUND.play();
+				Assets::GEM_PICKUP_SOUND.setVolume(30.f);
+			}
+			else
+			{
+				Assets::POWERUP_PICKUP_SOUND.play();
 			}
 			owner->needDeleted = true; // Luôn xóa item/gem sau khi nhặt
 		}

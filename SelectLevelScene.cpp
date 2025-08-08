@@ -7,10 +7,13 @@
 SelectLevelScene::SelectLevelScene()
 {
 
-     gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/selectLevel.png"));
+     gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/background.png"));
     
-     //Level 1 button
-    auto level1Button = std::make_shared<Button>(
+
+     
+
+
+     auto level1Button = std::make_shared<Button>(
         "Level 1", "type1", 535, 300, sf::Vector2f(210, 50),
         std::make_shared<SwitchSceneCommand>([]() {
             return std::make_shared<GamePlayScene>();
@@ -29,3 +32,19 @@ SelectLevelScene::SelectLevelScene()
 }
 
 SelectLevelScene::~SelectLevelScene() {}
+
+
+void SelectLevelScene::render(sf::RenderWindow& window)
+{
+    Scene::render(window);
+
+
+    sf::Font font;
+    font.loadFromFile("PixelOperator8-Bold.ttf");
+
+    title = sf::Text("Select level", font, 40);
+    title.setFillColor(sf::Color(107, 85, 74));
+    title.setStyle(sf::Text::Italic);
+    title.setPosition(430.f, 125.f);
+    window.draw(title);
+}

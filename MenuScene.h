@@ -8,9 +8,12 @@ class MenuScene: public Scene
 private:
 	static sf::Font font;
 	static bool fontLoaded;
+	sf::Text title;
 public:
 	MenuScene();
 	~MenuScene();
+	
+	void render(sf::RenderWindow& window) override ;
 
 };
 

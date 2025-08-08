@@ -37,12 +37,12 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
 
     // Thêm các component cho player
     player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
-    player->addComponent(std::make_shared<Stat>(player, 10000, 50));
+    player->addComponent(std::make_shared<Stat>(player, 100,10 ));
     player->addComponent(std::make_shared<PlayerStat>(player));
 
     //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
-    player->addComponent(std::make_shared<PlayerShoot>(player, 1.f, 500.f)); // cooldown, range
 
+    player->addComponent(std::make_shared<PlayerShoot>(player, 1.f, 500.f)); // cooldown, range
     GameManager::getInstance().currentPlayer = player;
     return player;
 }
