@@ -151,6 +151,8 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="DamageOnContact.cpp" />
+    <ClCompile Include="DashComponent.cpp" />
+    <ClCompile Include="DashEnemy.cpp" />
     <ClCompile Include="DefaultEnemy.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="EnemyShoot.cpp" />
@@ -208,6 +210,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="DamageOnContact.h" />
+    <ClInclude Include="DashComponent.h" />
     <ClInclude Include="DashEnemy.h" />
     <ClInclude Include="DefaultEnemy.h" />
     <ClInclude Include="Enemies.h" />

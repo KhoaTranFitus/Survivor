@@ -19,7 +19,7 @@ public:
 	static std::shared_ptr<Enemies> createDefaultEnemy();
 	static std::shared_ptr<Enemies> createTankerEnemy();
 	static std::shared_ptr<Enemies> createBurstEnemy();
-	//static std::shared_ptr<Enemies> createDashEnemy();
+	static std::shared_ptr<Enemies> createDashEnemy();
 
 
 	static std::shared_ptr<Enemies> createShooterEnemy();

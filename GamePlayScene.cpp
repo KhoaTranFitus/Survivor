@@ -10,6 +10,7 @@
 #include <cmath>
 #include "Shield.h"
 #include "Speed.h"
+#include <random>
 #include "MusicManager.h"
 
 sf::Font GamePlayScene::font;
@@ -48,6 +49,9 @@ float distance(sf::Vector2f a, sf::Vector2f b) {
 	return std::sqrt(dx * dx + dy * dy);
 }
 
+static std::random_device rd;
+static std::mt19937 gen(rd());
+
 void GamePlayScene::spawnEnemyGeneric(
 	std::function<std::shared_ptr<Enemies>()> factory,
 	float& elapsed, float cooldown,
@@ -56,29 +60,36 @@ void GamePlayScene::spawnEnemyGeneric(
 	const sf::Vector2f& playerPos,
 	float minDistanceToPlayer,
 	float deltaTime
-)
-{
+) {
 	elapsed += deltaTime;
 	if (elapsed >= cooldown)
 	{
 		elapsed = 0.0f;
-		float spawnX, spawnY;
-		int maxTry = 10;
+		std::uniform_real_distribution<float> distX(spawnRect.left, spawnRect.left + spawnRect.width);
+		std::uniform_real_distribution<float> distY(spawnRect.top, spawnRect.top + spawnRect.height);
+		float spawnX = 0.0f, spawnY = 0.0f;
 		bool valid = false;
+		constexpr int maxTry = 10;
 		for (int tryCount = 0; tryCount < maxTry && !valid; ++tryCount) {
-			spawnX = spawnRect.left + static_cast<float>(rand()) / RAND_MAX * spawnRect.width;
-			spawnY = spawnRect.top + static_cast<float>(rand()) / RAND_MAX * spawnRect.height;
+			spawnX = distX(gen);
+			spawnY = distY(gen);
 			if (distance(sf::Vector2f(spawnX, spawnY), playerPos) >= minDistanceToPlayer)
 				valid = true;
 		}
 		if (!valid) {
-			spawnX = viewRect.left - (spawnRect.left - viewRect.left);
-			spawnY = viewRect.top - (spawnRect.top - viewRect.top);
+			// Fallback: spawn at a random edge of spawnRect
+			std::uniform_int_distribution<int> edgeDist(0, 3);
+			int edge = edgeDist(gen);
+			switch (edge) {
+				case 0: spawnX = distX(gen); spawnY = spawnRect.top; break;
+				case 1: spawnX = distX(gen); spawnY = spawnRect.top + spawnRect.height; break;
+				case 2: spawnX = spawnRect.left; spawnY = distY(gen); break;
+				case 3: spawnX = spawnRect.left + spawnRect.width; spawnY = distY(gen); break;
+			}
 		}
 		auto enemy = factory();
 		if (enemy)
 		{
-			enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, &gameObjects));
 			enemy->getHitbox().setPosition(sf::Vector2f(spawnX, spawnY));
 			gameObjects.push_back(enemy);
 		}
@@ -115,35 +126,48 @@ void GamePlayScene::update(float deltaTime)
 		viewRect.height + 2 * margin
 	);
 
+	// Cứ mỗi 30 giây tăng thêm 1 enemy, tối đa 5 enemy/lần spawn
+	int spawnCount = std::min(1 + static_cast<int>(elapsed / 30.f), 5);
+
 	// Nếu chưa đến 2 phút thì vẫn spawn enemy
 	if (!stopAll) {
-		spawnEnemyGeneric(
-			[]() { return GameObjectFactory::createDefaultEnemy(); },
-			defaultEnemyElapsed, defaultEnemyCooldown,
-			spawnRect, viewRect, playerPos, minDistanceToPlayer,
-			deltaTime
-		);
+		for (int i = 0; i < spawnCount; ++i) {
 
-		spawnEnemyGeneric(
-			[]() { return GameObjectFactory::createShooterEnemy(); },
-			shooterEnemyElapsed, shooterEnemyCooldown,
-			spawnRect, viewRect, playerPos, minDistanceToPlayer,
-			deltaTime
-		);
+			spawnEnemyGeneric(
+				[]() { return GameObjectFactory::createDefaultEnemy(); },
+				defaultEnemyElapsed, defaultEnemyCooldown,
+				spawnRect, viewRect, playerPos, minDistanceToPlayer,
+				deltaTime
+			);
 
-		spawnEnemyGeneric(
-			[]() { return GameObjectFactory::createTankerEnemy(); },
-			tankerEnemyElapsed, tankerEnemyCooldown,
-			spawnRect, viewRect, playerPos, minDistanceToPlayer,
-			deltaTime
-		);
+			spawnEnemyGeneric(
+				[]() { return GameObjectFactory::createShooterEnemy(); },
+				shooterEnemyElapsed, shooterEnemyCooldown,
+				spawnRect, viewRect, playerPos, minDistanceToPlayer,
+				deltaTime
+			);
 
-		spawnEnemyGeneric(
-			[]() { return GameObjectFactory::createBurstEnemy(); },
-			burstEnemyElapsed, burstEnemyCooldown,
-			spawnRect, viewRect, playerPos, minDistanceToPlayer,
-			deltaTime
-		);
+			spawnEnemyGeneric(
+				[]() { return GameObjectFactory::createTankerEnemy(); },
+				tankerEnemyElapsed, tankerEnemyCooldown,
+				spawnRect, viewRect, playerPos, minDistanceToPlayer,
+				deltaTime
+			);
+
+			spawnEnemyGeneric(
+				[]() { return GameObjectFactory::createBurstEnemy(); },
+				burstEnemyElapsed, burstEnemyCooldown,
+				spawnRect, viewRect, playerPos, minDistanceToPlayer,
+				deltaTime
+			);
+
+			spawnEnemyGeneric(
+				[]() { return GameObjectFactory::createDashEnemy(); },
+				dashEnemyElapsed, dashEnemyCooldown,
+				spawnRect, viewRect, playerPos, minDistanceToPlayer,
+				deltaTime
+			);
+		}
 	}
 	else {
 		// XÓA CHỈ 1 LẦN

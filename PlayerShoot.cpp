@@ -4,8 +4,8 @@
 #include "DamageOnContact.h"
 #include "GameObjectFactory.h"
 
-PlayerShoot::PlayerShoot(std::shared_ptr<GameObject> owner, float cooldown)
-	: Component(owner), cooldown(cooldown), elapsed(0.f) {
+PlayerShoot::PlayerShoot(std::shared_ptr<GameObject> owner, float cooldown, float range)
+	: Component(owner), cooldown(cooldown), elapsed(0.f), range(range) {
 }
 
 void PlayerShoot::update(float deltaTime)
@@ -34,7 +34,7 @@ void PlayerShoot::update(float deltaTime)
 			float dx = owner->getHitbox().getPosition().x - obj->getHitbox().getPosition().x;
 			float dy = owner->getHitbox().getPosition().y - obj->getHitbox().getPosition().y;
 			float curDis = std::sqrt(dx * dx + dy * dy);
-			if (curDis < minDis)
+			if (curDis < minDis && curDis <= range)
 			{
 				minDis = curDis;
 				closestEnemy = obj;

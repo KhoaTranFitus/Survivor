@@ -22,6 +22,8 @@ private:
 	float tankerEnemyElapsed = 0.0f;
 	float burstEnemyCooldown = 30.0f; 
 	float burstEnemyElapsed = 0.0f;
+    float dashEnemyCooldown = 12.0f;
+	float dashEnemyElapsed = 0.0f;
 	bool bossSpawned = false;
 
 	// Thêm biến này để chỉ xóa enemy và bullet 1 lần sau 2 phút
@@ -32,6 +34,7 @@ private:
 
     float deadPlayerTimer = 0.f; // Thời gian chờ xóa player và chuyển LoseScene
     bool playerPendingDelete = false; // Đánh dấu player đã chết và đang chờ xóa
+
 
 public:
 	GamePlayScene();

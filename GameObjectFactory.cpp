@@ -1,6 +1,6 @@
-﻿#pragma once
-#include "GameObjectFactory.h"
+﻿#include "GameObjectFactory.h"
 #include "GameManager.h"
+#include "NoOverlapComponent.h"
 #include "Camera.h"
 #include "ItemEffect.h"
 #include "Gem.h"
@@ -14,17 +14,22 @@
 #include "PlayerShoot.h"
 #include "EnemyShoot.h"
 #include "BossShoot.h"
-#include "PlayerShoot.h"
-#include "BossShoot.h"
-#include "EnemyShoot.h"
 #include "BurstEnemyShoot.h"
 #include "BurstEnemy.h"
 #include "TankerEnemy.h"
 #include "Heal.h"
 #include "Shield.h"
 #include "Speed.h"
+#include "DashComponent.h"
+#include "DashEnemy.h"
 #include <random>
 
+
+static std::vector<std::shared_ptr<GameObject>>* getGameObjectsPtr() {
+    auto scene = GameManager::getInstance().getCurrentScene();
+    if (scene) return &(scene->getGameObjects());
+    return nullptr;
+}
 
 std::shared_ptr<Player> GameObjectFactory::createPlayer()
 {
@@ -36,8 +41,8 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
     player->addComponent(std::make_shared<PlayerStat>(player));
 
     //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
-    player->addComponent(std::make_shared<PlayerShoot>(player, 0.5f));
 
+    player->addComponent(std::make_shared<PlayerShoot>(player, 1.f, 500.f)); // cooldown, range
     GameManager::getInstance().currentPlayer = player;
     return player;
 }
@@ -65,10 +70,10 @@ std::shared_ptr<GameObject> GameObjectFactory::createBackground(const std::strin
 //}
 
 
-std::shared_ptr<Enemies> GameObjectFactory::createDefaultEnemy()
-{
+std::shared_ptr<Enemies> GameObjectFactory::createDefaultEnemy() {
     auto enemy = std::make_shared<DefaultEnemy>();
     enemy->setTag("enemies");
+    enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, getGameObjectsPtr()));
     enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 100.f));
     enemy->addComponent(std::make_shared<Stat>(enemy, 100, 5));
     enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
@@ -76,10 +81,10 @@ std::shared_ptr<Enemies> GameObjectFactory::createDefaultEnemy()
     return enemy;
 }
 
-std::shared_ptr<Enemies> GameObjectFactory::createTankerEnemy()
-{
+std::shared_ptr<Enemies> GameObjectFactory::createTankerEnemy() {
     auto enemy = std::make_shared<TankerEnemy>();
     enemy->setTag("enemies");
+    enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, getGameObjectsPtr()));
     enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 100.f));
     enemy->addComponent(std::make_shared<Stat>(enemy, 300, 5));
     enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
@@ -87,10 +92,10 @@ std::shared_ptr<Enemies> GameObjectFactory::createTankerEnemy()
     return enemy;
 }
 
-std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
-{
+std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy() {
     auto enemy = std::make_shared<ShooterEnemy>();
     enemy->setTag("enemies");
+    enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, getGameObjectsPtr()));
     enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 80.f));
     enemy->addComponent(std::make_shared<Stat>(enemy, 100, 5));
     enemy->addComponent(std::make_shared<EnemyShoot>(enemy, 1.5f)); // Có Shoot
@@ -101,12 +106,34 @@ std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy()
 std::shared_ptr<Enemies> GameObjectFactory::createBurstEnemy() {
     auto enemy = std::make_shared<BurstEnemy>();
     enemy->setTag("enemies");
-
+    enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, getGameObjectsPtr()));
     enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 80.f));
     enemy->addComponent(std::make_shared<Stat>(enemy, 100, 5));
     enemy->addComponent(std::make_shared<BurstEnemyShoot>(enemy, 3.0f, 3)); // 3 bullets per burst
     enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
     return enemy;
+}
+
+
+std::shared_ptr<Enemies> GameObjectFactory::createDashEnemy() {
+    auto enemy = std::make_shared<DashEnemy>();
+    enemy->setTag("enemies");
+    enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, getGameObjectsPtr()));
+    enemy->addComponent(std::make_shared<DashComponent>(enemy, 3.5f, 80.f, 800.f, 0.3f, 1.f)); // moveTime, moveSpeed, dashSpeed, dashDuration, waitTime
+    enemy->addComponent(std::make_shared<Stat>(enemy, 100, 5));
+    enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
+    return enemy;
+}
+
+std::shared_ptr<Enemies> GameObjectFactory::createBoss()
+{
+    auto boss = std::make_shared<Boss>();
+    boss->setTag("boss");
+    boss->addComponent(std::make_shared<Stat>(boss, 1000, 20)); // Máu và damage lớn hơn
+    boss->addComponent(std::make_shared<BossShoot>(boss, 2.0f)); // Bắn 3 tia đã xử lý trong Shoot
+    boss->addComponent(std::make_shared<DamageOnContact>(boss, boss->getComponent<Stat>()->getDamage(), "player", 1.0f));
+    boss->addComponent(std::make_shared<DashComponent>(boss, 10.f, 60.f, 500.f, 0.3f, 1.f)); // Boss dash
+    return boss;
 }
 
 //tạo ra bullet
@@ -117,18 +144,6 @@ std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position, s
     bullet->setTag(tag);
     return bullet;
 }
-
-std::shared_ptr<Enemies> GameObjectFactory::createBoss()
-{
-    auto boss = std::make_shared<Boss>();
-    boss->setTag("boss");
-    boss->addComponent(std::make_shared<FollowTarget>(boss, GameManager::getInstance().currentPlayer, 60.f));
-    boss->addComponent(std::make_shared<Stat>(boss, 1000, 20)); // Máu và damage lớn hơn
-    boss->addComponent(std::make_shared<BossShoot>(boss, 2.0f)); // Bắn 3 tia đã xử lý trong Shoot
-    boss->addComponent(std::make_shared<DamageOnContact>(boss, boss->getComponent<Stat>()->getDamage(), "player", 1.0f));
-    return boss;
-}
-
 std::shared_ptr<PowerUp> GameObjectFactory::createPowerUp(std::string name, float x, float y)
 {
     // Factory only manages, delegates creation to PowerUp
