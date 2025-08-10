@@ -103,7 +103,7 @@ void GamePlayScene::update(float deltaTime)
 	this->camera.update(deltaTime, GameManager::getInstance().currentPlayer->getHitbox().getPosition());
 	// thời gian đến khi dừng game
 	float elapsed = getElapsedTime();
-	bool stopAll = (elapsed >= 120.f);
+	bool stopAll = (elapsed >= 2.f);
 
 	if (clockInGame && !clockInGame->isPaused()) {
 		if (stopAll) {
@@ -259,8 +259,11 @@ void GamePlayScene::render(sf::RenderWindow& window)
 	    if (speed) speed->render(window);
 
 	}
+	/*renderBossHP(window);*/
+
 	renderClock(window, {10,10},sf::Color(10, 20, 15), 20);
 }
+
 
 void GamePlayScene::renderClock(sf::RenderWindow& window, sf::Vector2f position, sf::Color color, unsigned int size)
 {

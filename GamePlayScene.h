@@ -52,6 +52,7 @@ public:
 		sf::Color color = sf::Color::Green, unsigned int size = 24);	
 	void render(sf::RenderWindow& window) override;
 
+
 private:
 	// Hàm spawn enemy generic
 	void spawnEnemyGeneric(

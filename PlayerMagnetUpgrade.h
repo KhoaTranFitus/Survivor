@@ -25,10 +25,10 @@ public:
         auto gameObjects = GameManager::getInstance().getCurrentScene()->getGameObjects();
 
         float radius = getMagnetRadius();
-        float magnetSpeed = 560.f; // Speed at which gems move toward player
+        float magnetSpeed = 400.f; // Speed at which gems move toward player
 
         for (auto& obj : gameObjects) {
-            if (obj->getTag() == "gem") {
+            if (obj->getTag() == "gem_type1" || obj->getTag() == "gem_type2" || obj->getTag() == "gem_type3") {
                 sf::Vector2f gemPos = obj->getHitbox().getPosition();
                 sf::Vector2f toPlayer = playerPos - gemPos;
                 float distance = std::sqrt(toPlayer.x * toPlayer.x + toPlayer.y * toPlayer.y);
