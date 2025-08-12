@@ -48,9 +48,13 @@ void DamageOnContact::onCollisionEnter(std::shared_ptr<GameObject> other)
 				{
 					other->setState(4);
 				}
-				else if (other->getTag() == "enemies" || other->getTag() == "boss")
+				else if (other->getTag() == "enemies" )
 				{
 					other->needDeleted = true;
+				}
+				else if (other->getTag() == "boss")
+				{
+					other->setState(2);
 				}
 			}
 		}

@@ -29,6 +29,7 @@ void DashComponent::update(float deltaTime) {
                 dashDirection = player->getOrigin() - owner->getOrigin();
                 float len = std::sqrt(dashDirection.x * dashDirection.x + dashDirection.y * dashDirection.y);
                 if (len > 0.f) dashDirection /= len;
+				//cat nhat huong dash
             }
             isDashing = true;
             dashElapsed = 0.f;
@@ -44,6 +45,17 @@ void DashComponent::update(float deltaTime) {
         sf::Vector2f dir = player->getOrigin() - owner->getOrigin();
         float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
         if (len > 0.f) dir /= len;
+
+        if (dir.x < 0) {
+            owner->setFlipped(true);
+        }
+        else if (dir.x > 0) {
+            owner->setFlipped(false);
+        }
+        // Chỉ setState(0) nếu không phải FIRE (1) hoặc DIE (2)
+        if (owner->getCurrentState() != 1 && owner->getCurrentState() != 2) {
+            owner->setState(0);
+        }
         owner->move(dir * moveSpeed * deltaTime);
     }
     moveElapsed += deltaTime;

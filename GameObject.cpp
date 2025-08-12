@@ -112,27 +112,27 @@ void GameObject::update(float deltaTime)
 	this->updateComponents(deltaTime);
 
 	auto move = getComponent<KeyboardMove>();
-	hurtTimer -= deltaTime;
 	auto shoot = getComponent<PlayerShoot>();
+	hurtTimer -= deltaTime;
 	// Ưu tiên trạng thái bắn
 	if (move) {
 		sf::Vector2f currentDirection = move->getDirection();
-		if (isAttacked && hurtTimer > 0)
-		{
+		if (isAttacked && hurtTimer > 0) {
+			if (currentState != 3) { // Chỉ play khi vừa vào HURT
+				Assets::PLAYER_HURT_SOUND.play();
+			}
 			currentState = 3; // HURT
-			Assets::PLAYER_HURT_SOUND.play();
 		}
 		else if (shoot && shoot->isFiring) {
-			currentState = 2; // Fire
+			currentState = 2; // FIRE
 		}
-
-		else isAttacked = false;
-		if (currentDirection.x != 0.f || currentDirection.y != 0.f) {
-			currentState = 1; // Running 
+		else if (currentDirection.x != 0.f || currentDirection.y != 0.f) {
+			currentState = 1; // RUN
 		}
 		else {
-			currentState = 0; // Idle
+			currentState = 0; // IDLE
 		}
+
 		// Compare new direction with the previous direction (on the x-axis)
 		if (currentDirection.x != 0 || lastDirection.x != 0) {
 			if (lastDirection.x <= 0) {
@@ -153,6 +153,9 @@ void GameObject::update(float deltaTime)
 			a->setCenter();
 			a->setPosition(this->hitbox.getPosition() + this->hitbox.getSize() / 2.f);
 		}
+	}
+	if (hurtTimer <= 0) {
+		isAttacked = false;
 	}
 }
 

@@ -12,6 +12,7 @@ public:
 	void setImageScale(const sf::Vector2f& scale);
 	void update(float deltaTime) override;
 	void render(sf::RenderWindow& window);
+	std::shared_ptr<Animation> animations;
 private: 
 	float lifeTime = 0.f;
 	std::string tag;
@@ -20,5 +21,4 @@ private:
 	static bool texturesLoaded;
 	void loadTextures();
 
-	std::shared_ptr<Animation> animations;
 };

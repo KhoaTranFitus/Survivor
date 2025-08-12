@@ -7,7 +7,7 @@
 class PlayerSpeedUpgrade : public Component {
     int level = 1;
     const int maxLevel = 5;
-    float speedPerLevel = 50.f;
+    float speedPerLevel = 20.f;
 public:
     PlayerSpeedUpgrade(std::shared_ptr<GameObject> owner) : Component(owner) {
         applyUpgrade();

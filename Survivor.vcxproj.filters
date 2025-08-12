@@ -164,12 +164,6 @@
     <ClCompile Include="PlayerStat.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="TankerEnemy.h">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="TankerEnemy.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="BossShoot.cpp">
       <Filter>Component</Filter>
     </ClCompile>
@@ -206,15 +200,6 @@
     <ClCompile Include="PlayerDamageUpgrade.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerHealthUpgrade.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerMagnetUpgrade.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerReloadUpgrade.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Shield.cpp">
       <Filter>Component</Filter>
     </ClCompile>
@@ -226,6 +211,24 @@
     </ClCompile>
     <ClCompile Include="PlayerSpeedUpgrade.cpp">
       <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHealthUpgrade.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMagnetUpgrade.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerReloadUpgrade.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="DashComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="DashEnemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TankerEnemy.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,15 +380,6 @@
     <ClInclude Include="PlayerDamageUpgrade.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHealthUpgrade.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMagnetUpgrade.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerReloadUpgrade.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="MusicManager.h">
       <Filter>No Category</Filter>
     </ClInclude>
@@ -400,6 +394,21 @@
     </ClInclude>
     <ClInclude Include="PlayerSpeedUpgrade.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHealthUpgrade.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMagnetUpgrade.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerReloadUpgrade.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="DashComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TankerEnemy.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

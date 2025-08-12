@@ -192,7 +192,6 @@
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="SwitchSceneCommand.cpp" />
     <ClCompile Include="TankerEnemy.cpp" />
-    <ClCompile Include="TankerEnemy.h" />
     <ClCompile Include="VictoryScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +249,7 @@
     <ClInclude Include="Speed.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="SwitchSceneCommand.h" />
+    <ClInclude Include="TankerEnemy.h" />
     <ClInclude Include="VictoryScene.h" />
   </ItemGroup>
   <ItemGroup>

@@ -54,6 +54,10 @@ void Animation::setCenter()
 	this->sprite.setOrigin(frameSize.x / 2.0f, frameSize.y / 2.0f);	
 }
 
+sf::Vector2i Animation::getFrameSize() const
+{
+	return frameSize;
+}
 
 void Animation::update(float deltaTime, bool flipped)
 {

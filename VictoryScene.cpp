@@ -5,7 +5,7 @@
 #include "MusicManager.h"
 VictoryScene::VictoryScene()
 {
-	MusicManager::getInstance().play("./Assets/music/victory_scene.mp3", 40.f, true);
+	MusicManager::getInstance().play("./Assets/music/victory_scene.mp3",true);
 	auto button1 = std::make_shared<Button>(
 		"Back to Menu","type1", 500, 300, sf::Vector2f(200, 100),
 		std::make_shared<SwitchSceneCommand>([]() {

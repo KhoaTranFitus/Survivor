@@ -15,7 +15,6 @@ KeyboardMove::KeyboardMove(std::shared_ptr<GameObject> owner, float speed, std::
         left = sf::Keyboard::Left;
         right = sf::Keyboard::Right;
     }
-
     else
     {
 

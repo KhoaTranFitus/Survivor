@@ -69,7 +69,6 @@ void SettingScene::update(float deltaTime)
 			// Tính lại volume
 			float percent = (newX - volumeBar.getPosition().x) / volumeBar.getSize().x;
 			volume = percent * 100.f;
-
 			 // Điều chỉnh âm lượng nhạc nền
 			MusicManager::getInstance().setVolume(volume);
 		}
@@ -81,6 +80,7 @@ void SettingScene::update(float deltaTime)
 
 			float percent = (newX - sfxBar.getPosition().x) / sfxBar.getSize().x;
 			sfxVolume = percent * 100.f;
+
 		}
 	}
 	else

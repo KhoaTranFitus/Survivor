@@ -18,11 +18,11 @@ private:
 	float defaultEnemyElapsed = 0.0f;
 	float shooterEnemyCooldown = 15.0f;
 	float shooterEnemyElapsed = 0.0f;
-	float tankerEnemyCooldown = 10.0f; 
+	float tankerEnemyCooldown = 25.0f; 
 	float tankerEnemyElapsed = 0.0f;
-	float burstEnemyCooldown = 30.0f; 
+	float burstEnemyCooldown = 20.0f; 
 	float burstEnemyElapsed = 0.0f;
-    float dashEnemyCooldown = 12.0f;
+    float dashEnemyCooldown = 18.0f;
 	float dashEnemyElapsed = 0.0f;
 	bool bossSpawned = false;
 
@@ -35,6 +35,8 @@ private:
     float deadPlayerTimer = 0.f; // Thời gian chờ xóa player và chuyển LoseScene
     bool playerPendingDelete = false; // Đánh dấu player đã chết và đang chờ xóa
 
+    float bossDeathTimer = 0.f;
+    bool bossPendingDelete = false;
 
 public:
 	GamePlayScene();

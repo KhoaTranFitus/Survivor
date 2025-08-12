@@ -1,4 +1,4 @@
-#include "Button.h"
+﻿#include "Button.h"
 
 
 sf::Font Button::font;
@@ -46,10 +46,16 @@ Button::Button(const std::string& n_text, std::string tag, float x, float y, sf:
     text.setFillColor(sf::Color(107, 85, 74));
     // can giua nut
     sf::FloatRect textRect = text.getLocalBounds();
+
+    if (tag == "skill") {
+        text.setPosition(x + 100.f, y + size.y / 2.f + 120.f); // lệch xuống 120px
+        text.setCharacterSize(20);
+    }
+    else {
     text.setOrigin(textRect.left + textRect.width / 2.f,
         textRect.top + textRect.height / 2.f);
-    text.setPosition(x + size.x / 2.f, y + size.y / 2.f);
-
+        text.setPosition(x + size.x / 2.f, y + size.y / 2.f);
+    }
 
     hitbox.setSize(size);
     hitbox.setPosition(x, y);
@@ -98,4 +104,20 @@ void Button::render(sf::RenderWindow& window)
 	window.draw(sprite);
     //window.draw(hitbox);
     window.draw(text);
+}
+
+sf::Text Button::getText()
+{
+	return text;
+}
+
+void Button::setCustomTexture(const std::string& normalPath, const std::string& hoverPath)
+{
+    if (!textureNormal.loadFromFile(normalPath)) {
+        std::cerr << "Failed to load custom normal texture: " << normalPath << std::endl;
+    }
+    if (!textureHover.loadFromFile(hoverPath)) {
+        std::cerr << "Failed to load custom hover texture: " << hoverPath << std::endl;
+    }
+    sprite.setTexture(textureNormal, true);
 }

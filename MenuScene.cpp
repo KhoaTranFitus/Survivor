@@ -21,7 +21,7 @@ MenuScene::MenuScene()
 
 	// Phát nhạc nền nếu chưa phát
 	if (!MusicManager::getInstance().isPlaying()) {
-		MusicManager::getInstance().play("./Assets/music/music_basic.mp3", 40.f, true);
+		MusicManager::getInstance().play("./Assets/music/music_basic.mp3", true);
 	}
 	auto button1 = std::make_shared<Button>(
 		"Play", "type1", 535, 300, sf::Vector2f(210, 50),
