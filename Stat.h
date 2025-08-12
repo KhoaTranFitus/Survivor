@@ -15,7 +15,6 @@ private:
 
 	sf::Vector2f offset;
 	sf::RectangleShape healthBar;
-	std::vector<std::shared_ptr<GameObject>> gameObjects;
 	void updateHealthBar();
 
 public:
