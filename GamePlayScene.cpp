@@ -103,7 +103,7 @@ void GamePlayScene::update(float deltaTime)
 	this->camera.update(deltaTime, GameManager::getInstance().currentPlayer->getHitbox().getPosition());
 	// thời gian đến khi dừng game
 	float elapsed = getElapsedTime();
-	bool stopAll = (elapsed >= 180.f);
+	bool stopAll = (elapsed >= 10.f);
 
 	if (clockInGame && !clockInGame->isPaused()) {
 		if (stopAll) {

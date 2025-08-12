@@ -129,7 +129,7 @@ std::shared_ptr<Enemies> GameObjectFactory::createBoss()
 {
     auto boss = std::make_shared<Boss>();
     boss->setTag("boss");
-    boss->addComponent(std::make_shared<Stat>(boss, 5000,20)); // Máu và damage lớn hơn
+    boss->addComponent(std::make_shared<Stat>(boss, 500,20)); // Máu và damage lớn hơn
     boss->addComponent(std::make_shared<BossShoot>(boss, 2.5f)); // Bắn 3 tia đã xử lý trong Shoot
     //boss->addComponent(std::make_shared<DamageOnContact>(boss, boss->getComponent<Stat>()->getDamage(), "player", 1.0f));
     boss->addComponent(std::make_shared<BurstEnemyShoot>(boss, 4.0f, 5)); // 3 bullets per burst
