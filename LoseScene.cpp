@@ -7,7 +7,7 @@
 LoseScene::LoseScene(std::shared_ptr<GamePlayScene> gamePlayScene) :
     gamePlayScene(gamePlayScene)
 {
-	MusicManager::getInstance().play("./Assets/music/lose_scene.mp3", 40, true);
+	MusicManager::getInstance().play("./Assets/music/lose_scene.mp3", true);
     int elapsed = 0;
     if (gamePlayScene)
     {

@@ -28,8 +28,10 @@ public:
     ~Button();
     void update(float deltaTime);
     void render(sf::RenderWindow& window) ;
+    sf::Text getText();
 
     void setTag(const std::string& n_tag) { tag = n_tag; }
     std::string getTag() const { return tag; }
-};
+    void setCustomTexture(const std::string& normalPath, const std::string& hoverPath);
 
+};

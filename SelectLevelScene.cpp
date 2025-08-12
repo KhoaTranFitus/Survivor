@@ -3,16 +3,12 @@
 #include "SwitchSceneCommand.h"
 #include "GamePlayScene.h"
 #include "MenuScene.h"
-
+#include "MusicManager.h"
 SelectLevelScene::SelectLevelScene()
 {
-
+    MusicManager::getInstance().stop();
+    MusicManager::getInstance().play("./Assets/music/music_basic.mp3", true);
      gameObjects.push_back(GameObjectFactory::createBackground("./Assets/backGround/background.png"));
-    
-
-     
-
-
      auto level1Button = std::make_shared<Button>(
         "Level 1", "type1", 535, 300, sf::Vector2f(210, 50),
         std::make_shared<SwitchSceneCommand>([]() {

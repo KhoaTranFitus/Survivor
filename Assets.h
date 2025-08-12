@@ -17,6 +17,11 @@ public:
 	static sf::Texture ENEMY_RUN;
 	static sf::Texture SHOOT_ENEMY;
 	static sf::Texture TANKER_RUN;
+	static sf::Texture DASH_RUN;
+
+	static sf::Texture BOSS_RUN;
+	static sf::Texture BOSS_FIRE;
+	static sf::Texture BOSS_DIE;
 
 	static sf::Texture GEM_TYPE1;
 	static sf::Texture GEM_TYPE2;
@@ -28,6 +33,7 @@ public:
 	static sf::Texture SPEED;
 
 	static sf::Texture ENEMY_BULLET;
+	static sf::Texture BOSS_BULLET;
 
 	static sf::SoundBuffer GEM_PICKUP_S;
 	static sf::Sound GEM_PICKUP_SOUND;

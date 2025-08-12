@@ -19,7 +19,7 @@ void PlayerStat::addExp(int amount)
         exp -= expToNextLevel;
         level++;
         std::cout << "Level up! New level: " << level << std::endl;
-        expToNextLevel *= 1.2f;
+        expToNextLevel *= 1.1f;
         // Show LevelUpScene
         auto gameplayScene = std::dynamic_pointer_cast<GamePlayScene>(GameManager::getInstance().getCurrentScene());
         GameManager::getInstance().setScene(

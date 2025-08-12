@@ -28,6 +28,8 @@ public:
 	void setTransparency(int alpha);
 	void setCenter();
 
+	sf::Vector2i getFrameSize() const;
+
 	void update(float deltaTime, bool flipped);
 	void render(sf::RenderWindow& window);
 

@@ -5,4 +5,6 @@ class Boss : public Enemies {
 public:
     Boss();
     ~Boss() override = default;
+
+    void update(float deltaTime) override;
 };

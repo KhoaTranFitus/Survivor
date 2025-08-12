@@ -9,6 +9,11 @@ sf::Texture Assets::PLAYER_DIE;
 sf::Texture Assets::ENEMY_RUN;
 sf::Texture Assets::SHOOT_ENEMY;
 sf::Texture Assets::TANKER_RUN;
+sf::Texture Assets::DASH_RUN;
+
+sf::Texture Assets::BOSS_RUN;
+sf::Texture Assets::BOSS_FIRE;
+sf::Texture Assets::BOSS_DIE;
 
 sf::Texture Assets::GEM_TYPE1;
 sf::Texture Assets::GEM_TYPE2;
@@ -22,6 +27,7 @@ sf::Texture Assets::SHIELD;
 sf::Texture	Assets::SPEED;
 
 sf::Texture Assets::ENEMY_BULLET;
+sf::Texture Assets::BOSS_BULLET;
 
 sf::SoundBuffer Assets::GEM_PICKUP_S;
 sf::Sound Assets::GEM_PICKUP_SOUND;
@@ -44,12 +50,10 @@ void Assets::init()
 	if (!PLAYER_FIRE.loadFromFile("./Assets/player/newPlayer_FIRE(2).png")) {
 		std::cerr << "[ERROR] Failed to load PLAYER_FIRE from './Assets/player/newPlayer_FIRE.png'\n";
 	}
-
 	if (!PLAYER_HURT.loadFromFile("./Assets/player/newPlayer_HURT.png"))
 	{
 		std::cerr << "[ERROR] Failed to load PLAYER_HURT from './Assets/player/newPlayerHURT.png'\n";
 	}
-
 	if (!PLAYER_DIE.loadFromFile("./Assets/player/newPlayer_DIE.png"))
 	{
 		std::cerr << "[ERROR] Failed to load PLAYER_DIE from './Assets/player/newPlayerDIE.png'\n";
@@ -58,19 +62,19 @@ void Assets::init()
 	if (!ENEMY_RUN.loadFromFile("./Assets/enemy/enemy_run.png")) {
 		std::cerr << "[ERROR] Failed to load enemy_run from './Assets/enemy/enemy_run.png'\n";
 	}
-
 	if (!SHOOT_ENEMY.loadFromFile("./Assets/enemy/shooter_run.png")) {
 		std::cerr << "[ERROR] Failed to load shoot_enemy from './Assets/enemy/shooter_run.png'\n";
+	}
+	if(!DASH_RUN.loadFromFile("./Assets/enemy/dash_run.png")) {
+		std::cerr << "[ERROR] Failed to load dash_run from './Assets/enemy/dash_run.png'\n";
 	}
 
 	if (!GEM_TYPE1.loadFromFile("./Assets/gem/gem_type1.png")) {
 		std::cerr << "[ERROR] Failed to load gem from './Assets/gem/gem_type1.png'\n";
 	}
-
 	if (!GEM_TYPE2.loadFromFile("./Assets/gem/gem_type2.png")) {
 		std::cerr << "[ERROR] Failed to load gem from './Assets/gem/gem_type2.png'\n";
 	}
-
 	if (!GEM_TYPE3.loadFromFile("./Assets/gem/gem_type3.png")) {
 		std::cerr << "[ERROR] Failed to load gem from './Assets/gem/gem_type3.png'\n";
 	}
@@ -78,7 +82,6 @@ void Assets::init()
 	if (!HEALTH_TYPE1.loadFromFile("./Assets/powerUp/health_type1.png")) {
 		std::cerr << "[ERROR] Failed to load heal from './Assets/gem/health_tyoe1.png'\n";
 	}
-
 	if (!HEALTH_TYPE2.loadFromFile("./Assets/powerUp/health_type2.png")) {
 		std::cerr << "[ERROR] Failed to load heal from './Assets/gem/health_type2.png'\n";
 	}
@@ -86,7 +89,6 @@ void Assets::init()
 	if (!SHIELD.loadFromFile("./Assets/powerUp/shield.png")) {
 		std::cerr << "[ERROR] Failed to load shield from './Assets/powerUp/shield.png'\n";
 	}
-
 	if (!SPEED.loadFromFile("./Assets/powerUp/speed.png")) {
 		std::cerr << "[ERROR] Failed to load speed from './Assets/powerUp/speed.png'\n";
 	}
@@ -94,10 +96,27 @@ void Assets::init()
 	if (!ENEMY_BULLET.loadFromFile("./Assets/bullet/enemy_bullet.png")) {
 		std::cerr << "[ERROR] Failed to load enemy_bullet from './Assets/bullet/enemy_bullet.png'\n";
 	}
+	if (!BOSS_BULLET.loadFromFile("./Assets/bullet/boss_bullet.png")) {
+		std::cerr << "[ERROR] Failed to load boss_bullet from './Assets/bullet/boss_bullet.png'\n";
+	}
 
 	if (!TANKER_RUN.loadFromFile("./Assets/enemy/tanker_run.png")) {
-		std::cerr << "[ERROR] Failed to load tank_run from './Assets/tank/tanker_run.png'\n";
+		std::cerr << "[ERROR] Failed to load tank_run from './Assets/tank/tanker_fire.png'\n";
 	}
+
+	if (!BOSS_RUN.loadFromFile("./Assets/enemy/boss_run.png"))
+	{
+		std::cerr << "[ERROR] Failed to load boss_run from './Assets/enemy/boss_run.png'\n";
+	}
+	if (!BOSS_FIRE.loadFromFile("./Assets/enemy/boss_fire.png"))
+	{
+		std::cerr << "[ERROR] Failed to load boss_fire from './Assets/enemy/boss_fire.png'\n";
+	}
+	if (!BOSS_DIE.loadFromFile("./Assets/enemy/boss_die.png"))
+	{
+		std::cerr << "[ERROR] Failed to load boss_die from './Assets/enemy/boss_die.png'\n";
+	}
+	
 
 	// add sound for game
 

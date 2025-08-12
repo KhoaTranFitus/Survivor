@@ -12,14 +12,14 @@
 #include "Speed.h"
 #include <random>
 #include "MusicManager.h"
-
+#include "VictoryScene.h"
 sf::Font GamePlayScene::font;
 bool GamePlayScene::fontLoaded = false;
 GamePlayScene::GamePlayScene()
 {
 	//thêm background
 	MusicManager::getInstance().stop();
-	MusicManager::getInstance().play("./Assets/music/gameplay.ogg",30, true);
+	MusicManager::getInstance().play("./Assets/music/gameplay.ogg", true);
 	if (!fontLoaded) {
 		fontLoaded = font.loadFromFile("PixelOperator8-Bold.ttf");
 	}
@@ -103,7 +103,7 @@ void GamePlayScene::update(float deltaTime)
 	this->camera.update(deltaTime, GameManager::getInstance().currentPlayer->getHitbox().getPosition());
 	// thời gian đến khi dừng game
 	float elapsed = getElapsedTime();
-	bool stopAll = (elapsed >= 2.f);
+	bool stopAll = (elapsed >= 10.f);
 
 	if (clockInGame && !clockInGame->isPaused()) {
 		if (stopAll) {
@@ -127,7 +127,7 @@ void GamePlayScene::update(float deltaTime)
 	);
 
 	// Cứ mỗi 30 giây tăng thêm 1 enemy, tối đa 5 enemy/lần spawn
-	int spawnCount = std::min(1 + static_cast<int>(elapsed / 30.f), 5);
+	int spawnCount = std::min(1 + static_cast<int>(elapsed / 45.f), 4);
 
 	// Nếu chưa đến 2 phút thì vẫn spawn enemy
 	if (!stopAll) {
@@ -226,6 +226,36 @@ void GamePlayScene::update(float deltaTime)
 			this->pauseClock();
 			auto loseScene = std::make_shared<LoseScene>(shared_from_this());
 			GameManager::getInstance().setScene(loseScene);
+			return;
+		}
+	}
+
+	for (auto& obj : gameObjects) {
+		if (obj->getTag() == "boss") {
+			auto stat = obj->getComponent<Stat>();
+			if (stat && stat->getHealth() <= 0 && !bossPendingDelete) {
+				obj->setState(2); // DIE state for boss
+				bossDeathTimer = 2.6f; // Time for DIE animation
+				bossPendingDelete = true;
+			}
+		}
+	}
+
+	if (bossPendingDelete) {
+		bossDeathTimer -= deltaTime;
+		if (bossDeathTimer <= 0.f) {
+			// Remove boss from gameObjects
+			gameObjects.erase(
+				std::remove_if(gameObjects.begin(), gameObjects.end(),
+					[](const std::shared_ptr<GameObject>& obj) {
+						return obj->getTag() == "boss";
+					}
+				),
+				gameObjects.end()
+			);
+			// Switch to VictoryScene
+			auto victoryScene = std::make_shared<VictoryScene>();
+			GameManager::getInstance().setScene(victoryScene);
 			return;
 		}
 	}

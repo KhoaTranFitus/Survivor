@@ -15,7 +15,7 @@ Gem::Gem(sf::Vector2f position,const std::string tag)
         animation = std::make_shared<Animation>(Assets::GEM_TYPE3, 4, 0.15f, sf::Vector2i(16, 16));
 	}
     animation->setPosition(position);
-    animation->setScale(sf::Vector2f(1.f, 1.f));
+    animation->setScale(sf::Vector2f(1.5f, 1.5f));
 }
 
 void Gem::update(float deltaTime) {

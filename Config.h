@@ -28,6 +28,10 @@ const float BULLET_VELOCITY = 800.f;
 
 const float ENEMY_SPEED = 200.f;
 
+
+//static float MUSICVOLUME;
+//static float SFXVOLUME;
+
 enum class PLAYER_STATE {
     IDLE = 0,
     RUN = 1,
@@ -38,4 +42,6 @@ enum class PLAYER_STATE {
 
 enum class ENEMY_STATE {
     RUN = 0,
-};
+    FIRE = 1,
+    DIE = 2,
+}; 
