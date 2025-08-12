@@ -170,6 +170,8 @@ void GameObject::render(sf::RenderWindow& window)
 
 		if (isType<Stat>(component))
 		{
+			if (this->getTag() == "enemies")
+				continue;
 			component->render(window);
 		}
 	}
