@@ -15,7 +15,6 @@ private:
 
 	sf::Vector2f offset;
 	sf::RectangleShape healthBar;
-
 	void updateHealthBar();
 
 public:
@@ -29,4 +28,5 @@ public:
 	void setDamage(float value);
 	void update(float deltaTime) override;
 	void render(sf::RenderWindow& window) override;
+
 };

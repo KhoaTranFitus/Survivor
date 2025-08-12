@@ -39,9 +39,6 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
     player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
     player->addComponent(std::make_shared<Stat>(player, 300,20 ));
     player->addComponent(std::make_shared<PlayerStat>(player));
-
-    //player->addComponent(std::make_shared<Shoot>(player, 0.75f));
-
     player->addComponent(std::make_shared<PlayerShoot>(player, 0.35f, 500.f)); // cooldown, range
     GameManager::getInstance().currentPlayer = player;
     return player;
@@ -51,23 +48,7 @@ std::shared_ptr<GameObject> GameObjectFactory::createBackground(const std::strin
 {
     return std::make_shared<Background>(path);
 }
-//tạo default enemy
-//std::shared_ptr<Enemies> GameObjectFactory::createEnemy()
-//{
-//    if (!GameManager::getInstance().currentPlayer)
-//    {
-//        std::cerr << "[ERROR] Cannot create enemy: player is null\n";
-//        return nullptr;
-//    }
-//	auto enemies = std::make_shared<Enemies>();
-//	enemies->setTag("enemies");
-//
-//	enemies->addComponent(std::make_shared<FollowTarget>(enemies, GameManager::getInstance().currentPlayer, 100.f));
-//    enemies->addComponent(std::make_shared<Stat>(enemies, 100, 20));
-//    enemies->addComponent(std::make_shared<Shoot>(enemies, 1.f));
-//
-//    return enemies;
-//}
+
 
 
 std::shared_ptr<Enemies> GameObjectFactory::createDefaultEnemy() {

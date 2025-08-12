@@ -170,6 +170,8 @@ void GameObject::render(sf::RenderWindow& window)
 	for (const auto& component : this->components)
 	{
 		if (!component) continue;
+		//neu la enemies va Boss thi khong 
+		if (this->getTag() == "enemies") continue;
 
 		if (isType<Stat>(component))
 		{

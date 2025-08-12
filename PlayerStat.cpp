@@ -66,6 +66,14 @@ void PlayerStat::render(sf::RenderWindow& window, const sf::Font& font) {
     );
     window.draw(levelText);
 
+	// Hiển thị viền thanh exp
+    sf::RectangleShape border(sf::Vector2f(barWidth, barHeight));
+    border.setFillColor(sf::Color::Transparent);
+    border.setOutlineColor(sf::Color::White);
+    border.setOutlineThickness(1.5f);
+    border.setPosition(barX, barY);
+    window.draw(border);
+
     // Hiển thị thanh exp
     int exp = getExp();
     int expToNext = getExpToNextLevel();

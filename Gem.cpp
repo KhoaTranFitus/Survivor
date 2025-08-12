@@ -24,5 +24,6 @@ void Gem::update(float deltaTime) {
 
 void Gem::render(sf::RenderWindow& window) {
 
+	/*window.draw(hitbox);*/
     if (animation) animation->render(window);
 }
