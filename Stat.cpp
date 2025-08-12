@@ -56,64 +56,6 @@ void Stat::render(sf::RenderWindow& window)
             window.draw(border);
         }
         else if (owner->getTag() == "boss") {
-            // Tìm boss trong gameObjects
-        //    std::shared_ptr<GameObject> boss = nullptr;
-        //    for (auto& obj : gameObjects) {
-        //        if (obj->getTag() == "boss") {
-        //            boss = obj;
-        //            break;
-        //        }
-        //    }
-        //    if (!boss) return;
-
-        //    auto stat = boss->getComponent<Stat>();
-        //    if (!stat) return;
-
-        //    // Lấy máu hiện tại và tối đa
-        //    float hp = stat->getHealth();
-        //    float maxHp = stat->getMaxHealth();
-        //    float percent = std::max(0.f, std::min(1.f, hp / maxHp));
-
-        //    // Vị trí và kích thước
-        //    float barWidth = 500.f;
-        //    float barHeight = 22.f;
-        //    float windowWidth = window.getSize().x;
-        //    float bossBarY = barHeight + 32.f; // Dưới exp bar 16px
-
-        //    float barX = (windowWidth - barWidth) / 2.f;
-
-        //    // Khung nền máu boss
-        //    sf::RectangleShape bossBarBg(sf::Vector2f(barWidth, barHeight));
-        //    bossBarBg.setFillColor(sf::Color(60, 20, 20));
-        //    bossBarBg.setPosition(barX, bossBarY);
-
-        //    // Thanh máu boss
-        //    sf::RectangleShape bossBar(sf::Vector2f(barWidth * percent, barHeight));
-        //    bossBar.setFillColor(sf::Color(255, 40, 40)); // Đỏ tươi
-        //    bossBar.setPosition(barX, bossBarY);
-
-        //    float BossBoxWidth = 60.f;
-        //    float BossBoxHeight = barHeight + 8.f;
-        //    float BossBoxX = barX - BossBoxWidth - 10.f;
-        //    float BossBoxY = bossBarY - 4.f;
-
-        //    // Vẽ khung level
-        //    /*sf::RectangleShape BossBox(sf::Vector2f(BossBoxWidth, BossBoxHeight));
-        //    BossBox.setFillColor(sf::Color(40, 40, 40));
-        //    BossBox.setOutlineColor(sf::Color::White);
-        //    BossBox.setOutlineThickness(2.f);
-        //    BossBox.setPosition(BossBoxX, BossBoxY);
-        //    window.draw(BossBox);*/
-
-        //    sf::RectangleShape border(sf::Vector2f(barWidth, barHeight));
-        //    border.setFillColor(sf::Color::Transparent);
-        //    border.setOutlineColor(sf::Color::Yellow);
-        //    border.setOutlineThickness(1.5f);
-        //    border.setPosition(barX, bossBarY);
-        //    window.draw(border);
-
-        //    window.draw(bossBarBg);
-        //    window.draw(bossBar);
         
             sf::View oldView = window.getView();
             window.setView(window.getDefaultView());
