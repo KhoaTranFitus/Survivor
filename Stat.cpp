@@ -30,8 +30,6 @@ void Stat::update(float deltaTime)
 
 void Stat::render(sf::RenderWindow& window)
 {
-	window.draw(this->healthBar);
-
         if (owner->getTag() == "player")
         {
             // Lấy vị trí trên đầu hitbox player
@@ -40,7 +38,7 @@ void Stat::render(sf::RenderWindow& window)
 
             float hpPercent = health / maxHealth;
             float barWidth = 50.f;
-            float barHeight = 12.f;
+            float barHeight = 7.f;
 
             // ===== Background =====
             sf::RectangleShape background(sf::Vector2f(barWidth, barHeight));
@@ -58,7 +56,7 @@ void Stat::render(sf::RenderWindow& window)
             sf::RectangleShape border(sf::Vector2f(barWidth, barHeight));
             border.setFillColor(sf::Color::Transparent);
             border.setOutlineColor(sf::Color::Yellow);
-            border.setOutlineThickness(1.5f);
+            border.setOutlineThickness(1.f);
             border.setPosition(barPos);
             window.draw(border);
         }

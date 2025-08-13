@@ -1,6 +1,6 @@
 #include "Speed.h"
 #include "KeyboardMove.h"
-
+#include "Assets.h"
 Speed::Speed(std::shared_ptr<GameObject> owner, float multiplier, float duration)
     : Component(owner), multiplier(multiplier), duration(duration), timer(0.f)
 {
@@ -25,8 +25,9 @@ void Speed::update(float deltaTime)
 
 void Speed::render(sf::RenderWindow& window)
 {
-    float barWidth = 120.f;
-    float barHeight = 16.f;
+    // Increase bar size
+    float barWidth = 180.f;   // was 120.f
+    float barHeight = 28.f;   // was 16.f
     float margin = 20.f;
     float windowWidth = window.getSize().x;
     float x = windowWidth - barWidth - margin;
@@ -46,18 +47,30 @@ void Speed::render(sf::RenderWindow& window)
     bar.setPosition(x, y);
     window.draw(bar);
 
-    // Small square button
+    // Square background
     float squareSize = barHeight;
     sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
-    square.setFillColor(sf::Color::Yellow);
+    square.setFillColor(sf::Color(200, 200, 50, 80));
     square.setOutlineColor(sf::Color::White);
     square.setOutlineThickness(2.f);
-    square.setPosition(x - 30.f, y); // 8px padding from bar
-    window.draw(square);
+    square.setPosition(x - 38.f, y); // adjust for larger barHeight
+    //window.draw(square);
 
-    static sf::Font font;
-    static bool fontLoaded = false;
-    if (!fontLoaded) {
-        fontLoaded = font.loadFromFile("arial.ttf");
+    // Draw asset image inside square, larger and centered
+    sf::Sprite iconSprite;
+    iconSprite.setTexture(Assets::SPEED_ITEM);
+    sf::Vector2u texSize = Assets::SPEED_ITEM.getSize();
+    if (texSize.x > 0 && texSize.y > 0) {
+        // Make icon larger (e.g. 1.8x the square size)
+        float iconTargetSize = squareSize * 1.8f;
+        float scale = iconTargetSize / static_cast<float>(std::max(texSize.x, texSize.y));
+        iconSprite.setScale(scale, scale);
+        // Center the icon in the square
+        iconSprite.setPosition(
+            square.getPosition().x + (squareSize - texSize.x * scale) / 2.f,
+            square.getPosition().y + (squareSize - texSize.y * scale) / 2.f
+        );
+        window.draw(iconSprite);
     }
+
 }

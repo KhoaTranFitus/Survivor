@@ -57,7 +57,7 @@ void PlayerStat::render(sf::RenderWindow& window, const sf::Font& font) {
     // Vẽ số level
     std::ostringstream oss;
     oss << "Lv " << getLevel();
-    sf::Text levelText(oss.str(), font, 22);
+    sf::Text levelText(oss.str(), font, 16);
     levelText.setFillColor(sf::Color::White);
     sf::FloatRect textRect = levelText.getLocalBounds();
     levelText.setPosition(

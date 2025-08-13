@@ -16,9 +16,4 @@ public:
 private: 
 	float lifeTime = 0.f;
 	std::string tag;
-	static sf::Texture playerTexture;
-	static sf::Texture enemyTexture;
-	static bool texturesLoaded;
-	void loadTextures();
-
 };

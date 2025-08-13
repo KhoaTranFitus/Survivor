@@ -21,7 +21,7 @@ void BurstEnemyShoot::update(float deltaTime)
             burstFired++;
 
             sf::Vector2f size(10.f, 10.f);
-            auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size,"enemy_bullet");
+            auto bullet = GameObjectFactory::createBullet(owner->getOrigin(), size,"burst_bullet");
             bullet->getHitbox().setFillColor(sf::Color::Blue);
             bullet->addComponent(std::make_shared<MoveForward>(bullet, GameManager::getInstance().currentPlayer->getOrigin(), 400.f));
             bullet->addComponent(std::make_shared<DamageOnContact>(bullet, owner->getComponent<Stat>()->getDamage(), "player"));

@@ -25,11 +25,10 @@ void DamageOnContact::onCollisionEnter(std::shared_ptr<GameObject> other)
 		// Nếu có shield thì không trừ máu, bất kể owner là gì
 		if (other->getComponent<Shield>()) {
 			// Shield is active, ignore damage
-			if (owner && (owner->getTag() == "boss_bullet" || owner->getTag() == "player_bullet" || owner->getTag() == "enemy_bullet"))
+			if (owner && (owner->getTag() == "boss_bullet" || owner->getTag() == "player_bullet" || owner->getTag() == "enemy_bullet"|| owner->getTag() == "burst_bullet"))
 			{
 				owner->needDeleted = true;
 			}
-			// Nếu là enemy thì không xóa enemy, chỉ bỏ qua damage
 			return;
 		}
 
@@ -60,7 +59,7 @@ void DamageOnContact::onCollisionEnter(std::shared_ptr<GameObject> other)
 		}
 		if (owner) {
 			std::string tag = owner->getTag();
-			if (tag == "player_bullet" || tag == "enemy_bullet") {
+			if (tag == "player_bullet" || tag == "enemy_bullet" || tag == "burst_bullet") {
 				owner->needDeleted = true;
 			}
 		}

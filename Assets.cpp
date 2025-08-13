@@ -6,10 +6,12 @@ sf::Texture Assets::PLAYER_FIRE;
 sf::Texture Assets::PLAYER_HURT;
 sf::Texture Assets::PLAYER_DIE;
 
+sf::Texture Assets::PLAYER_ARROW;
 sf::Texture Assets::ENEMY_RUN;
 sf::Texture Assets::SHOOT_ENEMY;
 sf::Texture Assets::TANKER_RUN;
 sf::Texture Assets::DASH_RUN;
+sf::Texture Assets::BURST_RUN;
 
 sf::Texture Assets::BOSS_RUN;
 sf::Texture Assets::BOSS_FIRE;
@@ -28,6 +30,7 @@ sf::Texture	Assets::SPEED;
 
 sf::Texture Assets::ENEMY_BULLET;
 sf::Texture Assets::BOSS_BULLET;
+sf::Texture Assets::BURST_BULLET;
 
 sf::SoundBuffer Assets::GEM_PICKUP_S;
 sf::Sound Assets::GEM_PICKUP_SOUND;
@@ -37,7 +40,8 @@ sf::Sound Assets::POWERUP_PICKUP_SOUND;
 sf::SoundBuffer Assets::PLAYER_HURT_S;
 sf::Sound Assets::PLAYER_HURT_SOUND;
 
-
+sf::Texture Assets::SPEED_ITEM;
+sf::Texture Assets::SHIELD_ITEM;
 
 void Assets::init()
 {
@@ -59,6 +63,9 @@ void Assets::init()
 		std::cerr << "[ERROR] Failed to load PLAYER_DIE from './Assets/player/newPlayerDIE.png'\n";
 	}
 
+	if (!PLAYER_ARROW.loadFromFile("./Assets/bullet/arrow.png")) {
+		std::cerr << "[ERROR] Failed to load PLAYER_ARROW from './Assets/bullet/arrow.png'\n";
+	}
 	if (!ENEMY_RUN.loadFromFile("./Assets/enemy/enemy_run.png")) {
 		std::cerr << "[ERROR] Failed to load enemy_run from './Assets/enemy/enemy_run.png'\n";
 	}
@@ -67,6 +74,9 @@ void Assets::init()
 	}
 	if(!DASH_RUN.loadFromFile("./Assets/enemy/dash_run.png")) {
 		std::cerr << "[ERROR] Failed to load dash_run from './Assets/enemy/dash_run.png'\n";
+	}
+	if(!BURST_RUN.loadFromFile("./Assets/enemy/burst_run.png")) {
+		std::cerr << "[ERROR] Failed to load burst_run from './Assets/enemy/burst_run.png'\n";
 	}
 
 	if (!GEM_TYPE1.loadFromFile("./Assets/gem/gem_type1.png")) {
@@ -99,6 +109,9 @@ void Assets::init()
 	if (!BOSS_BULLET.loadFromFile("./Assets/bullet/boss_bullet.png")) {
 		std::cerr << "[ERROR] Failed to load boss_bullet from './Assets/bullet/boss_bullet.png'\n";
 	}
+	if(!BURST_BULLET.loadFromFile("./Assets/bullet/burst_bullet.png")) {
+		std::cerr << "[ERROR] Failed to load burst_bullet from './Assets/bullet/burst_bullet.png'\n";
+	}
 
 	if (!TANKER_RUN.loadFromFile("./Assets/enemy/tanker_run.png")) {
 		std::cerr << "[ERROR] Failed to load tank_run from './Assets/tank/tanker_fire.png'\n";
@@ -115,6 +128,13 @@ void Assets::init()
 	if (!BOSS_DIE.loadFromFile("./Assets/enemy/boss_die.png"))
 	{
 		std::cerr << "[ERROR] Failed to load boss_die from './Assets/enemy/boss_die.png'\n";
+	}
+
+	if(!SPEED_ITEM.loadFromFile("./Assets/powerUp/speed.png")) {
+		std::cerr << "[ERROR] Failed to load speed from './Assets/powerUp/speed.png'\n";
+	}
+	if(!SHIELD_ITEM.loadFromFile("./Assets/powerUp/shield.png")) {
+		std::cerr << "[ERROR] Failed to load shield from './Assets/powerUp/shield.png'\n";
 	}
 	
 

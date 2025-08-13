@@ -35,7 +35,7 @@ void Enemies::onDestroy()
 	std::uniform_int_distribution<> distType(0, 99);
 	int type = distType(gen);
 
-	if (type < 80) { // 70% tạo gem
+	if (type < 10) { // 70% tạo gem
 		GameManager::getInstance().getCurrentScene()->addGameObject(
 			GameObjectFactory::createGem(x, y)
 		);
@@ -47,28 +47,4 @@ void Enemies::onDestroy()
 		);
 	}
 
-	// Nếu là boss thì chuyển sang VictoryScene sau khi set DIE state
-	//if (this->getTag() == "boss")
-	//{
-	//	this->setState(2); // Set DIE state for animation
-
-	//	// Delay scene switch to allow animation to play
-	//	sf::Clock* dieClock = new sf::Clock();
-	//	auto self = shared_from_this();
-	//	GameManager::getInstance().getCurrentScene()->addGameObject(self); // Ensure boss is still in scene
-
-	//	// Lambda to check and switch scene after delay (e.g., 1.5s)
-	//	auto switchAfterDie = [dieClock, self]() mutable {
-	//		if (dieClock->getElapsedTime().asSeconds() >= 1.5f) {
-	//			auto switchCommand = std::make_shared<SwitchSceneCommand>([]() {
-	//				return std::make_shared<VictoryScene>();
-	//			});
-	//			switchCommand->execute();
-	//			delete dieClock;
-	//		}
-	//	};
-		// Register this lambda to be called in your scene's update loop (implement as needed)
-		// Example: GameManager::getInstance().getCurrentScene()->addDelayedAction(switchAfterDie);
-		// You need to implement addDelayedAction or similar mechanism in your scene.
-	//}
 }

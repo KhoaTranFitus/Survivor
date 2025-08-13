@@ -1,16 +1,5 @@
 ﻿#include "Bullet.h"
 #include "Assets.h"
-sf::Texture Bullet::playerTexture;
-sf::Texture Bullet::enemyTexture;
-bool Bullet::texturesLoaded = false;
-
-void Bullet::loadTextures() {
-	if (!texturesLoaded) {
-		playerTexture.loadFromFile("./Assets/bullet/arrow.png");
-		texturesLoaded = true;
-	}
-}
-
 
 Bullet::Bullet(sf::Vector2f position, sf::Vector2f size, std::string tag) :
 	GameObject()
@@ -20,9 +9,11 @@ Bullet::Bullet(sf::Vector2f position, sf::Vector2f size, std::string tag) :
 	hitbox.setPosition(position);
 	this->tag = tag;
 
-	loadTextures();
 	if (tag == "player_bullet") {
-		hitbox.setTexture(&playerTexture);
+		hitbox.setTexture(&Assets::PLAYER_ARROW);
+		hitbox.setOrigin(size.x / 2.f, size.y / 2.f); // Đặt tâm hitbox ở giữa
+		hitbox.setPosition(position + size / 2.f); // Đặt vị trí hitbox ở giữa
+		hitbox.setScale(2.5f, 2.5f); // Tăng kích thước hitbox
 	}
 	else if (tag == "enemy_bullet") {
 		sf::Vector2i frameSize(10, 10);
@@ -37,6 +28,14 @@ Bullet::Bullet(sf::Vector2f position, sf::Vector2f size, std::string tag) :
 		sf::Vector2i frameSize(19, 19);
 		animations = std::make_shared<Animation>(Assets::BOSS_BULLET, 4, 0.1, frameSize);
 		animations->setScale(sf::Vector2f(3.f,3.f)); // Boss bullet scale
+		animations->setCenter();
+		animations->setPosition(position + size / 2.f);
+	}
+	else if (tag == "burst_bullet")
+	{
+		sf::Vector2i frameSize(26, 26);
+		animations = std::make_shared<Animation>(Assets::BURST_BULLET, 4, 0.1, frameSize);
+		animations->setScale(sf::Vector2f(2.f, 2.f)); // Burst bullet scale
 		animations->setCenter();
 		animations->setPosition(position + size / 2.f);
 	}

@@ -122,7 +122,6 @@ std::shared_ptr<Enemies> GameObjectFactory::createBoss()
 std::shared_ptr<Bullet> GameObjectFactory::createBullet(sf::Vector2f position, sf::Vector2f size, const std::string& tag)
 {
     auto bullet = std::make_shared<Bullet>(position, size, tag);
-    bullet->setImageScale(sf::Vector2f(2.f, 2.f)); // Scale hình ảnh, không đổi hitbox logic
     bullet->setTag(tag);
     return bullet;
 }

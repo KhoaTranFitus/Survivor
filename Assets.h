@@ -14,10 +14,12 @@ public:
 	static sf::Texture PLAYER_HURT;
 	static sf::Texture PLAYER_DIE;
 
+	static sf::Texture PLAYER_ARROW;
 	static sf::Texture ENEMY_RUN;
 	static sf::Texture SHOOT_ENEMY;
 	static sf::Texture TANKER_RUN;
 	static sf::Texture DASH_RUN;
+	static sf::Texture BURST_RUN;
 
 	static sf::Texture BOSS_RUN;
 	static sf::Texture BOSS_FIRE;
@@ -34,6 +36,7 @@ public:
 
 	static sf::Texture ENEMY_BULLET;
 	static sf::Texture BOSS_BULLET;
+	static sf::Texture BURST_BULLET;
 
 	static sf::SoundBuffer GEM_PICKUP_S;
 	static sf::Sound GEM_PICKUP_SOUND;
@@ -44,7 +47,8 @@ public:
 	static sf::Sound PLAYER_HURT_SOUND;
 
 
-
+	static sf::Texture SPEED_ITEM;
+	static sf::Texture SHIELD_ITEM;
 
 
 	static void init();

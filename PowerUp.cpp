@@ -31,6 +31,7 @@ std::shared_ptr<PowerUp> PowerUp::Create(const std::string& name, float x, float
             }
         ));
         powerUp->sprite.setTexture(Assets::SHIELD);
+		powerUp->sprite.setScale(1.5f, 1.5f);
     }
     else if (name == "speed")
     {
@@ -41,7 +42,7 @@ std::shared_ptr<PowerUp> PowerUp::Create(const std::string& name, float x, float
             }
         ));
 		powerUp->sprite.setTexture(Assets::SPEED);
-        powerUp->sprite.setScale(1.5f, 1.5f);
+        powerUp->sprite.setScale(3.f, 3.f);
     }
     else if (name == "health_type1")
     {
@@ -53,6 +54,8 @@ std::shared_ptr<PowerUp> PowerUp::Create(const std::string& name, float x, float
         ));
         //powerUp->getHitbox().setFillColor(sf::Color::Green);
         powerUp->sprite.setTexture(Assets::HEALTH_TYPE1);
+        powerUp->sprite.setScale(1.25f, 1.25f);
+
     }
     else if (name == "health_type2")
     {
@@ -64,8 +67,8 @@ std::shared_ptr<PowerUp> PowerUp::Create(const std::string& name, float x, float
         ));
         //powerUp->getHitbox().setFillColor(sf::Color:: Black);
         powerUp->sprite.setTexture(Assets::HEALTH_TYPE2);
-    }
     powerUp->sprite.setScale(1.25f, 1.25f);
+    }
     return powerUp;
 }
 
