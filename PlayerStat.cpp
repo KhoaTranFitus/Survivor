@@ -37,14 +37,18 @@ void PlayerStat::render(sf::RenderWindow& window, const sf::Font& font) {
     float barWidth = 400.f;
     float barHeight = 22.f;
     float windowWidth = window.getSize().x;
-    float barX = (windowWidth - barWidth) / 2.f;
     float barY = 16.f;
-
-    // Level box
     float levelBoxWidth = 60.f;
     float levelBoxHeight = barHeight + 8.f;
-    float levelBoxX = barX - levelBoxWidth - 10.f;
+    float gap = 10.f; // khoảng cách giữa level và exp
+
+    // Tổng chiều rộng khối
+    float totalWidth = levelBoxWidth + gap + barWidth;
+    float startX = (windowWidth - totalWidth) / 2.f; // X của level box
+
+    float levelBoxX = startX;
     float levelBoxY = barY - 4.f;
+    float barX = startX + levelBoxWidth + gap;
 
     // Vẽ khung level
     sf::RectangleShape levelBox(sf::Vector2f(levelBoxWidth, levelBoxHeight));

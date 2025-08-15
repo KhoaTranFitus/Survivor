@@ -35,7 +35,7 @@ void Enemies::onDestroy()
 	std::uniform_int_distribution<> distType(0, 99);
 	int type = distType(gen);
 
-	if (type < 10) { // 70% tạo gem
+	if (type < 80) { // 70% tạo gem
 		GameManager::getInstance().getCurrentScene()->addGameObject(
 			GameObjectFactory::createGem(x, y)
 		);

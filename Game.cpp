@@ -13,7 +13,7 @@ void Game::updateMousePosition()
 Game::Game()
 {
 	sf::VideoMode videoMode(WINDOW_WIDTH, WINDOW_HEIGHT);
-	this->window = new sf::RenderWindow(videoMode, "SFML Game", sf::Style::Close);
+	this->window = new sf::RenderWindow(videoMode, "Survivor", sf::Style::Close);
 	this->window->setKeyRepeatEnabled(false);
 
 	GameManager::getInstance().setScene(std::make_shared<MenuScene>());
