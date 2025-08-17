@@ -10,12 +10,11 @@ private:
 	sf::Vector2f lastDirection;
 	float speed;
 public:
-	FollowTarget(std::shared_ptr<GameObject> owner, std::shared_ptr<GameObject> target, float speed = 400.f);
+	FollowTarget(std::shared_ptr<GameObject> owner, 
+		std::shared_ptr<GameObject> target, float speed = 400.f);
 	virtual ~FollowTarget();
 
-	void setTarget(std::shared_ptr<GameObject> newTarget) {
-		target = newTarget;
-	}
+	void setTarget(std::shared_ptr<GameObject> newTarget);
 
 	void update(float deltaTime) override;
 };

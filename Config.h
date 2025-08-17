@@ -28,10 +28,6 @@ const float BULLET_VELOCITY = 800.f;
 
 const float ENEMY_SPEED = 200.f;
 
-
-//static float MUSICVOLUME;
-//static float SFXVOLUME;
-
 enum class PLAYER_STATE {
     IDLE = 0,
     RUN = 1,

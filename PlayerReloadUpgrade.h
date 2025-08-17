@@ -12,20 +12,10 @@ public:
     PlayerReloadUpgrade(std::shared_ptr<GameObject> owner) : Component(owner) {
         applyUpgrade();
     }
-    void upgrade() {
-        if (level < maxLevel) {
-            level++;
-            applyUpgrade();
-        }
-    }
-    int getLevel() const { return level; }
+    void upgrade();
+    int getLevel() const;
     void update(float deltaTime) override {}
 private:
-    void applyUpgrade() {
-        auto shoot = owner->getComponent<PlayerShoot>();
-        if (shoot) {
-            shoot->setCooldown(shoot->getCooldown() + reloadPerLevel);
-        }
-    }
+    void applyUpgrade();
 };
 

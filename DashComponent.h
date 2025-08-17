@@ -10,11 +10,14 @@ protected:
     sf::Vector2f dashDirection;
 
 public:
-    DashComponent(std::shared_ptr<GameObject> owner, float moveTime, float moveSpeed, float dashSpeed, float dashDuration, float waitTime = 1.f);
+    DashComponent(std::shared_ptr<GameObject> owner,
+        float moveTime, float moveSpeed, float dashSpeed, 
+        float dashDuration, float waitTime = 1.f);
+
     void update(float deltaTime) override;
     virtual void onDashStart() {}
     virtual void onDashEnd() {}
-    bool getIsDashing() { return this->isDashing; };
+    bool getIsDashing() { return this->isDashing; }
     bool getIsWaiting() const { return isWaiting; }
 };
 

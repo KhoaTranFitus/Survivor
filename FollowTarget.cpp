@@ -12,6 +12,11 @@ FollowTarget::~FollowTarget()
 {
 }
 
+void FollowTarget::setTarget(std::shared_ptr<GameObject> newTarget)
+{
+    target = newTarget;
+}
+
 void FollowTarget::update(float deltaTime)
 {
     // Nếu không có target hoặc target sắp bị xóa, thì đi theo hướng cũ
@@ -23,6 +28,7 @@ void FollowTarget::update(float deltaTime)
 
     // Lúc này target còn sống, được phép truy cập hitbox
     sf::Vector2f direction = target->getHitbox().getPosition() - owner->getHitbox().getPosition();
+	// xét vị trí so với owner để xác đinh hướng của đối tượng
     if (direction.x < 0) {
         owner->setFlipped(true);
     }

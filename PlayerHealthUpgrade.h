@@ -5,28 +5,17 @@
 #include "stat.h"
 
 class PlayerHealthUpgrade : public Component {
+private:
     int level = 1;
     const int maxLevel = 5;
     float healthPerLevel = 20.f;
+    void applyUpgrade();
 public:
     PlayerHealthUpgrade(std::shared_ptr<GameObject> owner) : Component(owner) {
         applyUpgrade();
     }
-    void upgrade() {
-        if (level < maxLevel) {
-            level++;
-            applyUpgrade();
-        }
-    }
-    int getLevel() const { return level; }
+    void upgrade();
+    int getLevel() const;
     void update(float deltaTime) override {}
-private:
-    void applyUpgrade() {
-        auto stat = owner->getComponent<Stat>();
-        if (stat) {
-            stat->setHealth(stat->getHealth() + healthPerLevel);
-            // Optionally increase maxHealth
-        }
-    }
 };
 

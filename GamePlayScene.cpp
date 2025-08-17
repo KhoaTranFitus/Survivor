@@ -13,8 +13,11 @@
 #include <random>
 #include "MusicManager.h"
 #include "VictoryScene.h"
+
 sf::Font GamePlayScene::font;
 bool GamePlayScene::fontLoaded = false;
+
+//constructor 
 GamePlayScene::GamePlayScene()
 {
 	//thêm background
@@ -40,9 +43,11 @@ GamePlayScene::GamePlayScene()
 	buttons.push_back(playPause);
 }
 
+//destructor
 GamePlayScene::~GamePlayScene()
 {
 }
+
 float distance(sf::Vector2f a, sf::Vector2f b) {
 	float dx = a.x - b.x;
 	float dy = a.y - b.y;
@@ -289,8 +294,6 @@ void GamePlayScene::render(sf::RenderWindow& window)
 	    if (speed) speed->render(window);
 
 	}
-	/*renderBossHP(window);*/
-
 	renderClock(window, {10,10},sf::Color(10, 20, 15), 20);
 }
 

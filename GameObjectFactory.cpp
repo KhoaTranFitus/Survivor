@@ -37,7 +37,7 @@ std::shared_ptr<Player> GameObjectFactory::createPlayer()
 
     // Thêm các component cho player
     player->addComponent(std::make_shared<KeyboardMove>(player, PLAYER_SPEED));
-    player->addComponent(std::make_shared<Stat>(player, 300,20 ));
+    player->addComponent(std::make_shared<Stat>(player, 250.f,20.f ));
     player->addComponent(std::make_shared<PlayerStat>(player));
     player->addComponent(std::make_shared<PlayerShoot>(player, 0.35f, 500.f)); // cooldown, range
     GameManager::getInstance().currentPlayer = player;
@@ -78,7 +78,7 @@ std::shared_ptr<Enemies> GameObjectFactory::createShooterEnemy() {
     enemy->setTag("enemies");
     enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, getGameObjectsPtr()));
     enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 80.f));
-    enemy->addComponent(std::make_shared<Stat>(enemy, 50, 10));
+    enemy->addComponent(std::make_shared<Stat>(enemy, 50.f, 10.f));
     enemy->addComponent(std::make_shared<EnemyShoot>(enemy, 1.5f)); // Có Shoot
     enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
     return enemy;
@@ -89,7 +89,7 @@ std::shared_ptr<Enemies> GameObjectFactory::createBurstEnemy() {
     enemy->setTag("enemies");
     enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, getGameObjectsPtr()));
     enemy->addComponent(std::make_shared<FollowTarget>(enemy, GameManager::getInstance().currentPlayer, 80.f));
-    enemy->addComponent(std::make_shared<Stat>(enemy, 50, 7));
+    enemy->addComponent(std::make_shared<Stat>(enemy, 50.f, 7.f));
     enemy->addComponent(std::make_shared<BurstEnemyShoot>(enemy, 3.0f, 3)); // 3 bullets per burst
     enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
     return enemy;
@@ -101,7 +101,7 @@ std::shared_ptr<Enemies> GameObjectFactory::createDashEnemy() {
     enemy->setTag("enemies");
     enemy->addComponent(std::make_shared<NoOverlapComponent>(enemy, getGameObjectsPtr()));
     enemy->addComponent(std::make_shared<DashComponent>(enemy, 3.5f, 80.f, 800.f, 0.3f, 1.f)); // moveTime, moveSpeed, dashSpeed, dashDuration, waitTime
-    enemy->addComponent(std::make_shared<Stat>(enemy, 80, 5));
+    enemy->addComponent(std::make_shared<Stat>(enemy, 80.f, 5.f));
     enemy->addComponent(std::make_shared<DamageOnContact>(enemy, enemy->getComponent<Stat>()->getDamage(), "player", 1.0f));
     return enemy;
 }
@@ -110,9 +110,8 @@ std::shared_ptr<Enemies> GameObjectFactory::createBoss()
 {
     auto boss = std::make_shared<Boss>();
     boss->setTag("boss");
-    boss->addComponent(std::make_shared<Stat>(boss, 500,20)); // Máu và damage lớn hơn
+    boss->addComponent(std::make_shared<Stat>(boss, 3000.f,30.f)); // Máu và damage lớn hơn
     boss->addComponent(std::make_shared<BossShoot>(boss, 2.5f)); // Bắn 3 tia đã xử lý trong Shoot
-    //boss->addComponent(std::make_shared<DamageOnContact>(boss, boss->getComponent<Stat>()->getDamage(), "player", 1.0f));
     boss->addComponent(std::make_shared<BurstEnemyShoot>(boss, 4.0f, 5)); // 3 bullets per burst
     boss->addComponent(std::make_shared<DashComponent>(boss, 5.f, 80.f, 1000.f, 0.5f, 1.f)); // Boss dash
     return boss;
