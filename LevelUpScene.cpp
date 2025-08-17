@@ -18,6 +18,10 @@ static const char* skillNames[5] = {
 LevelUpScene::LevelUpScene(std::shared_ptr<GameObject> player, std::shared_ptr<GamePlayScene> gamePlayScene)
 	: player(player), gamePlayScene(gamePlayScene)
 {
+	if (gamePlayScene) {
+		gamePlayScene->pauseClock();
+	}
+	
 	// Build a list of skills that are not maxed out
 	std::vector<int> availableSkills;
 	if (!player->getComponent<PlayerDamageUpgrade>() || player->getComponent<PlayerDamageUpgrade>()->getLevel() < 5)
@@ -140,6 +144,9 @@ void LevelUpScene::onSkillSelected(int skillIndex) {
 		else player->addComponent(std::make_shared<PlayerMagnetUpgrade>(player));
 		break;
 	}
+	}
+	if (gamePlayScene) {
+		gamePlayScene->resumeClock();
 	}
 	// Switch back to gameplay scene
 	GameManager::getInstance().setScene(gamePlayScene);

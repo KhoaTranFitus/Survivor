@@ -33,5 +33,5 @@ private:
     MusicManager() = default;
     sf::Music music;
     std::string currentPath;
-    float musicVolume = 50.f;
+    float musicVolume = 30.f;
 };
