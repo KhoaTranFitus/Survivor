@@ -11,7 +11,7 @@
 #include <SFML/Graphics.hpp>
 
 static const char* skillNames[5] = {
-	"Damage Up", "Speed Up", "Max Health Up", "Reload Up", "Magnet Up"
+	"Damage Up", "Speed Up", "Max Health", "Reload Up", "Magnet Up"
 };
 
 

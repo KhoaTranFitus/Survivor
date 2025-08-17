@@ -499,6 +499,30 @@
     <Image Include="Assets\bullet\enemy_bullet.png">
       <Filter>Assets\bullet</Filter>
     </Image>
+    <Image Include="Assets\bullet\boss_bullet.png">
+      <Filter>Assets\bullet</Filter>
+    </Image>
+    <Image Include="Assets\bullet\burst_bullet.png">
+      <Filter>Assets\bullet</Filter>
+    </Image>
+    <Image Include="Assets\enemy\boss_die.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
+    <Image Include="Assets\enemy\boss_fire.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
+    <Image Include="Assets\enemy\boss_run.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
+    <Image Include="Assets\enemy\burst_run.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
+    <Image Include="Assets\enemy\dash_run.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
+    <Image Include="Assets\enemy\tanker_run.png">
+      <Filter>Assets\enemy</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Assets\music\music_basic.mp3">

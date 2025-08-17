@@ -256,6 +256,8 @@
     <Image Include="Assets\backGround\menuScene.png" />
     <Image Include="Assets\backGround\selectLevel.png" />
     <Image Include="Assets\bullet\arrow.png" />
+    <Image Include="Assets\bullet\boss_bullet.png" />
+    <Image Include="Assets\bullet\burst_bullet.png" />
     <Image Include="Assets\bullet\enemy_bullet.png" />
     <Image Include="Assets\button\button.png" />
     <Image Include="Assets\button\button1.png" />
@@ -265,9 +267,15 @@
     <Image Include="Assets\button\button_hover.png" />
     <Image Include="Assets\button\pause.png" />
     <Image Include="Assets\button\pause_hover.png" />
+    <Image Include="Assets\enemy\boss_die.png" />
+    <Image Include="Assets\enemy\boss_fire.png" />
+    <Image Include="Assets\enemy\boss_run.png" />
+    <Image Include="Assets\enemy\burst_run.png" />
+    <Image Include="Assets\enemy\dash_run.png" />
     <Image Include="Assets\enemy\enemy_run.png" />
     <Image Include="Assets\enemy\shooter_run.png" />
     <Image Include="Assets\enemy\shoot_enemy.png" />
+    <Image Include="Assets\enemy\tanker_run.png" />
     <Image Include="Assets\gem\gem_type1.png" />
     <Image Include="Assets\gem\gem_type2.png" />
     <Image Include="Assets\gem\gem_type3.png" />
