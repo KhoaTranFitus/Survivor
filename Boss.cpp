@@ -19,7 +19,7 @@ Boss::Boss() : Enemies() {
 
     // DIE
     animations.push_back(std::make_shared<Animation>(Assets::BOSS_DIE,
-        9, 0.35f, sf::Vector2i(63, 63)));
+        9, 0.4f, sf::Vector2i(63, 63)));
     animations[2]->setScale(sf::Vector2f(2.5f, 2.5f));
 }
 

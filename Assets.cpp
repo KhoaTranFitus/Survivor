@@ -58,7 +58,7 @@ void Assets::init()
 	{
 		std::cerr << "[ERROR] Failed to load PLAYER_HURT from './Assets/player/newPlayerHURT.png'\n";
 	}
-	if (!PLAYER_DIE.loadFromFile("./Assets/player/newPlayer_DIE.png"))
+	if (!PLAYER_DIE.loadFromFile("./Assets/player/newPlayer_DIE2.png"))
 	{
 		std::cerr << "[ERROR] Failed to load PLAYER_DIE from './Assets/player/newPlayerDIE.png'\n";
 	}

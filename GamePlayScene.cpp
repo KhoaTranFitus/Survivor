@@ -108,7 +108,7 @@ void GamePlayScene::update(float deltaTime)
 	this->camera.update(deltaTime, GameManager::getInstance().currentPlayer->getHitbox().getPosition());
 	// thời gian đến khi dừng game
 	float elapsed = getElapsedTime();
-	bool stopAll = (elapsed >= 10.f);
+	bool stopAll = (elapsed >= 150.f);
 
 	if (clockInGame && !clockInGame->isPaused()) {
 		if (stopAll) {
@@ -134,7 +134,7 @@ void GamePlayScene::update(float deltaTime)
 	// Cứ mỗi 30 giây tăng thêm 1 enemy, tối đa 5 enemy/lần spawn
 	int spawnCount = std::min(1 + static_cast<int>(elapsed / 45.f), 4);
 
-	// Nếu chưa đến 2 phút thì vẫn spawn enemy
+	// Nếu chưa đến 2 phút 30s thì vẫn spawn enemy
 	if (!stopAll) {
 		for (int i = 0; i < spawnCount; ++i) {
 
@@ -207,8 +207,8 @@ void GamePlayScene::update(float deltaTime)
 	if (!alivePlayer() && !playerPendingDelete) {
 		// Bắt đầu quá trình đếm ngược
 		playerPendingDelete = true;
-		deadPlayerTimer = 1.55f;  // thời gian hiển thị animation chết
-		loseDelayTimer = 1.45f;   // thời gian trước khi chuyển scene
+		deadPlayerTimer = 1.7f;  // thời gian hiển thị animation chết
+		loseDelayTimer = 1.55f;   // thời gian trước khi chuyển scene
 	}
 
 	if (playerPendingDelete) {
@@ -240,7 +240,7 @@ void GamePlayScene::update(float deltaTime)
 			auto stat = obj->getComponent<Stat>();
 			if (stat && stat->getHealth() <= 0 && !bossPendingDelete) {
 				obj->setState(2); // DIE state for boss
-				bossDeathTimer = 2.6f; // Time for DIE animation
+				bossDeathTimer = 2.5f; // Time for DIE animation
 				bossPendingDelete = true;
 			}
 		}
@@ -347,10 +347,8 @@ bool GamePlayScene::alivePlayer()
 					// Chỉ set state DIE nếu chưa phải DIE
 					if (obj->getCurrentState() != 4) {
 						obj->setState(4); // Set DIE state
-						deadPlayerTimer = 1.55f; // Thời gian chờ xóa player và chuyển LoseScene
 						playerPendingDelete = true;
 						waitingForLose = true;
-						loseDelayTimer = 1.45f; // Đồng bộ với deadPlayerTimer
 					}
 				}
 			}
