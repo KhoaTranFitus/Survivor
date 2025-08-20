@@ -230,6 +230,9 @@
     <ClCompile Include="TankerEnemy.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="MusicManager.cpp">
+      <Filter>No Category</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
