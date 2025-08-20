@@ -9,26 +9,12 @@ public:
         return instance;
     }
 
-    void play(const std::string& path, bool loop = true) {
-        if (currentPath != path) {
-            if (!music.openFromFile(path)) return;
-            currentPath = path;
-        }
-        music.setVolume(musicVolume);
+    void play(const std::string& path, bool loop = true);
 
-        music.setLoop(loop);
-        if (music.getStatus() == sf::Music::Playing)
-            music.stop();
-		music.play();
-    }
-
-    void setVolume(float volume) { 
-        musicVolume = volume;
-        music.setVolume(musicVolume);
-    }
-    float getVolume() const { return music.getVolume(); }
-    bool isPlaying() const { return music.getStatus() == sf::Music::Playing; }
-    void stop() { music.stop(); }
+    void setVolume(float volume);
+    float getVolume() const;
+    bool isPlaying() const;
+    void stop();
 private:
     MusicManager() = default;
     sf::Music music;
